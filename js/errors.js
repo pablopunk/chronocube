@@ -1,4 +1,4 @@
 
 function printError(msg) {
-  $("#console").html(msg);
+  document.getElementById('console').innerText=msg
 }

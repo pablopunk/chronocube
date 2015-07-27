@@ -20,7 +20,7 @@ function updateTimes() {
   //savedTimes = localStorage.getItem("savedTimes")
   var table = '';
   for (i = 0; i < savedTimes.length; i++) {
-    table += '<tr><td>'+(i+1)+'</td><td>'+savedTimes[i]+'</td><td onclick="deleteTime('+i+')" unselectable="on">X</td></tr>';
+    table += '<tr><td>'+(i+1)+'</td><td>'+savedTimes[i]+'</td><td onclick="deleteTime('+i+')">X</td></tr>';
   }
   document.getElementById('savedTimes').innerHTML = table
 }

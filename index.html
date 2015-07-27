@@ -6,7 +6,6 @@
   <title>Chrono Cube</title>
   <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu:regular&subset=Latin,Cyrillic">
   <link rel="stylesheet" type="text/css" href="css/index.css" />
-  <script type="text/javascript" src="js/jquery.js"></script>
   <script type="text/javascript" src="js/errors.js"></script>
   <script type="text/javascript" src="js/chrono.js"></script>
   <script type="text/javascript" src="js/input.js"></script>
@@ -14,10 +13,11 @@
 
 </head>
 
-<body background="img/background.jpg">
+<body unselectable="on">
 
   <center>
-    <span id="chronotime">00:00:00</span>
+    <span id="chronotime">00:00:00</span><br>
+    <span id="subtitle">Press SPACE to start/stop the timer</span>
 
     <h2 style="border-bottom: 1px solid white; width: 10em;">History</h2>
     <div id="scroll" style="width: 20em; height: 20em; overflow-y: scroll;">
