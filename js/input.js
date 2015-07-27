@@ -2,8 +2,15 @@
 
 $(function(){ // this will be called when the DOM is ready
 
+  // Prevent SPACE from scrolling down the browser window
+  document.documentElement.addEventListener('keydown', function (e) {
+    if ( ( e.keycode || e.which ) == 32) {
+        e.preventDefault();
+    }
+  }, false);
+
   var isRunning = "no"
-  var enterPressed = "no"
+  var spacePressed = "no"
 
   function start() {
     chronoReset(); chronoStart(); isRunning = "yes";
@@ -13,19 +20,19 @@ $(function(){ // this will be called when the DOM is ready
     chronoStop(); isRunning = "no"; saveTime(); updateTimes();
   }
 
-  $('body').keyup(function() { // Starting at ENTER released
+  $('body').keyup(function() { // Starting at SPACE released
     if (event.which == 32) {
-      if (isRunning == "no" && enterPressed == "no") {
+      if (isRunning == "no" && spacePressed == "no") {
         start();
       }
-      enterPressed="no"
+      spacePressed="no"
     }
   });
 
-  $('body').keydown(function() { // Stoping at ENTER pressed
+  $('body').keydown(function() { // Stoping at SPACE pressed
     if (event.which == 32) {
       if (isRunning == "yes") {
-        enterPressed = "yes"
+        spacePressed = "yes"
         stop();
       }
     }
