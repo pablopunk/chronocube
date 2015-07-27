@@ -1,0 +1,51 @@
+
+@font-face {
+    font-family: Data;
+    src: url('../fonts/data-latin.ttf');
+}
+
+body {
+  margin: 0em;
+  font-family: Data, Avenir, sans-serif;
+  color: white;
+  background-size: cover;
+}
+
+span#chronotime {
+  font-size: 8em;
+  opacity: 0.7;
+  padding-top: 10em;
+}
+
+table#savedTimes {
+  font-size: 2em;
+  border-collapse: collapse;
+}
+
+table#savedTimes td:first-child, table#savedTimes td:nth-child(2) {
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+table#savedTimes td:first-child {
+  border-right: 1px solid white;
+}
+
+table#savedTimes td:nth-child(3) {
+  font-size: 0.8em;
+  color:red;
+  cursor:default;
+}
+
+table#savedTimes td:hover:nth-child(3) {
+  color:white;
+}
+
+div#console {
+  font-size: 1.2em;
+  color: red;
+}
+
+footer {
+  margin-top: 10em;
+}
