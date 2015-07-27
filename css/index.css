@@ -9,6 +9,7 @@ body {
   color: white;
   background: url('../img/background.jpg') no-repeat center center fixed;
   background-size: cover;
+  height:100%; overflow: hidden; /* prevents scrolling */
   cursor:default;
   user-select: none;
   -webkit-user-select: none;
