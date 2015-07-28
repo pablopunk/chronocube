@@ -11,7 +11,7 @@ function saveTime() {
   // savedTimes = localStorage.getItem("savedTimes")
   // if (savedTimes == null) savedTimes = [];
   savedTimes.push(currentTime)
-  localStorage.setItem("savedTimes", savedTimes)
+  //localStorage.setItem("savedTimes", savedTimes)
   var scroll = document.getElementById('scroll')
   scroll.scrollTop = scroll.scrollHeight;
 }
