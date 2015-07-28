@@ -18,6 +18,28 @@ body {
   -ms-user-select: none;
 }
 
+div#forkme {
+  position: absolute;
+  right: 0; /* with position:absolute you can't use float:right, so this does the trick */
+  width: 50px;
+  margin-top: 1em; margin-right: 1em;
+}
+
+img#github-logo {
+  opacity: 0.5;
+}
+
+img#github-logo:hover {
+  opacity: 0.9;
+}
+
+p#forkmemsg {
+  padding: 0; margin: 0;
+  visibility: hidden;
+  text-align: center;
+  font-size: 0.8em;
+}
+
 span#chronotime {
   font-family: Data;
   font-size: 5em;
@@ -64,6 +86,6 @@ div#console {
 }
 
 footer {
-  margin-top: 3em;
+  margin-top: 5em;
   margin-bottom: 1em;
 }
