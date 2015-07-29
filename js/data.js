@@ -19,6 +19,7 @@ function initData() {
 
 function saveTime() {
   var currentTime = document.getElementById("chronotime").innerHTML
+  if (savedTimes == null) savedTimes = [];
   savedTimes.push(currentTime)
   scrollDown()
 }
@@ -26,7 +27,7 @@ function saveTime() {
 function updateTimes() {
   var table = '';
   for (i in savedTimes) {
-    table += '<tr><td>'+(i+1)+'</td><td>'+savedTimes[i]+'</td><td onclick="deleteTime('+i+')">X</td></tr>';
+    table += '<tr><td>'+(parseInt(i)+1)+'</td><td>'+savedTimes[i]+'</td><td onclick="deleteTime('+i+')">X</td></tr>';
   }
   document.getElementById('savedTimes').innerHTML = table
   saveToStorage()
