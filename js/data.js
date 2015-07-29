@@ -25,7 +25,7 @@ function saveTime() {
 
 function updateTimes() {
   var table = '';
-  for (i = 0; i < savedTimes.length; i++) {
+  for (i in savedTimes) {
     table += '<tr><td>'+(i+1)+'</td><td>'+savedTimes[i]+'</td><td onclick="deleteTime('+i+')">X</td></tr>';
   }
   document.getElementById('savedTimes').innerHTML = table
