@@ -1,15 +1,13 @@
+var isRunning = "no"
+var spacePressed = "no"
 
-
-window.onload = function() {
+function initInput() {
   // Prevent SPACE from scrolling down the browser window
   document.documentElement.addEventListener('keydown', function (e) {
     if ( ( e.keycode || e.which ) == 32) {
         e.preventDefault();
     }
   }, false);
-
-  var isRunning = "no"
-  var spacePressed = "no"
 
   document.body.addEventListener("keyup", spaceUp);
   document.body.addEventListener("keydown", spaceDown);
@@ -39,5 +37,4 @@ window.onload = function() {
       }
     }
   }
-
 }

@@ -1,4 +1,5 @@
 
 function printError(msg) {
-  document.getElementById('console').innerText=msg
+  //document.getElementById('console').innerHTML=msg
+  console.log(msg)
 }

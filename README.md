@@ -23,7 +23,6 @@ Use the *MAKEFILE* to build the executable for all platforms (you'll need *[elec
 Use it as you wish (but give me credit cause I want to be famous)
 
 ## To do
-- LocalStorage to save solves
 - Display best solve
 - Display averages
 - Implement inspection timer
