@@ -11,7 +11,7 @@ function initData() {
   if (typeof JSON === "undefined") {
     printError('JSON not supported')
   }
-  scroll = document.getElementById('scroll')
+  scroll = document.getElementById('scroll-child')
   savedTimes = restoreFromStorage();
   updateTimes()
   scrollDown()
