@@ -52,6 +52,13 @@ span#subtitle {
   opacity: 0.7;
 }
 
+div#scroll {
+  width: 20em;
+  height: 20em;
+  overflow-y: scroll;
+  overflow: hidden;
+}
+
 table#savedTimes {
   font-size: 1.5em;
   border-collapse: collapse;
