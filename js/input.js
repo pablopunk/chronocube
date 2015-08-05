@@ -17,7 +17,7 @@ function initInput() {
   }
 
   function stop() {
-    chronoStop(); isRunning = "no"; saveTime(); updateTimes();
+    chronoStop(); isRunning = "no"; saveTime(); updateTimes(); scrollDown();
   }
 
   function spaceUp() { // Starting at SPACE released

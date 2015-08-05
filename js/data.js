@@ -46,6 +46,11 @@ function restoreFromStorage() {
   else return JSON.parse(localStorage.getItem("savedTimes"));
 }
 
+function scrollUp() {
+  var scroll = document.getElementById('scroll-child')
+  scroll.scrollTop = 0;
+}
+
 function scrollDown() {
   var scroll = document.getElementById('scroll-child')
   scroll.scrollTop = scroll.scrollHeight;

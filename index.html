@@ -10,6 +10,7 @@
   <script type="text/javascript" src="js/chrono.js"></script>
   <script type="text/javascript" src="js/input.js"></script>
   <script type="text/javascript" src="js/data.js"></script>
+  <script type="text/javascript" src="js/settings.js"></script>
 
   <!-- made by www.metatags.org -->
   <meta name="description" content="Time your Rubik's cube solves with this beautiful and simple app. Available on web and desktop." />
@@ -21,7 +22,7 @@
 
 </head>
 
-<body unselectable="on" onload='initInput(); initData()'>
+<body unselectable="on" onload='initInput(); initData(); initSettings();'>
 
   <div id="forkme" onclick="window.open('http://www.github.com/pablopunk/chronocube');">
     <img id="github-logo" src="img/github.png"/ alt="github logo" onmouseover="document.getElementById('forkmemsg').style.visibility='visible'" onmouseout="document.getElementById('forkmemsg').style.visibility='hidden'">
@@ -37,6 +38,10 @@
       <div id="scroll-child">
         <table id="savedTimes"></table>
       </div>
+    </div>
+
+    <div id="settings">
+      <input type="checkbox" onchange="toggleScrollBars();" checked>Hide scroll bar</input>
     </div>
 
     <div id="console"></div>

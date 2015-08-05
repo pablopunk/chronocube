@@ -99,6 +99,19 @@ table#savedTimes td:hover:nth-child(3) {
   color:white;
 }
 
+div#settings {
+  margin-top: 1em;
+  font-style: italic;
+  font-size: 0.9em;
+  padding: 1em;
+  opacity: 0.7;
+}
+
+div#settings input {
+  width: 0.9em;
+  margin-right: 0.5em;
+}
+
 div#console {
   font-size: 1.2em;
   color: red;
