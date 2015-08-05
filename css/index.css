@@ -55,14 +55,15 @@ span#subtitle {
 div#scroll-parent {
   width: 20em;
   height: 20em;
-  overflow-y: scroll;
   overflow: hidden;
 }
 
 div#scroll-child {
   width: 100%;
   height: 99%;
+  overflow-y: scroll;
   overflow: auto;
+  padding-right: 3em; /* hides scroll-bar: increase this value for crossbrowser compatibility */
 }
 
 table#savedTimes {
@@ -74,7 +75,12 @@ table#savedTimes td:first-child {
   text-align: right;
 }
 
-table#savedTimes td:first-child, table#savedTimes td:nth-child(2) {
+table#savedTimes td:first-child {
+  width: 1.5em;
+  padding-right: 1em;
+}
+
+table#savedTimes td:nth-child(2) {
   width: 1.5em;
   padding-left: 1em;
   padding-right: 1em;

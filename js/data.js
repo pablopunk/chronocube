@@ -1,7 +1,6 @@
 
 
 var savedTimes = []
-var scroll
 
 function initData() {
   if(typeof(Storage) == "undefined") {
@@ -11,7 +10,6 @@ function initData() {
   if (typeof JSON === "undefined") {
     printError('JSON not supported')
   }
-  scroll = document.getElementById('scroll-child')
   savedTimes = restoreFromStorage();
   updateTimes()
   scrollDown()
@@ -31,6 +29,7 @@ function updateTimes() {
   }
   document.getElementById('savedTimes').innerHTML = table
   saveToStorage()
+
 }
 
 function deleteTime(index) {
@@ -48,5 +47,6 @@ function restoreFromStorage() {
 }
 
 function scrollDown() {
+  var scroll = document.getElementById('scroll-child')
   scroll.scrollTop = scroll.scrollHeight;
 }
