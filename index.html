@@ -40,8 +40,8 @@
       </div>
     </div>
 
-    <div id="settings">
-      <input type="checkbox" onchange="toggleScrollBars();" checked>Hide scroll bar</input>
+    <div id="settings" onclick="document.getElementById('hideScrollBarsCheckbox').checked = !(document.getElementById('hideScrollBarsCheckbox').checked)">
+      <input id="hideScrollBarsCheckbox" type="checkbox" onchange="toggleScrollBars();" checked>Hide scroll bar</input>
     </div>
 
     <div id="console"></div>
