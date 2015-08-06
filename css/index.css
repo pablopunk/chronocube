@@ -52,6 +52,22 @@ span#subtitle {
   opacity: 0.7;
 }
 
+div#scores, div#history {
+  display: inline-block;
+  width: 15em;
+  text-align: center;
+  vertical-align: text-top; /* I want to marry this line */
+}
+
+div#history {
+  margin-left: 2em;
+}
+
+p#best-solve {
+  font-size: 1.5em;
+  font-style: italic;
+}
+
 div#scroll-parent {
   width: 20em;
   height: 20em;
@@ -67,8 +83,8 @@ div#scroll-child {
 }
 
 table#savedTimes {
-  font-size: 1.5em;
   border-collapse: collapse;
+  font-size: 1.5em;
 }
 
 table#savedTimes td:first-child {

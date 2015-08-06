@@ -33,12 +33,23 @@
     <span id="chronotime">00:00:00</span><br>
     <span id="subtitle">Press SPACE to start/stop the timer</span>
 
-    <h2 style="border-bottom: 1px solid white; width: 10em; padding-bottom: 0.5em">History</h2>
-    <div id="scroll-parent">
-      <div id="scroll-child">
-        <table id="savedTimes"></table>
+    <br>
+
+    <div id="scores">
+      <h2 style="border-bottom: 1px solid white; padding-bottom: 0.5em">Scores</h2>
+      <p id="best-solve">Best: no data yet</p>
+    </div>
+
+    <div id="history">
+      <h2 style="border-bottom: 1px solid white; padding-bottom: 0.5em">History</h2>
+      <div id="scroll-parent">
+        <div id="scroll-child">
+          <table id="savedTimes"></table>
+        </div>
       </div>
     </div>
+
+    <br>
 
     <div id="settings" onclick="document.getElementById('hideScrollBarsCheckbox').checked = !(document.getElementById('hideScrollBarsCheckbox').checked)">
       <input id="hideScrollBarsCheckbox" type="checkbox" onchange="toggleScrollBars();" checked>Hide scroll bar</input>
