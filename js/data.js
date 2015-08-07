@@ -79,10 +79,8 @@ function getBestTime() {
 }
 
 function getIntFromTimeString(time) {
-  var min, sec, dec;
-  min = parseInt( time.charAt(0) + time.charAt(1) ) * 10000
-  sec = parseInt( time.charAt(3) + time.charAt(4) ) * 100
-  dec = parseInt( time.charAt(6) + time.charAt(7) )
 
-  return min+sec+dec;
+  var r = time.replace(/:/g, ''); // removes ':'
+  
+  return parseInt(r);
 }
