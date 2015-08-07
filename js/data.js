@@ -36,7 +36,8 @@ function updateTimes() {
   saveToStorage()
 
   // display best time
-  document.getElementById('best-solve').innerHTML = "Best: "+ savedTimes[best]
+  if (savedTimes.length == 0) document.getElementById('best-solve').innerHTML = "Best: No data yet"
+  else document.getElementById('best-solve').innerHTML = "Best: "+ savedTimes[best]
 
 }
 
