@@ -13,11 +13,18 @@ function initInput() {
   document.body.addEventListener("keydown", spaceDown);
 
   function start() {
-    chronoReset(); chronoStart(); isRunning = "yes";
+    chronoReset();
+    chronoStart();
+    isRunning = "yes";
   }
 
   function stop() {
-    chronoStop(); isRunning = "no"; saveTime(); updateTimes(); scrollDown();
+    chronoStop();
+    isRunning = "no";
+    saveTime();
+    updateTimes();
+    scrollDown();
+    displayScramble();
   }
 
   function spaceUp() { // Starting at SPACE released

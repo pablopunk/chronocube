@@ -52,6 +52,12 @@ span#subtitle {
   opacity: 0.7;
 }
 
+span#scramble {
+  font-style: italic;
+  font-size: 1.2em;
+  opacity: 0.7;
+}
+
 div#scores, div#history {
   display: inline-block;
   width: 15em;

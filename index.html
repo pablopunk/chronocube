@@ -6,11 +6,13 @@
   <title>Chronocube</title>
   <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu:regular&subset=Latin,Cyrillic">
   <link rel="stylesheet" type="text/css" href="css/index.css" />
+  <script type="text/javascript" src="js/main.js"></script>
   <script type="text/javascript" src="js/errors.js"></script>
   <script type="text/javascript" src="js/chrono.js"></script>
   <script type="text/javascript" src="js/input.js"></script>
   <script type="text/javascript" src="js/data.js"></script>
   <script type="text/javascript" src="js/settings.js"></script>
+  <script type="text/javascript" src="js/cube.js"></script>
 
   <!-- made by www.metatags.org -->
   <meta name="description" content="Time your Rubik's cube solves with this beautiful and simple app. Available on web and desktop." />
@@ -22,7 +24,7 @@
 
 </head>
 
-<body unselectable="on" onload='initInput(); initData(); initSettings();'>
+<body unselectable="on" onload='init()'>
 
   <div id="forkme" onclick="window.open('http://www.github.com/pablopunk/chronocube');">
     <img id="github-logo" src="img/github.png"/ alt="github logo" onmouseover="document.getElementById('forkmemsg').style.visibility='visible'" onmouseout="document.getElementById('forkmemsg').style.visibility='hidden'">
@@ -31,8 +33,8 @@
 
   <center>
     <span id="chronotime">00:00:00</span><br>
-    <span id="subtitle">Press SPACE to start/stop the timer</span>
-
+    <span id="subtitle">Press SPACE to start/stop the timer</span><br>
+    <span id="scramble" onclick="displayScramble()"></span>
     <br>
 
     <div id="scores">
