@@ -27,4 +27,5 @@ Use it as you wish (but give me credit cause I want to be famous)
 ## To do
 - Display averages
 - Implement inspection timer
+- Classify solves
 - Background picker

@@ -42,7 +42,7 @@ p#forkmemsg {
 
 span#chronotime {
   font-family: Data;
-  font-size: 5em;
+  font-size: 7em;
   opacity: 0.7;
 }
 
@@ -60,7 +60,7 @@ span#scramble {
 
 div#scores, div#history {
   display: inline-block;
-  width: 15em;
+  width: 13em;
   text-align: center;
   vertical-align: text-top; /* I want to marry this line */
 }
@@ -70,7 +70,7 @@ div#history {
 }
 
 p#best-solve {
-  font-size: 1.5em;
+  font-size: 1.3em;
   font-style: italic;
 }
 
@@ -90,7 +90,7 @@ div#scroll-child {
 
 table#savedTimes {
   border-collapse: collapse;
-  font-size: 1.5em;
+  font-size: 1.3em;
 }
 
 table#savedTimes td:first-child {
@@ -122,11 +122,11 @@ table#savedTimes td:hover:nth-child(3) {
 }
 
 div#settings {
-  margin-top: 1em;
   font-style: italic;
   font-size: 0.9em;
   padding: 1em;
-  opacity: 0.7;
+  opacity: 0;
+  padding: 0;
 }
 
 div#settings input {

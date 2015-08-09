@@ -75,12 +75,24 @@ function getBestTime() {
 
     if (cur < old) best = i;
   }
+
   return best;
 }
 
 function getIntFromTimeString(time) {
 
   var r = time.replace(/:/g, ''); // removes ':'
-  
+
   return parseInt(r);
+}
+
+function exportTimesToFile() {
+  var csvContent = "data:text/csv;charset=utf-8,";
+
+  for (i in savedTimes) {
+    csvContent += savedTimes.length ? savedTimes[i] + "\n" : savedTimes[i];
+  }
+
+  var encodedUri = encodeURI(csvContent);
+  window.open(encodedUri);
 }
