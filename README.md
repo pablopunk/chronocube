@@ -5,6 +5,8 @@ Simple app to time your Rubik's Cube solves.
 
 This app is cross-platform as it's created with *HTML+CSS+JS* and it's packaged on *[Electron](https://github.com/atom/electron)*, a tool to create apps from webapps, so you can use it as a native app on your desktop.
 
+- Try it online [here](http://chronocube.pablopunk.com)
+
 ## Download
 - [Download for OS X](https://raw.githubusercontent.com/pablopunk/chronocube/master/dist/osx/Chronocube.dmg)
 - [Download for Windows](https://raw.githubusercontent.com/pablopunk/chronocube/master/dist/win/Chronocube-Setup.exe)
