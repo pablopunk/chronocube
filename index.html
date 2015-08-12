@@ -23,14 +23,22 @@
   <!--  -->
 
   <script type="text/javascript">
+
   function showSettings() {
-    document.getElementById('settings').style.transition = "opacity 0.6s";
+    hideDownloadOptions()
+    document.getElementById('settings').style.transition = "opacity 0.3s";
     document.getElementById('settings').style.opacity = 0.9
   }
   function hideSettings() {
-    document.getElementById('settings').style.transition = "opacity 0.6s";
+    document.getElementById('settings').style.transition = "opacity 0.3s";
     document.getElementById('settings').style.opacity = 0
   }
+
+  function hideDownloadOptions() {
+    document.getElementById('downloadtxt').style.opacity = 0
+    document.getElementById('downloadcsv').style.opacity = 0
+  }
+
   function toggleSettings() {
     if (document.getElementById('settings').style.opacity != 0) {
       hideSettings();
@@ -38,11 +46,35 @@
       showSettings();
     }
   }
+
+  function showExportOptions() {
+    document.getElementById('downloadtxt').style.opacity = 1
+    document.getElementById('downloadcsv').style.opacity = 1
+  }
+
+  function downloadtxt() {
+    exportTimesToTxt()
+    hideDownloadOptions()
+  }
+
+  function downloadcsv() {
+    exportTimesToCsv()
+    hideDownloadOptions()
+  }
   </script>
 
 </head>
 
 <body unselectable="on" onload='init()'>
+
+  <div id="settingsBox">
+    <h2 style="padding-bottom: 0.5em; width: 100%; margin-bottom: 0em;" id="settingsTitle" onclick="toggleSettings()" onmouseover="this.style.color='#44ff77'" onmouseout="this.style.color='white'">Settings</h2>
+    <div id="settings">
+      <div onclick="toggleScrollBars(); document.getElementById('hideScrollBarsCheckbox').checked = !(document.getElementById('hideScrollBarsCheckbox').checked)"><input id="hideScrollBarsCheckbox" type="checkbox" onchange="toggleScrollBars();"checked/><label>Hide scroll bar</label></div>
+      <div onclick="showExportOptions();">Download solves</div>
+      <div id="downloadtxt" onclick="downloadtxt()">Download TXT</div> <div id="downloadcsv" onclick="downloadcsv()">Download CSV</div>
+    </div>
+  </div>
 
   <div id="forkme" onclick="window.open('http://www.github.com/pablopunk/chronocube');">
     <img id="github-logo" src="img/github.png"/ alt="github logo" onmouseover="document.getElementById('forkmemsg').style.visibility='visible'" onmouseout="document.getElementById('forkmemsg').style.visibility='hidden'">
@@ -57,7 +89,9 @@
 
     <div id="scores">
       <h2 style="border-bottom: 1px solid white; padding-bottom: 0.5em">Scores</h2>
-      <p id="best-solve">Best: no data yet</p>
+      <p id="best-solve">Best: -</p>
+      <p id="average-all">Average All: -</p>
+      <p id="average-5">Average 5: -</p>
     </div>
 
     <div id="history">
@@ -70,12 +104,6 @@
     </div>
 
     <br>
-
-    <h2 style="padding-bottom: 0.5em; width: 15em; margin-bottom: 0em;" id="settingsTitle" onclick="toggleSettings()" onmouseover="this.style.color='#44ff77'" onmouseout="this.style.color='white'">Settings</h2>
-    <div id="settings">
-      <input id="hideScrollBarsCheckbox" type="checkbox" onchange="toggleScrollBars();"checked/><label onclick="toggleScrollBars(); document.getElementById('hideScrollBarsCheckbox').checked = !(document.getElementById('hideScrollBarsCheckbox').checked)">Hide scroll bar</label>
-      <br><span onclick="exportTimesToFile();">Download solves</span>
-    </div>
 
     <div id="console"></div>
 

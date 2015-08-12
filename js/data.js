@@ -23,8 +23,8 @@ function saveTime() {
 }
 
 function updateTimes() {
+  var best = getBestTime();
   var table = '';
-  var best = getBestTime()
   for (i in savedTimes) {
     if (i == best) {
         table += '<tr style="color:#44ff77"><td>'+(parseInt(i)+1)+'</td><td>'+savedTimes[i]+'</td><td onclick="deleteTime('+i+')">X</td></tr>';
@@ -35,9 +35,18 @@ function updateTimes() {
   document.getElementById('savedTimes').innerHTML = table
   saveToStorage()
 
-  // display best time
-  if (savedTimes.length == 0) document.getElementById('best-solve').innerHTML = "Best: No data yet"
-  else document.getElementById('best-solve').innerHTML = "Best: "+ savedTimes[best]
+  if (savedTimes.length == 0) {
+    document.getElementById('best-solve').innerHTML = "Best: -"
+    document.getElementById('average-all').innerHTML = "Average All: -"
+    document.getElementById('average-5').innerHTML = "Average 5: -"
+  }
+  else {
+    // display scores
+    document.getElementById('best-solve').innerHTML = "Best: "+ savedTimes[best]
+    document.getElementById('average-all').innerHTML = "Average All: " + getAverage(savedTimes.length)
+    if (savedTimes.length>4) document.getElementById('average-5').innerHTML = "Average 5: " + getAverage(5);
+    else document.getElementById('average-5').innerHTML = "Average 5: -"
+  }
 
 }
 
@@ -79,6 +88,34 @@ function getBestTime() {
   return best;
 }
 
+// get average of last 'size' solves -> if size==average.length, then it returns all solves average
+function getAverage(size) {
+  var i=0, average=0, min=0, sec=0, dec=0;
+  for (i=savedTimes.length-size; i<savedTimes.length; i++) {
+    min = parseInt(savedTimes[i].charAt(0)+savedTimes[i].charAt(1))
+    sec = parseInt(savedTimes[i].charAt(3)+savedTimes[i].charAt(4))
+    dec = parseInt(savedTimes[i].charAt(6)+savedTimes[i].charAt(7))
+    // average in decimals
+    average += ( (min*60*100) + (sec*100) + dec)
+  }
+  average /= size
+  average = average.toFixed(0);
+
+  return getAverageStringFromDec(average)
+}
+
+function getAverageStringFromDec(dec) {
+  var minutes = Math.floor(dec / 6000);
+  var seconds = ((dec % 6000) / 100).toFixed(0);
+  var decString = ""+dec;
+  var l = decString.length;
+  var decimals = decString.charAt(l-2) + decString.charAt(l-1) // last two digits
+
+  if (dec < 100) seconds = 0; // seconds fix
+
+  return minutes + ":" + (seconds < 10 ? '0' : '') + seconds + ":" + decimals;
+}
+
 function getIntFromTimeString(time) {
 
   var r = time.replace(/:/g, ''); // removes ':'
@@ -86,10 +123,27 @@ function getIntFromTimeString(time) {
   return parseInt(r);
 }
 
-function exportTimesToFile() {
+function exportTimesToCsv() {
   var csvContent = "data:text/csv;charset=utf-8,";
+  var i = 0;
 
-  for (i in savedTimes) {
+  csvContent += "All solves;Average All;Average 5\n"
+  csvContent += savedTimes[i]+";"+getAverage(savedTimes.length)+";"+getAverage(5)+"\n"
+  for (i=1; i<savedTimes.length;i++) {
+    csvContent += savedTimes.length ? savedTimes[i] + "\n" : savedTimes[i];
+  }
+
+  var encodedUri = encodeURI(csvContent);
+  window.open(encodedUri);
+}
+
+function exportTimesToTxt() {
+  var csvContent = "data:text/txt;charset=utf-8,";
+  var i = 0;
+
+  csvContent += "All solves\tAverage All\tAverage 5\n"
+  csvContent += savedTimes[i]+"\t"+getAverage(savedTimes.length)+"\t\t"+getAverage(5)+"\n"
+  for (i=1; i<savedTimes.length;i++) {
     csvContent += savedTimes.length ? savedTimes[i] + "\n" : savedTimes[i];
   }
 

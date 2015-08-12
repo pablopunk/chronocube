@@ -69,8 +69,8 @@ div#history {
   margin-left: 2em;
 }
 
-p#best-solve {
-  font-size: 1.3em;
+div#scores p {
+  font-size: 1.2em;
   font-style: italic;
 }
 
@@ -121,10 +121,18 @@ table#savedTimes td:hover:nth-child(3) {
   color:white;
 }
 
+div#settingsBox {
+  position: absolute;
+  left: 0;
+  width: 10em;
+  text-align: center;
+  margin: 1em 0 0 1em;
+}
+
 div#settings {
+  width: 100%;
   font-style: italic;
   font-size: 0.9em;
-  padding: 1em;
   opacity: 0;
   padding: 0;
 }
@@ -132,6 +140,20 @@ div#settings {
 div#settings input {
   width: 0.9em;
   margin-right: 0.5em;
+}
+
+div#settings div {
+  width: 100%;
+  padding: 0.5em;
+  border: 1px solid white;
+  transition: 0.3s;
+  margin-bottom: 0.5em;
+}
+
+div#settings div:hover {
+  background-color: white;
+  color: black;
+  transition: 0.3s;
 }
 
 div#console {
