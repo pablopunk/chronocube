@@ -124,11 +124,12 @@ function getIntFromTimeString(time) {
 }
 
 function exportTimesToCsv() {
+  if (savedTimes.length==0) return;
   var csvContent = "data:text/csv;charset=utf-8,";
   var i = 0;
 
-  csvContent += "All solves;Average All;Average 5\n"
-  csvContent += savedTimes[i]+";"+getAverage(savedTimes.length)+";"+getAverage(5)+"\n"
+  csvContent += "All solves;Average All"+(savedTimes.length>4 ? ";Average 5\n" : "\n")
+  csvContent += savedTimes[i]+";"+getAverage(savedTimes.length)+(savedTimes.length>4 ? ";"+getAverage(5)+"\n" : "\n")
   for (i=1; i<savedTimes.length;i++) {
     csvContent += savedTimes.length ? savedTimes[i] + "\n" : savedTimes[i];
   }
@@ -138,11 +139,12 @@ function exportTimesToCsv() {
 }
 
 function exportTimesToTxt() {
+  if (savedTimes.length==0) return;
   var csvContent = "data:text/txt;charset=utf-8,";
   var i = 0;
 
-  csvContent += "All solves\tAverage All\tAverage 5\n"
-  csvContent += savedTimes[i]+"\t"+getAverage(savedTimes.length)+"\t\t"+getAverage(5)+"\n"
+  csvContent += "All solves\tAverage All"+(savedTimes.length>4 ? "\tAverage 5\n" : "\n")
+  csvContent += savedTimes[i]+"\t"+getAverage(savedTimes.length)+(savedTimes.length>4 ? "\t\t"+getAverage(5)+"\n" : "\n")
   for (i=1; i<savedTimes.length;i++) {
     csvContent += savedTimes.length ? savedTimes[i] + "\n" : savedTimes[i];
   }
