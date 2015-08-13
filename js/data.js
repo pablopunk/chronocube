@@ -10,6 +10,15 @@ function initData() {
   if (typeof JSON === "undefined") {
     printError('JSON not supported')
   }
+
+  if (!window.File || !window.FileReader || !window.FileList || !window.Blob) {
+  	printError('Sorry, no html5 support in this browser')
+  }
+
+  document.getElementById('importFile').addEventListener("change", function(evt) {
+  	importTimes(evt)
+  });
+
   savedTimes = restoreFromStorage();
   updateTimes()
   scrollDown()
@@ -124,7 +133,10 @@ function getIntFromTimeString(time) {
 }
 
 function exportTimesToCsv() {
-  if (savedTimes.length==0) return;
+  if (savedTimes.length==0) {
+  	printError('No solves yet')
+  	return;
+  }
   var csvContent = "data:text/csv;charset=utf-8,";
   var i = 0;
 
@@ -139,7 +151,10 @@ function exportTimesToCsv() {
 }
 
 function exportTimesToTxt() {
-  if (savedTimes.length==0) return;
+  if (savedTimes.length==0) {
+  	printError('No solves yet')
+  	return;
+  }
   var csvContent = "data:text/txt;charset=utf-8,";
   var i = 0;
 
@@ -151,4 +166,20 @@ function exportTimesToTxt() {
 
   var encodedUri = encodeURI(csvContent);
   window.open(encodedUri);
+}
+
+function importTimes(evt) {
+	var files = evt.target.files; // FileList object
+	var file = files[0] // file to import
+	var reader = new FileReader();
+	var text = ""
+
+	alert("This feature will be available soon :)")
+
+	// reader.onload = function(e) {
+ //  		text = event.target.result;
+ //    	var data = JSON.parse(text)
+ //    	console.log(data)
+	// }
+	// reader.readAsText(file);
 }

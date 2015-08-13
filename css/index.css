@@ -22,7 +22,7 @@ div#forkme {
   position: absolute;
   right: 0; /* with position:absolute you can't use float:right, so this does the trick */
   width: 50px;
-  margin-top: 1em; margin-right: 1em;
+  margin-top: 1em; margin-right: 4em;
 }
 
 img#github-logo {
@@ -31,6 +31,68 @@ img#github-logo {
 
 img#github-logo:hover {
   opacity: 0.9;
+}
+
+img#settingsImg {
+  opacity: 0.5;
+  margin-bottom: 0.5em;
+}
+
+img#settingsImg:hover {
+  opacity: 0.9;
+}
+
+
+div#settingsBox {
+  position: absolute;
+  left: 0;
+  width: 10em;
+  text-align: center;
+  margin: 1em 0 0 1em;
+}
+
+div#settings {
+  width: 100%;
+  font-style: italic;
+  font-size: 0.9em;
+  opacity: 0;
+  padding: 0;
+}
+
+div#settings div {
+  width: 100%;
+  padding: 0.5em;
+  border: 1px solid white;
+  margin-bottom: 0.5em;
+  overflow:hidden;
+  transition: 0.3s;
+}
+
+div#settings div:hover {
+  background-color: white;
+  color: black;
+  transition: 0.3s;
+}
+
+div#settings div {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+div#settings input, div#settings label {
+    cursor: pointer;
+}
+
+div#settings div input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    opacity: 0;
+    filter: alpha(opacity=0);
 }
 
 p#forkmemsg {
@@ -121,47 +183,13 @@ table#savedTimes td:hover:nth-child(3) {
   color:white;
 }
 
-div#settingsBox {
-  position: absolute;
-  left: 0;
-  width: 10em;
-  text-align: center;
-  margin: 1em 0 0 1em;
-}
-
-div#settings {
-  width: 100%;
-  font-style: italic;
-  font-size: 0.9em;
-  opacity: 0;
-  padding: 0;
-}
-
-div#settings input {
-  width: 0.9em;
-  margin-right: 0.5em;
-}
-
-div#settings div {
-  width: 100%;
-  padding: 0.5em;
-  border: 1px solid white;
-  transition: 0.3s;
-  margin-bottom: 0.5em;
-}
-
-div#settings div:hover {
-  background-color: white;
-  color: black;
-  transition: 0.3s;
-}
-
 div#console {
   font-size: 1.2em;
   color: red;
 }
 
 footer {
+  opacity: 0.5;
   margin-top: 5em;
   margin-bottom: 1em;
 }
