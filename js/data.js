@@ -114,13 +114,22 @@ function getAverage(size) {
 }
 
 function getAverageStringFromDec(dec) {
-  var minutes = Math.floor(dec / 6000);
-  var seconds = ((dec % 6000) / 100).toFixed(0);
+
   var decString = ""+dec;
   var l = decString.length;
   var decimals = decString.charAt(l-2) + decString.charAt(l-1) // last two digits
 
-  if (dec < 100) seconds = 0; // seconds fix
+  if (dec < 100) {
+    return "00:00:"+dec
+  } // else
+
+  if (dec < 6000) {
+    var seconds = (dec < 1000 ? "0" + decString.charAt(0) : decString.charAt(0)+decString.charAt(1))
+    return "00:" + seconds + ":" + decimals
+  } // else
+
+  var minutes = Math.floor(dec / 6000);
+  var seconds = ((dec % 6000) / 100).toFixed(0);
 
   return minutes + ":" + (seconds < 10 ? '0' : '') + seconds + ":" + decimals;
 }
