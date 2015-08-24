@@ -28,6 +28,7 @@ function initData() {
   });
 
   savedTimes = restoreFromStorage();
+  if (savedTimes == null) savedTimes = [];
   backgroundSelected = restoreBackground();
   changeBackground(backgrounds[backgroundSelected])
   updateTimes()
@@ -93,7 +94,9 @@ function saveToStorage() {
 }
 
 function restoreFromStorage() {
-  return ( localStorage.getItem('savedTimes') == 'undefined' ? [] : JSON.parse(localStorage.getItem("savedTimes")) )
+  // return ( localStorage.getItem('savedTimes') == 'undefined' ? [] : JSON.parse(localStorage.getItem("savedTimes")) )
+  if (localStorage.getItem("savedTimes") == 'undefined') return [];
+  else return JSON.parse(localStorage.getItem("savedTimes"));
 }
 
 function saveBackground() {
