@@ -4,12 +4,17 @@
     src: url('../fonts/data-latin.ttf');
 }
 
+html {
+  height: 100%;
+}
+
 body {
   font-family: Avenir, Helvetica, sans-serif;
   color: white;
   background: url('../img/background.jpg') no-repeat center center fixed;
   background-size: cover;
   height:100%; overflow: hidden; /* prevents scrolling */
+  margin: 0;
   cursor:default;
   user-select: none;
   -webkit-user-select: none;

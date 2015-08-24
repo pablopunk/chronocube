@@ -1,6 +1,14 @@
 
 
 var savedTimes = []
+var backgroundSelected = 0
+var backgrounds = [
+  "url('img/background.jpg') no-repeat center center fixed",
+  "-webkit-linear-gradient(90deg, #f857a6 10%, #ff5858 90%)",
+  "-webkit-linear-gradient(90deg, #00d2ff 10%, #3a7bd5 90%)",
+  "-webkit-linear-gradient(90deg, #673AB7 10%, #512DA8 90%)",
+  "-webkit-linear-gradient(90deg, #fc00ff 10%, #00dbde 90%)"
+  ];
 
 function initData() {
   if(typeof(Storage) == "undefined") {
@@ -20,8 +28,24 @@ function initData() {
   });
 
   savedTimes = restoreFromStorage();
+  backgroundSelected = restoreBackground();
+  changeBackground(backgrounds[backgroundSelected])
   updateTimes()
   scrollDown()
+}
+
+
+function nextBackground() {
+  var newbg = backgrounds[ backgroundSelected >= backgrounds.length-1 ? backgroundSelected=0 : ++backgroundSelected ]
+  changeBackground(newbg)
+  saveBackground();
+}
+
+function changeBackground(bg) {
+  $('body').css({
+    "background": bg,
+    "background-size": "cover"
+  });
 }
 
 function saveTime() {
@@ -69,8 +93,15 @@ function saveToStorage() {
 }
 
 function restoreFromStorage() {
-  if (localStorage.getItem("savedTimes") == 'undefined') return [];
-  else return JSON.parse(localStorage.getItem("savedTimes"));
+  return ( localStorage.getItem('savedTimes') == 'undefined' ? [] : JSON.parse(localStorage.getItem("savedTimes")) )
+}
+
+function saveBackground() {
+  localStorage['bgIndex'] = (""+backgroundSelected)
+}
+
+function restoreBackground() {
+  return ( (localStorage.getItem('bgIndex') == 'undefined' || isNaN(localStorage.getItem('bgIndex'))) ? 0 : parseInt(localStorage.getItem('bgIndex')) )
 }
 
 function scrollUp() {

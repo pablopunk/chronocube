@@ -68,14 +68,14 @@
     document.getElementById('downloadtxt').style.opacity = 0
     document.getElementById('downloadcsv').style.opacity = 0
   }
-  
+
   function showDownloadOptions() {
   	document.getElementById('downloadtxt').style.position = 'relative'
     document.getElementById('downloadcsv').style.position = 'relative'
     document.getElementById('downloadtxt').style.opacity = 1
     document.getElementById('downloadcsv').style.opacity = 1
   }
-  
+
   function toggleSettings() {
     if (document.getElementById('settings').style.opacity != 0) {
       hideSettings();
@@ -104,6 +104,7 @@
     <img src="img/settings.png" id="settingsImg" onclick="toggleSettings()"/>
     <div id="settings">
       <div onclick="toggleScrollBars(); document.getElementById('hideScrollBarsCheckbox').checked = !(document.getElementById('hideScrollBarsCheckbox').checked)"><input id="hideScrollBarsCheckbox" type="checkbox" onchange="toggleScrollBars();"checked/><label>Hide scroll bar</label></div>
+      <div onclick="nextBackground();">Change background</div>
       <div onclick="showDownloadOptions();">Download solves</div>
       <div id="downloadtxt" onclick="downloadtxt()">Download TXT</div> <div id="downloadcsv" onclick="downloadcsv()">Download CSV</div>
       <div id="import">Import Solves<input type="file" id="importFile" class="upload"/></div>
