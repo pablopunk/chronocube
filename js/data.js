@@ -30,6 +30,7 @@ function initData() {
   savedTimes = restoreFromStorage();
   if (savedTimes == null) savedTimes = [];
   backgroundSelected = restoreBackground();
+  if (backgroundSelected == null || isNaN(backgroundSelected)) backgroundSelected = 0;
   changeBackground(backgrounds[backgroundSelected])
   updateTimes()
   scrollDown()
