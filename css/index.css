@@ -107,10 +107,14 @@ p#forkmemsg {
   font-size: 0.8em;
 }
 
-span#chronotime {
+div#chronotime {
+  width: 5em;
+  margin: 0;
+  padding: 0;
+  text-align: center;
   font-family: Data;
   font-size: 7em;
-  opacity: 0.7;
+  opacity: 0.85;
 }
 
 span#subtitle {

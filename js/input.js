@@ -16,6 +16,7 @@ function initInput() {
     chronoReset();
     chronoStart();
     isRunning = "yes";
+    hideAll()
   }
 
   function stop() {
@@ -25,6 +26,7 @@ function initInput() {
     updateTimes();
     scrollDown();
     displayScramble();
+    showAll()
   }
 
   function spaceUp() { // Starting at SPACE released

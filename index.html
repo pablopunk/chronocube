@@ -52,6 +52,20 @@
 
   <script type="text/javascript">
 
+  function hideAll() {
+    document.getElementById('hideall').style.opacity = 0
+    document.getElementById('chronotime').style.position = "fixed"
+    document.getElementById('chronotime').style.top = "30%"
+    document.getElementById('chronotime').style.left = "25%"
+  }
+
+  function showAll() {
+    document.getElementById('hideall').style.opacity = 1
+    document.getElementById('chronotime').style.position = "relative"
+    document.getElementById('chronotime').style.top = "0"
+    document.getElementById('chronotime').style.left = "0"
+  }
+
   function showSettings() {
     hideDownloadOptions()
     document.getElementById('settings').style.transition = "opacity 0.3s";
@@ -117,27 +131,28 @@
   </div>
 
   <center>
-    <span id="chronotime">00:00:00</span><br>
-    <span id="subtitle">Press SPACE to start/stop the timer</span><br>
-    <span id="scramble" onclick="displayScramble()"></span>
-    <br>
+    <div id="chronotime">00:00:00</div>
+    <div id="hideall">
+      <span id="subtitle">Press SPACE to start/stop the timer</span><br>
+      <span id="scramble" onclick="displayScramble()"></span>
+      <br>
 
-    <div id="scores">
-      <h2 style="border-bottom: 1px solid white; padding-bottom: 0.5em">Scores</h2>
-      <p id="best-solve">Best: -</p>
-      <p id="average-all">Average All: -</p>
-      <p id="average-5">Average 5: -</p>
-    </div>
+      <div id="scores">
+        <h2 style="border-bottom: 1px solid white; padding-bottom: 0.5em">Scores</h2>
+        <p id="best-solve">Best: -</p>
+        <p id="average-all">Average All: -</p>
+        <p id="average-5">Average 5: -</p>
+      </div>
 
-    <div id="history">
-      <h2 style="border-bottom: 1px solid white; padding-bottom: 0.5em">History</h2>
-      <div id="scroll-parent">
-        <div id="scroll-child">
-          <table id="savedTimes"></table>
+      <div id="history">
+        <h2 style="border-bottom: 1px solid white; padding-bottom: 0.5em">History</h2>
+        <div id="scroll-parent">
+          <div id="scroll-child">
+            <table id="savedTimes"></table>
+          </div>
         </div>
       </div>
     </div>
-
     <br>
 
     <div id="console"></div>
