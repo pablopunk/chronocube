@@ -7,7 +7,8 @@ var backgrounds = [
   "-webkit-linear-gradient(90deg, #f857a6 10%, #ff5858 90%)",
   "-webkit-linear-gradient(90deg, #00d2ff 10%, #3a7bd5 90%)",
   "-webkit-linear-gradient(90deg, #673AB7 10%, #512DA8 90%)",
-  "-webkit-linear-gradient(90deg, #fc00ff 10%, #00dbde 90%)"
+  "-webkit-linear-gradient(90deg, #fc00ff 10%, #00dbde 90%)",
+  "-webkit-linear-gradient(90deg, #dc2430 10%, #7b4397 90%)"
   ];
 
 function initData() {
