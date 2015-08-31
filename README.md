@@ -23,6 +23,9 @@ Use the *MAKEFILE* to build the executable for all platforms (you'll need *[elec
 
 ## License
 Use it as you wish (but give me credit cause I want to be famous)
+Also credits to:
+- [Randome state scrambles](https://github.com/cubing/jsss)
+- [Background gradients](http://uigradients.com)
 
 ## To do
 - Implement inspection timer
