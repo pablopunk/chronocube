@@ -32,6 +32,7 @@ function initInput() {
   function spaceUp() { // Starting at SPACE released
     if (event.which == 32) {
       if (isRunning == "no" && spacePressed == "no") {
+        document.getElementById('chronotime').style.color = "white"
         start();
       }
       spacePressed="no"
@@ -43,6 +44,8 @@ function initInput() {
       if (isRunning == "yes") {
         spacePressed = "yes"
         stop();
+      } else {
+        document.getElementById('chronotime').style.color = "#92FE9D"
       }
     }
   }
