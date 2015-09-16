@@ -1736,11 +1736,13 @@ scramblers["333bf"] = scramblers["333"];
 scramblers["333oh"] = scramblers["333"];
 scramblers["333mbf"] = scramblers["333"];
 
-function displayScramble() {
-  document.getElementById('scramble').innerHTML = scramblers["333"].getRandomScramble().scramble_string
-}
+function ScrambleObject() {
 
-function initScramble() {
   scramblers["333"].initialize()
-  displayScramble()
+
+  this.displayScramble = function() {
+    document.getElementById('scramble').innerHTML = scramblers["333"].getRandomScramble().scramble_string
+  }
+
+  this.displayScramble()
 }

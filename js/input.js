@@ -25,7 +25,7 @@ function Input() {
     Data.saveTime();
     Data.updateTimes();
     MainLayout.scrollDown();
-    displayScramble();
+    Scramble.displayScramble();
     MainLayout.showAll()
   }
 

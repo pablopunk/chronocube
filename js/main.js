@@ -8,8 +8,8 @@ function init() {
 	Data = new DataManager();
 	MainLayout = new Layout();
 	Error = new ErrorHandle();
+  	Scramble = new ScrambleObject();
   	Input();
-  	initScramble();
 }
 
 if (typeof(require) == "function") {
