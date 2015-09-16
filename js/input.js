@@ -1,7 +1,7 @@
 var isRunning = "no"
 var spacePressed = "no"
 
-function initInput() {
+function Input() {
   // Prevent SPACE from scrolling down the browser window
   document.documentElement.addEventListener('keydown', function (e) {
     if ( ( e.keycode || e.which ) == 32) {
@@ -16,22 +16,23 @@ function initInput() {
     chronoReset();
     chronoStart();
     isRunning = "yes";
-    hideAll()
+    MainLayout.hideAll()
   }
 
   function stop() {
     chronoStop();
     isRunning = "no";
-    saveTime();
-    updateTimes();
-    scrollDown();
+    Data.saveTime();
+    Data.updateTimes();
+    MainLayout.scrollDown();
     displayScramble();
-    showAll()
+    MainLayout.showAll()
   }
 
   function spaceUp() { // Starting at SPACE released
     if (event.which == 32) {
       if (isRunning == "no" && spacePressed == "no") {
+        document.getElementById('chronotime').style.color = "white"
         start();
       }
       spacePressed="no"
@@ -43,6 +44,8 @@ function initInput() {
       if (isRunning == "yes") {
         spacePressed = "yes"
         stop();
+      } else {
+        document.getElementById('chronotime').style.color = "#92FE9D"
       }
     }
   }

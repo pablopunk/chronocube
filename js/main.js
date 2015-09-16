@@ -1,9 +1,15 @@
 
+var MainLayout
+var Data
+var Error
+var Scramble
+
 function init() {
-  initInput();
-  initData();
-  initSettings();
-  initScramble();
+	Data = new DataManager();
+	MainLayout = new Layout();
+	Error = new ErrorHandle();
+  	Input();
+  	initScramble();
 }
 
 if (typeof(require) == "function") {

@@ -11,11 +11,11 @@
   <link rel="stylesheet" type="text/css" href="css/index.css" />
   <script type="text/javascript" src="js/main.js"></script>
   <script type="text/javascript" src="js/jquery.js"></script>
-  <script type="text/javascript" src="js/errors.js"></script>
+  <script type="text/javascript" src="js/ErrorHandle.js"></script>
   <script type="text/javascript" src="js/chrono.js"></script>
-  <script type="text/javascript" src="js/input.js"></script>
-  <script type="text/javascript" src="js/data.js"></script>
-  <script type="text/javascript" src="js/settings.js"></script>
+  <script type="text/javascript" src="js/Input.js"></script>
+  <script type="text/javascript" src="js/Data.js"></script>
+  <script type="text/javascript" src="js/Layout.js"></script>
   <script type="text/javascript" src="js/scramble_333.js"></script>
 
   <!-- For old IEs -->
@@ -51,81 +51,17 @@
   <meta name="author" content="metatags generator">
   <meta name="robots" content="index, follow">
   <meta name="revisit-after" content="1 month">
-  <!--  -->
-
-  <script type="text/javascript">
-
-  function hideAll() {
-    var divs = document.getElementsByClassName('hideall')
-    for (d in divs) {
-      divs[d].style.transition = "opacity 0.3s";
-      divs[d].style.opacity = 0
-    }
-  }
-
-  function showAll() {
-    var divs = document.getElementsByClassName('hideall')
-    for (d in divs) {
-      divs[d].style.transition = "opacity 0.3s";
-      divs[d].style.opacity = 1
-    }
-  }
-
-  function showSettings() {
-    hideDownloadOptions()
-    document.getElementById('settings').style.transition = "opacity 0.3s";
-    document.getElementById('settings').style.opacity = 0.9
-  }
-  function hideSettings() {
-    document.getElementById('settings').style.transition = "opacity 0.3s";
-    document.getElementById('settings').style.opacity = 0
-  }
-
-  function hideDownloadOptions() {
-  	document.getElementById('downloadtxt').style.position = 'absolute'
-    document.getElementById('downloadcsv').style.position = 'absolute'
-    document.getElementById('downloadtxt').style.opacity = 0
-    document.getElementById('downloadcsv').style.opacity = 0
-  }
-
-  function showDownloadOptions() {
-  	document.getElementById('downloadtxt').style.position = 'relative'
-    document.getElementById('downloadcsv').style.position = 'relative'
-    document.getElementById('downloadtxt').style.opacity = 1
-    document.getElementById('downloadcsv').style.opacity = 1
-  }
-
-  function toggleSettings() {
-    if (document.getElementById('settings').style.opacity != 0) {
-      hideSettings();
-    } else {
-      showSettings();
-    }
-  }
-
-  function downloadtxt() {
-    exportTimesToTxt()
-    hideDownloadOptions()
-  }
-
-  function downloadcsv() {
-    exportTimesToCsv()
-    hideDownloadOptions()
-  }
-
-  </script>
-
 </head>
 
 <body unselectable="on" onload='init()'>
 
   <div id="settingsBox">
-    <img src="img/settings.png" id="settingsImg" onclick="toggleSettings()"/>
+    <img src="img/settings.png" id="settingsImg" onclick="MainLayout.toggleSettings()"/>
     <div id="settings">
-      <div onclick="toggleScrollBars(); document.getElementById('hideScrollBarsCheckbox').checked = !(document.getElementById('hideScrollBarsCheckbox').checked)"><input id="hideScrollBarsCheckbox" type="checkbox" onchange="toggleScrollBars();"checked/><label>Hide scroll bar</label></div>
-      <div onclick="nextBackground();">Change background</div>
-      <div onclick="showDownloadOptions();">Download solves</div>
-      <div id="downloadtxt" onclick="downloadtxt()">Download TXT</div> <div id="downloadcsv" onclick="downloadcsv()">Download CSV</div>
+      <div onclick="MainLayout.toggleScrollBars(); document.getElementById('hideScrollBarsCheckbox').checked = !(document.getElementById('hideScrollBarsCheckbox').checked)"><input id="hideScrollBarsCheckbox" type="checkbox" onchange="MainLayout.toggleScrollBars();"checked/><label>Hide scroll bar</label></div>
+      <div onclick="MainLayout.nextBackground();">Change background</div>
+      <div onclick="MainLayout.showDownloadOptions();">Download solves</div>
+      <div id="downloadtxt" onclick="Data.downloadtxt()">Download TXT</div> <div id="downloadcsv" onclick="Data.downloadcsv()">Download CSV</div>
       <div id="import">Import Solves<input type="file" id="importFile" class="upload"/></div>
     </div>
   </div>
