@@ -29,7 +29,7 @@ function Input() {
     MainLayout.showAll()
   }
 
-  function spaceUp() { // Starting at SPACE released
+  function spaceUp(event) { // Starting at SPACE released
     if (event.which == 32) {
       if (isRunning == "no" && spacePressed == "no") {
         document.getElementById('chronotime').style.color = "white"
@@ -39,7 +39,7 @@ function Input() {
     }
   }
 
-  function spaceDown() { // Stoping at SPACE pressed
+  function spaceDown(event) { // Stoping at SPACE pressed
     if (event.which == 32) {
       if (isRunning == "yes") {
         spacePressed = "yes"
