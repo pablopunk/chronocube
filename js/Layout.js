@@ -1,6 +1,6 @@
 function Layout() {
 	this.scrollbar = document.getElementById("scroll-child");
-	this.overflowValue = "3em";
+	this.overflowValue = "32pt";
 	this.hiddenScrollBars = "yes";
 
 	this.backgrounds = [
@@ -12,9 +12,12 @@ function Layout() {
 	  "-webkit-linear-gradient(90deg, #dc2430 10%, #7b4397 90%)"
 	];
 
-  	this.backgroundSelected = Data.restoreBackground();
-    if (this.backgroundSelected == null || isNaN(this.backgroundSelected)) this.backgroundSelected = 0;
-
+	this.init = function() {
+		this.backgroundSelected = Data.restoreBackground();
+    	if (this.backgroundSelected == null || isNaN(this.backgroundSelected)) this.backgroundSelected = 0;
+		this.changeBackground(this.backgrounds[this.backgroundSelected])
+	}
+  	
   	this.nextBackground = function() {
 	  var newbg = this.backgrounds[ this.backgroundSelected >= this.backgrounds.length-1 ? this.backgroundSelected=0 : ++(this.backgroundSelected) ]
 	  this.changeBackground(newbg)
@@ -27,7 +30,6 @@ function Layout() {
 	    "background-size": "cover"
 	  });
 	}
-	this.changeBackground(this.backgrounds[this.backgroundSelected]) // this has to go after the function declaration to run when the constructor is invoked
 
 	this.toggleScrollBars = function() {
 		if (this.hiddenScrollBars==="yes") {
@@ -54,7 +56,7 @@ function Layout() {
 	}
 
 	this.showScrollBars = function() {
-		this.scrollbar.style.paddingRight = "0em"
+		this.scrollbar.style.paddingRight = "0"
 		this.hiddenScrollBars = "no"
 	}
 

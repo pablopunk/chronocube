@@ -2,7 +2,7 @@
 function DataManager() {
   this.savedTimes = []
 
-  this.initData = function() {
+  this.init = function() {
     if(typeof(Storage) == "undefined") {
       // Sorry! No Web Storage support..
       Error.print('Sorry! No Web Storage support..');
@@ -15,13 +15,13 @@ function DataManager() {
       Error.print('Sorry, no html5 support in this browser')
     }
 
-    document.getElementById('importFile').addEventListener("change", this.evt = function() {
+    document.getElementById('importFile').addEventListener("change", evt = function() {
       Data.importTimes(evt)
     });
 
-    this.savedTimes = restoreFromStorage();
+    this.savedTimes = this.restoreFromStorage();
     if (this.savedTimes == null) this.savedTimes = [];
-    updateTimes()
+    this.updateTimes()
     MainLayout.scrollDown()
   }
 
@@ -66,11 +66,11 @@ function DataManager() {
   }
 
   this.saveTimesToStorage = function() {
-    localStorage["this.savedTimes"] = JSON.stringify(this.savedTimes)
+    localStorage["savedTimes"] = JSON.stringify(this.savedTimes)
   }
 
   this.restoreFromStorage = function() {
-    // return ( localStorage.getItem('this.savedTimes') == 'undefined' ? [] : JSON.parse(localStorage.getItem("this.savedTimes")) )
+    // return ( localStorage.getItem('savedTimes') == 'undefined' ? [] : JSON.parse(localStorage.getItem("savedTimes")) )
     if (localStorage.getItem("savedTimes") == 'undefined') return [];
     else return JSON.parse(localStorage.getItem("savedTimes"));
   }
@@ -188,10 +188,10 @@ function DataManager() {
   }
 
   this.importTimes = function(evt) {
-    var files = evt.target.files; // FileList object
-    var file = files[0] // file to import
-    var reader = new FileReader();
-    var text = ""
+    // var files = evt.target.files; // FileList object
+    // var file = files[0] // file to import
+    // var reader = new FileReader();
+    // var text = ""
 
     alert("This feature will be available soon :)")
 

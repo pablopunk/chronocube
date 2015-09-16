@@ -27,7 +27,7 @@ div#forkme {
   position: absolute;
   right: 0; /* with position:absolute you can't use float:right, so this does the trick */
   width: 50px;
-  margin-top: 1em; margin-right: 4em;
+  margin-top: 10pt; margin-right: 40pt;
 }
 
 img#github-logo {
@@ -40,7 +40,7 @@ img#github-logo:hover {
 
 img#settingsImg {
   opacity: 0.5;
-  margin-bottom: 0.5em;
+  margin-bottom: 5pt;
 }
 
 img#settingsImg:hover {
@@ -51,24 +51,24 @@ img#settingsImg:hover {
 div#settingsBox {
   position: absolute;
   left: 0;
-  width: 10em;
+  width: 140pt;
   text-align: center;
-  margin: 1em 0 0 1em;
+  margin: 12pt 0 0 12pt;
 }
 
 div#settings {
   width: 100%;
   font-style: italic;
-  font-size: 0.9em;
+  font-size: 11pt;
   opacity: 0;
   padding: 0;
 }
 
 div#settings div {
   width: 100%;
-  padding: 0.5em;
+  padding: 6pt;
   border: 1px solid white;
-  margin-bottom: 0.5em;
+  margin-bottom: 6pt;
   overflow:hidden;
   transition: 0.3s;
 }
@@ -95,7 +95,7 @@ div#settings div input.upload {
     right: 0;
     margin: 0;
     padding: 0;
-    font-size: 20px;
+    font-size: 20pt;
     opacity: 0;
     filter: alpha(opacity=0);
 }
@@ -104,50 +104,50 @@ p#forkmemsg {
   padding: 0; margin: 0;
   visibility: hidden;
   text-align: center;
-  font-size: 0.8em;
+  font-size: 10pt;
 }
 
 div#chronotime {
-  width: 5em;
+  width: 500pt;
   margin: 0;
   padding: 0;
   text-align: center;
   font-family: Data;
-  font-size: 7em;
+  font-size: 90pt;
   opacity: 0.85;
 }
 
 span#subtitle {
   font-style: italic;
-  font-size: 0.9em;
+  font-size: 10pt;
   opacity: 0.7;
 }
 
 span#scramble {
   font-style: italic;
-  font-size: 1.2em;
+  font-size: 15pt;
   opacity: 0.7;
 }
 
 div#scores, div#history {
   display: inline-block;
-  width: 13em;
+  width: 150pt;
   text-align: center;
   vertical-align: text-top; /* I want to marry this line */
 }
 
 div#history {
-  margin-left: 2em;
+  margin-left: 21pt;
 }
 
 div#scores p {
-  font-size: 1.2em;
+  font-size: 14pt;
   font-style: italic;
 }
 
 div#scroll-parent {
-  width: 20em;
-  height: 20em;
+  width: 200pt;
+  height: 200pt;
   overflow: hidden;
 }
 
@@ -156,12 +156,12 @@ div#scroll-child {
   height: 99%;
   overflow-y: scroll;
   overflow: auto;
-  padding-right: 3em; /* hides scroll-bar: increase this value for crossbrowser compatibility */
+  padding-right: 40pt; /* hides scroll-bar: increase this value for crossbrowser compatibility */
 }
 
 table#savedTimes {
   border-collapse: collapse;
-  font-size: 1.3em;
+  font-size: 15pt;
 }
 
 table#savedTimes td:first-child {
@@ -169,14 +169,14 @@ table#savedTimes td:first-child {
 }
 
 table#savedTimes td:first-child {
-  width: 1.5em;
-  padding-right: 1em;
+  width: 17pt;
+  padding-right: 11pt;
 }
 
 table#savedTimes td:nth-child(2) {
-  width: 1.5em;
-  padding-left: 1em;
-  padding-right: 1em;
+  width: 17pt;
+  padding-left: 11pt;
+  padding-right: 11pt;
 }
 
 table#savedTimes td:first-child {
@@ -184,7 +184,7 @@ table#savedTimes td:first-child {
 }
 
 table#savedTimes td:nth-child(3) {
-  font-size: 0.8em;
+  font-size: 10pt;
   color:red;
 }
 
@@ -193,6 +193,6 @@ table#savedTimes td:hover:nth-child(3) {
 }
 
 div#console {
-  font-size: 1.2em;
+  font-size: 14pt;
   color: red;
 }
