@@ -22,8 +22,8 @@ function Input() {
   function stop() {
     chronoStop();
     isRunning = "no";
-    Data.saveTime();
-    Data.updateTimes();
+    Data.add();
+    Data.refresh();
     MainLayout.scrollDown();
     Scramble.displayScramble();
     MainLayout.showAll()

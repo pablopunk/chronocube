@@ -159,37 +159,64 @@ div#scroll-child {
   padding-right: 40pt; /* hides scroll-bar: increase this value for crossbrowser compatibility */
 }
 
-table#savedTimes {
+table#times-table {
   border-collapse: collapse;
   font-size: 15pt;
 }
 
-table#savedTimes td:first-child {
+table#times-table td:first-child {
   text-align: right;
 }
 
-table#savedTimes td:first-child {
+table#times-table td:first-child {
   width: 17pt;
   padding-right: 11pt;
 }
 
-table#savedTimes td:nth-child(2) {
+table#times-table td:nth-child(2) {
   width: 17pt;
   padding-left: 11pt;
   padding-right: 11pt;
 }
 
-table#savedTimes td:first-child {
+table#times-table td:first-child {
   border-right: 1px solid white;
 }
 
-table#savedTimes td:nth-child(3) {
+table#times-table td:nth-child(3) {
   font-size: 10pt;
   color:red;
 }
 
-table#savedTimes td:hover:nth-child(3) {
+table#times-table td:hover:nth-child(3) {
   color:white;
+}
+
+div#solvesManager {
+  height: 40pt;
+}
+
+select#solveNames {
+  width: 100pt;
+}
+
+span#add-button {
+  vertical-align: middle;
+  font-size: 20pt;
+  width: 20pt;
+  height: 100%;
+  margin: 0 10pt 0 0;
+  padding: 3pt 8pt 3pt 8pt;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+input#newSolveText {
+  margin-right: 10pt;
+}
+
+p#pressEnterToSaveSolveClass {
+  opacity: 0.6;
+  font-style: italic;
 }
 
 div#console {
