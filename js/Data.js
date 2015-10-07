@@ -81,12 +81,29 @@ function DataManager() {
     $('#solveNames').select2("close");
   }
 
+  this.delSolve = function() {
+    if (confirm ("Are you sure to delete this Solve class?")) {
+      var index = $("select[id='solveNames'] option:selected").index()
+      this.solves.splice(parseInt(index), 1)
+      if (this.solves.length == 0) {
+        this.solves[0] = new Solve('Default', [])
+        this.currentSolve = 'Default'
+      } else {
+        this.currentSolve = this.solves[index-1].name
+      }
+      this.refresh()
+    }
+  }
+
   this.getIndex = function(name) {
+    var exists = "no"
     for (i in this.solves) {
       if (this.solves[i].name == name) {
-        return i
+        exists = "yes"
       }
     }
+    if (exists == "yes") return i;
+    else return -1;
   }
 
   this.add = function() {
@@ -251,8 +268,10 @@ function DataManager() {
   }
 
   this.newSolve = function(name) {
-    this.currentSolve = name
-    this.solves.push(new Solve(name, []))
-    this.refresh()
+    if (this.getIndex(name) == -1) { // it does not exists yet
+      this.currentSolve = name
+      this.solves.push(new Solve(name, []))
+      this.refresh()
+    }
   }
 }

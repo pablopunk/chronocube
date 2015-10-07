@@ -207,9 +207,18 @@ select#solveNames {
 
 img#add-button {
   vertical-align: middle;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 255, 0, 0.6);
   margin-right: 10pt;
   opacity: 0.85;
+  border-radius: 3pt;
+}
+
+img#del-button {
+  vertical-align: middle;
+  background-color: rgba(255, 0, 0, 0.6);
+  margin-left: 10pt;
+  opacity: 0.85;
+  border-radius: 3pt;
 }
 
 input#newSolveText {
