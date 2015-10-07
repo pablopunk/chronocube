@@ -99,7 +99,7 @@ function DataManager() {
     var exists = "no"
     for (i in this.solves) {
       if (this.solves[i].name == name) {
-        exists = "yes"
+        exists = "yes"; break
       }
     }
     if (exists == "yes") return i;
