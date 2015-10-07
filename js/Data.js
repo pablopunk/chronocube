@@ -89,7 +89,7 @@ function DataManager() {
         this.solves[0] = new Solve('Default', [])
         this.currentSolve = 'Default'
       } else {
-        this.currentSolve = this.solves[index-1].name
+        this.currentSolve = this.solves[index].name
       }
       this.refresh()
     }
