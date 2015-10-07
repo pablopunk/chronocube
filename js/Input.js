@@ -2,12 +2,6 @@ var isRunning = "no"
 var spacePressed = "no"
 
 function Input() {
-  // Prevent SPACE from scrolling down the browser window
-  document.documentElement.addEventListener('keydown', function (e) {
-    if ( ( e.keycode || e.which ) == 32) {
-        e.preventDefault();
-    }
-  }, false);
 
   document.body.addEventListener("keyup", spaceUp);
   document.body.addEventListener("keydown", spaceDown);
@@ -30,6 +24,7 @@ function Input() {
   }
 
   function spaceUp(event) { // Starting at SPACE released
+    if ($('#newSolveText').is(":visible")) return;
     if (event.which == 32) {
       if (isRunning == "no" && spacePressed == "no") {
         document.getElementById('chronotime').style.color = "white"
@@ -40,6 +35,7 @@ function Input() {
   }
 
   function spaceDown(event) { // Stoping at SPACE pressed
+    if ($('#newSolveText').is(":visible")) return;
     if (event.which == 32) {
       if (isRunning == "yes") {
         spacePressed = "yes"

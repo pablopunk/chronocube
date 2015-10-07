@@ -196,18 +196,20 @@ div#solvesManager {
   height: 40pt;
 }
 
-select#solveNames {
-  width: 100pt;
+.select2-results__option {
+  color: black;
 }
 
-span#add-button {
+select#solveNames {
+  width: 100pt;
+  color: black;
+}
+
+img#add-button {
   vertical-align: middle;
-  font-size: 20pt;
-  width: 20pt;
-  height: 100%;
-  margin: 0 10pt 0 0;
-  padding: 3pt 8pt 3pt 8pt;
   background-color: rgba(0, 0, 0, 0.4);
+  margin-right: 10pt;
+  opacity: 0.85;
 }
 
 input#newSolveText {

@@ -40,10 +40,13 @@ function DataManager() {
     if (this.numberOfSolves == 0) {
       this.solves = [new Solve('Default', [])]
       this.numberOfSolves = 1
+      this.currentSolve = 'Default'
     }
     else {
       this.solves = JSON.parse(localStorage.getItem('solves')) // JSON object in localstorage
       if (this.solves == null) this.solves = [new Solve('Default', [])]
+      this.currentSolve = localStorage['currentSolve']
+      if (this.currentSolve == null) this.currentSolve = 'Default'
     }
   }
 
@@ -51,9 +54,11 @@ function DataManager() {
     if (this.solves == null) { // no solves
       localStorage['numberOfSolves'] = 1
       localStorage['solves'] = JSON.stringify([new Solve('Default', [])])
+      localStorage['currentSolve'] = 'Default'
     } else {
       localStorage['numberOfSolves'] = this.solves.length
       localStorage['solves'] = JSON.stringify(this.solves)
+      localStorage['currentSolve'] = this.currentSolve
     }
   }
 
@@ -64,12 +69,16 @@ function DataManager() {
       else content += '<option>'+this.solves[i].name+'</option>'
     }
     document.getElementById('solveNames').innerHTML = content
+    $('#solveNames').select2({
+  			minimumResultsForSearch: Infinity,
+				theme: "classic"
+		});
   }
 
-  this.changeSolve = function() {
-    // @implement when I change to another solve
-    // I have to update this.currentSolve
-    // and call this.refresh
+  this.changeSolve = function(index) {
+    this.currentSolve = this.solves[index].name
+    this.refresh()
+    $('#solveNames').select2("close");
   }
 
   this.getIndex = function(name) {
@@ -91,8 +100,6 @@ function DataManager() {
     var best = this.getBestTime();
     var table = '';
     var times = this.solves[this.getIndex(this.currentSolve)].times
-    // @debug
-    console.log('times to iterate: '+times)
     for (i=0; i<times.length; i++) {
       if (i == best) {
           table += '<tr style="color:#44ff77"><td>'+(parseInt(i)+1)+'</td><td>'+times[i]+'</td><td onclick="Data.deleteTime('+i+')">X</td></tr>';
@@ -241,5 +248,11 @@ function DataManager() {
 
   this.importTimes = function(evt) {
     alert("This feature will be available soon :)")
+  }
+
+  this.newSolve = function(name) {
+    this.currentSolve = name
+    this.solves.push(new Solve(name, []))
+    this.refresh()
   }
 }

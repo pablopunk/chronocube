@@ -14,12 +14,16 @@ function Layout() {
 
 	this.init = function() {
 		$('#solveNames').select2();
+		$('#solveNames').select2({
+  			minimumResultsForSearch: Infinity,
+				theme: "classic"
+		});
 		this.backgroundSelected = Data.restoreBackground();
     if (this.backgroundSelected == null || isNaN(this.backgroundSelected)) this.backgroundSelected = 0;
 		this.changeBackground(this.backgrounds[this.backgroundSelected])
 	}
 
-  	this.nextBackground = function() {
+  this.nextBackground = function() {
 	  var newbg = this.backgrounds[ this.backgroundSelected >= this.backgrounds.length-1 ? this.backgroundSelected=0 : ++(this.backgroundSelected) ]
 	  this.changeBackground(newbg)
 	  Data.saveBackground();
@@ -119,10 +123,11 @@ function Layout() {
 	this.newSolveClass = function(event) {
 		if (event.keyCode == 13) {// enter key
 			$('#newSolveText').fadeOut(50)
+			var name = $('#newSolveText').val()
 			$('#newSolveText').val('')
 			$('#pressEnterToSaveSolveClass').fadeOut()
 			$('#add-button').fadeIn()
-			$('#add-button').text('+') // @implement the '+' text dissapear, why?
+			Data.newSolve(name)
 		}
 	}
 }

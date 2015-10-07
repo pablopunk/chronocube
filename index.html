@@ -7,18 +7,18 @@
 <head>
   <meta charset="utf-8">
   <title>Chronocube</title>
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <link href="http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
   <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu:regular&subset=Latin,Cyrillic">
   <link rel="stylesheet" type="text/css" href="css/index.css" />
   <script type="text/javascript" src="js/main.js"></script>
-  <script type="text/javascript" src="js/jquery.js"></script>
   <script type="text/javascript" src="js/ErrorHandle.js"></script>
   <script type="text/javascript" src="js/chrono.js"></script>
   <script type="text/javascript" src="js/Input.js"></script>
   <script type="text/javascript" src="js/Data.js"></script>
   <script type="text/javascript" src="js/Layout.js"></script>
   <script type="text/javascript" src="js/scramble_333.js"></script>
-  <link href="http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
 
   <!-- For old IEs -->
 	<link rel="shortcut icon" href="img/favicon/favicon.ico" />
@@ -95,9 +95,9 @@
       </div>
     </div>
     <div id="solvesManager" class="hideall">
-      <input id="newSolveText" type="text" value="" hidden="true" onkeypress="MainLayout.newSolveClass(event)"/>
-      <span id="add-button" onclick="MainLayout.displayNewSolveText()">+</span>
-      <select id="solveNames">
+      <input id="newSolveText" type="text" value="" hidden="true" onkeypress="if (this.value != '')  MainLayout.newSolveClass(event)"/>
+      <img id="add-button" onclick="MainLayout.displayNewSolveText()" src="img/add.png"></img>
+      <select id="solveNames" onchange="Data.changeSolve(this.selectedIndex)">
       </select>
       <p id="pressEnterToSaveSolveClass" hidden>Press Enter to save the new Solve class</p>
     </div>
