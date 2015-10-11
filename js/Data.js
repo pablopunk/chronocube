@@ -119,9 +119,9 @@ function DataManager() {
     var times = this.solves[this.getIndex(this.currentSolve)].times
     for (i=0; i<times.length; i++) {
       if (i == best) {
-          table += '<tr style="color:#44ff77"><td>'+(parseInt(i)+1)+'</td><td>'+times[i]+'</td><td onclick="Data.deleteTime('+i+')">X</td></tr>';
+          table += '<tr style="color:#44ff77"><td>'+(parseInt(i)+1)+'</td><td>'+times[i]+'</td><td onclick="Data.deleteTime('+i+')"><img src="img/x.png"/></td></tr>';
       } else {
-          table += '<tr><td>'+(parseInt(i)+1)+'</td><td>'+times[i]+'</td><td onclick="Data.deleteTime('+i+')">X</td></tr>';
+          table += '<tr><td>'+(parseInt(i)+1)+'</td><td>'+times[i]+'</td><td onclick="Data.deleteTime('+i+')"><img src="img/x.png"/></td></tr>';
       }
     }
     document.getElementById('times-table').innerHTML = table

@@ -29,4 +29,3 @@ Also credits to:
 
 ## To do
 - Implement inspection timer
-- Classify solves

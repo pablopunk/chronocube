@@ -183,17 +183,23 @@ table#times-table td:first-child {
   border-right: 1px solid white;
 }
 
+table#times-table td:nth-child(3) img {
+  width: 15pt;
+}
+
 table#times-table td:nth-child(3) {
   font-size: 10pt;
-  color:red;
+  opacity: 0.75;
 }
 
 table#times-table td:hover:nth-child(3) {
   color:white;
+  opacity: 1;
 }
 
 div#solvesManager {
   height: 40pt;
+  margin-top: 10pt;
 }
 
 .select2-results__option {
