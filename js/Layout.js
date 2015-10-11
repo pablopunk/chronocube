@@ -120,10 +120,9 @@ function Layout() {
 		$('#pressEnterToSaveSolveClass').fadeIn()
 	}
 
-	this.newSolveClass = function(event) {
+	this.newSolveClass = function(event, name) {
 		if (event.keyCode == 13) {// enter key
 			$('#newSolveText').fadeOut(50)
-			var name = $('#newSolveText').val()
 			$('#newSolveText').val('')
 			$('#pressEnterToSaveSolveClass').fadeOut()
 			$('#add-button').fadeIn()

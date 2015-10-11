@@ -100,7 +100,7 @@
       </div>
     </div>
     <div id="solvesManager" class="hideall">
-      <input id="newSolveText" type="text" value="" hidden="true" onkeypress="if (this.value != '')  MainLayout.newSolveClass(event)"/>
+      <input id="newSolveText" type="text" value="" hidden="true" onkeypress="if (this.value.trim() != '')  MainLayout.newSolveClass(event, this.value.trim())"/>
       <img id="add-button" onclick="MainLayout.displayNewSolveText()" src="img/add.png"></img>
       <select id="solveNames" onchange="Data.changeSolve(this.selectedIndex)">
       </select>
