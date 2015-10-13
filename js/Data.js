@@ -119,8 +119,8 @@ function DataManager() {
     else {
       // display scores
       document.getElementById('best-solve').innerHTML = "Best: "+ times[best]
-      document.getElementById('average-all').innerHTML = "Average All: " + this.getAverage(times.length)
-      if (times.length>4) document.getElementById('average-5').innerHTML = "Average 5: " + this.getAverage(5);
+      document.getElementById('average-all').innerHTML = "Average All: " + this.getAverageAll()
+      if (times.length>4) document.getElementById('average-5').innerHTML = "Average 5: " + this.getAverage5();
       else document.getElementById('average-5').innerHTML = "Average 5: -"
     }
   }
@@ -153,18 +153,37 @@ function DataManager() {
     return best;
   }
 
-  // get average of last 'size' solves -> if size==average.length, then it returns all solves average
-  this.getAverage = function(size) {
+  this.getAverageAll = function() {
     var times = this.solves[this.getIndex(this.currentSolve)].times
     var i=0, average=0, min=0, sec=0, dec=0;
-    for (i=times.length-size; i<times.length; i++) {
+    for (i=0; i<times.length; i++) {
       min = parseInt(times[i].charAt(0)+times[i].charAt(1))
       sec = parseInt(times[i].charAt(3)+times[i].charAt(4))
       dec = parseInt(times[i].charAt(6)+times[i].charAt(7))
       // average in decimals
       average += ( (min*60*100) + (sec*100) + dec)
     }
-    average /= size
+    average /= times.length
+    average = average.toFixed(0);
+
+    return this.getAverageStringFromDec(average)
+  }
+
+  this.getAverage5 = function() {
+    var times = this.solves[this.getIndex(this.currentSolve)].times
+    var i=0, average=0, min=0, sec=0, dec=0;
+    times = times.slice(times.length-5, times.length)
+    times.sort()
+    for (i=1; i<times.length-1; i++) {
+      // @debug
+      console.log('time'+i+": "+times[i])
+      min = parseInt(times[i].charAt(0)+times[i].charAt(1))
+      sec = parseInt(times[i].charAt(3)+times[i].charAt(4))
+      dec = parseInt(times[i].charAt(6)+times[i].charAt(7))
+      // average in decimals
+      average += ( (min*60*100) + (sec*100) + dec)
+    }
+    average /= 3
     average = average.toFixed(0);
 
     return this.getAverageStringFromDec(average)
@@ -219,7 +238,7 @@ function DataManager() {
     var i = 0;
 
     csvContent += "All solves;Average All"+(this.savedTimes.length>4 ? ";Average 5\n" : "\n")
-    csvContent += this.savedTimes[i]+";"+this.getAverage(this.savedTimes.length)+(this.savedTimes.length>4 ? ";"+this.getAverage(5)+"\n" : "\n")
+    csvContent += this.savedTimes[i]+";"+this.getAverageAll()+(this.savedTimes.length>4 ? ";"+this.getAverage5()+"\n" : "\n")
     for (i=1; i<this.savedTimes.length;i++) {
       csvContent += this.savedTimes.length ? this.savedTimes[i] + "\n" : this.savedTimes[i];
     }
@@ -237,7 +256,7 @@ function DataManager() {
     var i = 0;
 
     csvContent += "All solves\tAverage All"+(this.savedTimes.length>4 ? "\tAverage 5\n" : "\n")
-    csvContent += this.savedTimes[i]+"\t"+this.getAverage(this.savedTimes.length)+(this.savedTimes.length>4 ? "\t"+this.getAverage(5)+"\n" : "\n")
+    csvContent += this.savedTimes[i]+"\t"+this.getAverageAll()+(this.savedTimes.length>4 ? "\t"+this.getAverage5()+"\n" : "\n")
     for (i=1; i<this.savedTimes.length;i++) {
       csvContent += this.savedTimes.length ? this.savedTimes[i] + "\n" : this.savedTimes[i];
     }
