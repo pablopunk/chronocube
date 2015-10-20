@@ -22,7 +22,7 @@ Use the *MAKEFILE* to build the executable for all platforms (you'll need *[elec
 - `make linux64` creates the build folder inside `dist/` for x64
 
 ## License
-Use it as you wish (but give me credit cause I want to be famous)
+Check `LICENSE.md` (MIT License)
 Also credits to:
 - [Random state scrambles](https://github.com/cubing/jsss)
 - [Background gradients](http://uigradients.com)

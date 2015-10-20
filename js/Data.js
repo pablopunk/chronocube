@@ -22,9 +22,9 @@ function DataManager() {
       Error.print('Sorry, no html5 support in this browser')
     }
 
-    document.getElementById('importFile').addEventListener("change", evt = function() {
-      Data.importTimes(evt)
-    });
+    //document.getElementById('importFile').addEventListener("change", evt = function() {
+    //  Data.importTimes(evt)
+    //});
     document.getElementById('solve')
 
     // load number of solves stored
@@ -64,7 +64,7 @@ function DataManager() {
 
   this.updateSolveName = function() {
     var content = ''
-    for (i in this.solves) {
+    for (var i=0; i<this.solves.length; i++) {
       if (this.currentSolve == this.solves[i].name) content += '<option selected>'+this.solves[i].name+'</option>'
       else content += '<option>'+this.solves[i].name+'</option>'
     }
@@ -97,7 +97,7 @@ function DataManager() {
 
   this.getIndex = function(name) {
     var exists = "no"
-    for (i in this.solves) {
+    for (var i=0; i<this.solves.length; i++) {
       if (this.solves[i].name == name) {
         exists = "yes"; break
       }
@@ -117,7 +117,7 @@ function DataManager() {
     var best = this.getBestTime();
     var table = '';
     var times = this.solves[this.getIndex(this.currentSolve)].times
-    for (i=0; i<times.length; i++) {
+    for (var i=0; i<times.length; i++) {
       if (i == best) {
           table += '<tr style="color:#44ff77"><td>'+(parseInt(i)+1)+'</td><td>'+times[i]+'</td><td onclick="Data.deleteTime('+i+')"><img src="img/x.png"/></td></tr>';
       } else {
@@ -192,8 +192,6 @@ function DataManager() {
     times = times.slice(times.length-5, times.length)
     times.sort()
     for (i=1; i<times.length-1; i++) {
-      // @debug
-      console.log('time'+i+": "+times[i])
       min = parseInt(times[i].charAt(0)+times[i].charAt(1))
       sec = parseInt(times[i].charAt(3)+times[i].charAt(4))
       dec = parseInt(times[i].charAt(6)+times[i].charAt(7))
