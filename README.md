@@ -9,7 +9,7 @@ This app is cross-platform as it's created with *HTML+CSS+JS* and it's packaged 
 
 ## Download
 - [Download for OS X](https://raw.githubusercontent.com/pablopunk/chronocube/master/dist/Chronocube.dmg)
-- [Download for Windows](https://raw.githubusercontent.com/pablopunk/chronocube/master/dist/Setup.exe)
+- [Download for Windows](https://raw.githubusercontent.com/pablopunk/chronocube/master/dist/Chronocube-Setup.exe)
 - Linux: check Build instructions below
 
 ## Build
@@ -23,7 +23,7 @@ Use the *MAKEFILE* to build the executable for all platforms:
 - `make linux64` creates the installation folders for linux x64 inside `build/linux64`
 
 ## Packages
-You can check the installers in `dist`. In order to make your own, use the documentation of [the packager](https://github.com/Aluxian/electron-superkit) (you'll do something like `gulp pack:win32:installer`)
+You can check the installers in `dist`. In order to make your own, use [the documentation of the packager](https://github.com/Aluxian/electron-superkit/wiki/Packaging) (code-signing and packaging sections)
 
 ## License
 Check `LICENSE.md` (MIT License)
