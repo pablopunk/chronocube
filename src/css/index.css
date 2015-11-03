@@ -186,17 +186,14 @@ table#times-table td:first-child {
   border-right: 1px solid white;
 }
 
-table#times-table td:nth-child(3) img {
-  width: 15pt;
-}
-
 table#times-table td:nth-child(3) {
+  color: white;
   font-size: 10pt;
   opacity: 0.75;
 }
 
 table#times-table td:hover:nth-child(3) {
-  color:white;
+  color:red;
   opacity: 1;
 }
 
@@ -214,20 +211,30 @@ select#solveNames {
   color: black;
 }
 
-img#add-button {
+#add-button {
+  font-size: 20pt;
   vertical-align: middle;
-  background-color: rgba(0, 255, 0, 0.6);
+  color: #33ff33;
+  text-shadow: 0 0 2pt black;
   margin-right: 10pt;
-  opacity: 0.85;
-  border-radius: 3pt;
+  opacity: 0.5;
 }
 
-img#del-button {
+#add-button:hover {
+  opacity: 0.9;
+}
+
+#del-button {
+  font-size: 20pt;
   vertical-align: middle;
-  background-color: rgba(255, 0, 0, 0.6);
+  color: #ff3333;
+  text-shadow: 0 0 2pt black;
   margin-left: 10pt;
-  opacity: 0.85;
-  border-radius: 3pt;
+  opacity: 0.7;
+}
+
+#del-button:hover {
+  opacity: 0.9;
 }
 
 input#newSolveText {

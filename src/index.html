@@ -101,10 +101,10 @@
     </div>
     <div id="solvesManager" class="hideall">
       <input id="newSolveText" type="text" value="" hidden="true" onkeypress="if (this.value.trim() != '')  MainLayout.newSolveClass(event, this.value.trim())"/>
-      <img id="add-button" onclick="MainLayout.displayNewSolveText()" src="img/add.png"></img>
+      <i class="fa fa-plus-square" id="add-button" onclick="MainLayout.displayNewSolveText()"></i>
       <select id="solveNames" onchange="Data.changeSolve(this.selectedIndex)">
       </select>
-      <img id="del-button" onclick="Data.delSolve()" src="img/del.png"></img>
+      <i class="fa fa-minus-square" id="del-button" onclick="Data.delSolve()"></i>
       <p id="pressEnterToSaveSolveClass" hidden>Press Enter to save the new Solve class</p>
     </div>
   <br>
