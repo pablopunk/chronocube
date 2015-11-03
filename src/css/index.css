@@ -28,22 +28,25 @@ div#forkme {
   right: 0; /* with position:absolute you can't use float:right, so this does the trick */
   width: 50px;
   margin-top: 10pt; margin-right: 40pt;
+  font-size: 45pt;
 }
 
-img#github-logo {
+#github-logo {
   opacity: 0.5;
 }
 
-img#github-logo:hover {
+#github-logo:hover {
   opacity: 0.9;
 }
 
-img#settingsImg {
+#settingsIcon {
   opacity: 0.5;
+  margin-top: 5pt;
   margin-bottom: 5pt;
+  font-size: 45pt;
 }
 
-img#settingsImg:hover {
+#settingsIcon:hover {
   opacity: 0.9;
 }
 
