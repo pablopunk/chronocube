@@ -194,7 +194,6 @@ table#times-table td:nth-child(3) {
 
 table#times-table td:hover:nth-child(3) {
   color:red;
-  opacity: 1;
 }
 
 div#solvesManager {

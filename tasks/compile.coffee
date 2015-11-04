@@ -71,6 +71,28 @@ manifest = require '../src/package.json'
       .pipe gulp.dest dir + '/fonts'
       .pipe livereload()
 
+  # FONT AWESOME AND SUBFOLDERS
+  gulp.task 'compile:' + dist + ':fonts2', ['clean:build:' + dist], ->
+    gulp.src './src/fonts/Font-Awesome/*'
+      .pipe gulp.dest dir + '/fonts/Font-Awesome'
+      .pipe livereload()
+  gulp.task 'compile:' + dist + ':fonts3', ['clean:build:' + dist], ->
+    gulp.src './src/fonts/Font-Awesome/css/*'
+      .pipe gulp.dest dir + '/fonts/Font-Awesome/css'
+      .pipe livereload()
+  gulp.task 'compile:' + dist + ':fonts4', ['clean:build:' + dist], ->
+    gulp.src './src/fonts/Font-Awesome/less/*'
+      .pipe gulp.dest dir + '/fonts/Font-Awesome/less'
+      .pipe livereload()
+  gulp.task 'compile:' + dist + ':fonts5', ['clean:build:' + dist], ->
+    gulp.src './src/fonts/Font-Awesome/scss/*'
+      .pipe gulp.dest dir + '/fonts/Font-Awesome/scss'
+      .pipe livereload()
+  gulp.task 'compile:' + dist + ':fonts6', ['clean:build:' + dist], ->
+    gulp.src './src/fonts/Font-Awesome/fonts/*'
+      .pipe gulp.dest dir + '/fonts/Font-Awesome/fonts'
+      .pipe livereload()
+
   # Move package.json
   gulp.task 'compile:' + dist + ':package', ['clean:build:' + dist], ->
     gulp.src './src/package.json'
@@ -83,6 +105,11 @@ manifest = require '../src/package.json'
     'compile:' + dist + ':scripts'
     'compile:' + dist + ':html'
     'compile:' + dist + ':fonts'
+    'compile:' + dist + ':fonts2'
+    'compile:' + dist + ':fonts3'
+    'compile:' + dist + ':fonts4'
+    'compile:' + dist + ':fonts5'
+    'compile:' + dist + ':fonts6'
     'compile:' + dist + ':img'
     'compile:' + dist + ':deps'
     'compile:' + dist + ':package'
