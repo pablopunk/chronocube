@@ -8,9 +8,7 @@ This app is cross-platform as it's created with *HTML+CSS+JS* and it's packaged 
 - Try it online [here](http://chronocube.pablopunk.com)
 
 ## Download
-- [Download for OS X](https://raw.githubusercontent.com/pablopunk/chronocube/master/dist/Chronocube.dmg)
-- [Download for Windows](https://raw.githubusercontent.com/pablopunk/chronocube/master/dist/Chronocube-Setup.exe)
-- Linux: check Build instructions below
+- Check the [releases page](https://github.com/pablopunk/chronocube/releases)
 
 ## Build
 I use [this tool](https://github.com/Aluxian/electron-superkit) for both building and packaging the app for all platforms, so be sure to check out the repo for more details.
