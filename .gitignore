@@ -6,3 +6,4 @@ src/node_modules/
 npm-debug.log
 .env*
 pack.sh
+*.p12
