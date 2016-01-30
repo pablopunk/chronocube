@@ -120,12 +120,16 @@ function Layout() {
 		$('#pressEnterToSaveSolveClass').fadeIn()
 	}
 
+	this.hideNewSolveText = function() {
+		$('#newSolveText').fadeOut(50);
+		$('#newSolveText').val('')
+		$('#pressEnterToSaveSolveClass').fadeOut(50);
+		$('#add-button').fadeIn();
+	}
+
 	this.newSolveClass = function(event, name) {
 		if (event.keyCode == 13) {// enter key
-			$('#newSolveText').fadeOut(50)
-			$('#newSolveText').val('')
-			$('#pressEnterToSaveSolveClass').fadeOut()
-			$('#add-button').fadeIn()
+			this.hideNewSolveText()
 			Data.newSolve(name)
 		}
 	}

@@ -24,6 +24,10 @@ function Input() {
   }
 
   function spaceUp(event) { // Starting at SPACE released
+    if ($('#newSolveText').is(":visible")) {
+      if (event.keyCode == 27) MainLayout.hideNewSolveText();
+      return
+    }
     if ($('#newSolveText').is(":visible")) return;
     if (event.which == 32) {
       if (isRunning == "no" && spacePressed == "no") {
