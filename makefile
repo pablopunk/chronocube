@@ -17,3 +17,10 @@ linux32:
 linux64:
 	rm -rf build/linux64
 	gulp build:linux64
+
+pack:
+	gulp pack:darwin64 # mac os x
+	cd build
+	zip -r ../dist/linux32.zip linux32 # linux
+	zip -r ../dist/linux64.zip linux64
+	zip -r ../dist/win32.zip win32 # windows
