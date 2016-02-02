@@ -1,9 +1,4 @@
 dist/
 build/
-cache/
-node_modules/
 src/node_modules/
 npm-debug.log
-.env*
-pack.sh
-*.p12

@@ -4,43 +4,12 @@
   "version": "0.2.1",
   "description": "Cube timer",
   "main": "js/main.js",
-  "dependencies": {
-    "babel-runtime": "^5.6.20",
-    "mustache": "^2.1.2",
-    "request": "^2.58.0",
-    "semver": "^5.0.1",
-    "yargs": "^3.15.0"
-  },
-  "scripts": {
-  },
   "license": "MIT",
   "author": "Pablo Varela <pablovarela182@gmail.com>",
-  "homepage": "https://github.com/pablopunk/chronocube",
+  "homepage": "https://pablopunk.github.io/chronocube",
   "repository": {
     "type": "git",
     "url": "https://github.com/pablopunk/chronocube.git"
-  },
-  "crashReporter": {
-    "productName": "Chronocube",
-    "companyName": "Pablo Varela",
-    "submitUrl": "http://localhost:1127/post"
-  },
-  "updater": {
-    "manifestUrl": "https://raw.githubusercontent.com/pablopunk/chronocube/master/src/package.json",
-    "download": {
-      "darwin": "https://github.com/pablopunk/chronocube/releases/download/v{{ version }}/{{ productName }}.dmg",
-      "linux": {
-        "deb": {
-          "ia32": "https://github.com/pablopunk/chronocube/releases/download/v{{ version }}/{{ name }}-{{ version }}-i386.deb",
-          "x64": "https://github.com/pablopunk/chronocube/releases/download/v{{ version }}/{{ name }}-{{ version }}-amd64.deb"
-        },
-        "rpm": {
-          "ia32": "https://github.com/pablopunk/chronocube/releases/download/v{{ version }}/{{ name }}-{{ version }}-i386.rpm",
-          "x64": "https://github.com/pablopunk/chronocube/releases/download/v{{ version }}/{{ name }}-{{ version }}-x86_64.rpm"
-        }
-      },
-      "win": "https://github.com/pablopunk/chronocube/releases/download/v{{ version }}/{{ productName }}Setup.exe"
-    }
   },
   "darwin": {
     "bundleId": "com.pablopunk.chronocube",
@@ -56,5 +25,9 @@
   "win": {
     "companyName": "Pablo Varela",
     "copyright": "Copyright © Pablo Varela"
+  },
+  "devDependencies": {
+    "electron-builder": "^2.6.0",
+    "electron-packager": "^5.2.1"
   }
 }

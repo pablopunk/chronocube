@@ -7,31 +7,32 @@ This app is cross-platform as it's created with *HTML+CSS+JS* and it's packaged 
 
 ![screnshot](https://s3.amazonaws.com/f.cl.ly/items/360K0M2o1M2i0X32212d/Captura%20de%20pantalla%202015-12-14%20a%20las%207.28.36.png?v=b8fd4955)
 
-- Try it online [here](http://chronocube.pablopunk.com)
-
 ## Download
-- Check the [releases page](https://github.com/pablopunk/chronocube/releases)
+- Try it online [here](http://chronocube.pablopunk.com)
+- Check the [releases page](https://github.com/pablopunk/chronocube/releases) for desktop apps
 
-## Build
-I use [this tool](https://github.com/Aluxian/electron-superkit) for both building and packaging the app for all platforms, so be sure to check out the repo for more details.
+## Build and Package
 
 Use the *MAKEFILE* to build the executable for all platforms:
-- `make all` creates all builds (osx, win and linux for all architectures) inside `build/`
-- `make osx` creates the .app for darwin x64 in `build/darwin64`
-- `make win32` creates the .exe for win ia32 in `build/win32`
-- `make linux32` creates the installation folders for linux ia32 inside `build/linux32` for ia32
-- `make linux64` creates the installation folders for linux x64 inside `build/linux64`
-
-## Packages
-You can check the installers in `dist`. In order to make your own, use [the documentation of the packager](https://github.com/Aluxian/electron-superkit/wiki/Packaging) (code-signing and packaging sections)
+- `make all`:
+  * creates all builds inside `build/`
+  * creates apps for mac and win inside `dist/`
+- Specific arquitectures:
+  * `make osx`
+  * `make win`
+  * `make linux32`
+  * `make linux64`
+  * `make linux` (both `ia32` and `x64`)
 
 ## License
 Check `LICENSE.md` (MIT License)
 
 Also credits to:
-- [Electron SuperKit](https://github.com/Aluxian/electron-superkit)
 - [Random state scrambles](https://github.com/cubing/jsss)
 - [Background gradients](http://uigradients.com)]
+
+Older versions included:
+- [Electron SuperKit](https://github.com/Aluxian/electron-superkit) for building and packaging
 
 ## To do
 - Implement inspection timer
