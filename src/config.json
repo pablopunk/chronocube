@@ -6,12 +6,15 @@
     "icon": "../resources/darwin/app.icns",
     "icon-size": 80,
     "contents": [
-      { "x": 438, "y": 300, "type": "link", "path": "/Applications" },
-      { "x": 192, "y": 300, "type": "file" }
+      { "x": 438, "y": 250, "type": "link", "path": "/Applications" },
+      { "x": 192, "y": 250, "type": "file" }
     ]
   },
   "win" : {
     "title" : "Chronocube",
-    "icon" : "../resources/win/app.ico"
+    "version": "0.2.2",
+    "publisher": "Pablo Varela",
+    "icon" : "../resources/win/app.ico",
+    "verbosity": 1
   }
 }

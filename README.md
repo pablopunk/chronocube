@@ -29,7 +29,7 @@ Check `LICENSE.md` (MIT License)
 
 Also credits to:
 - [Random state scrambles](https://github.com/cubing/jsss)
-- [Background gradients](http://uigradients.com)]
+- [Background gradients](http://uigradients.com)
 
 Older versions included:
 - [Electron SuperKit](https://github.com/Aluxian/electron-superkit) for building and packaging
