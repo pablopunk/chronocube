@@ -150,7 +150,7 @@ div#scores p {
 
 div#scroll-parent {
   width: 200pt;
-  height: 200pt;
+  height: 40vh;
   overflow: hidden;
 }
 
