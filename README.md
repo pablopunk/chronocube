@@ -35,6 +35,8 @@ Older versions included:
 - [Electron SuperKit](https://github.com/Aluxian/electron-superkit) for building and packaging
 
 ## To do
-- Implement inspection timer
+- Save scramble in solves
+- Add notes to each solve
+- Exporting/Importing features
 
 #### Don't be afraid to send pull requests :)
