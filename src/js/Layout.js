@@ -139,6 +139,14 @@ function Layout() {
 		}
 	}
 
+	this.showUndoDelete = function() {
+		document.getElementById('undoDeleteButton').style.visibility = "visible"
+	}
+
+	this.hideUndoDelete = function() {
+		document.getElementById('undoDeleteButton').style.visibility = "hidden"
+	}
+
 	this.displayNewSolveText = function() {
 		$('#add-button').fadeOut(50)
 		$('#newSolveText').fadeIn()

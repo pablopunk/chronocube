@@ -7,7 +7,8 @@ function Solve(name, times) {
 function DataManager() {
   this.solves = [] // array of Solve objects
   this.numberOfSolves = 0 // solves loaded into the app !! not the actual number (solves.length)
-  this.currentSolve = 'Default' // @implement save and load currentSolve in localstorage
+  this.currentSolve = 'Default'
+  this.deleted = [] // list of deleted solves to undo
 
   this.init = function() {
     if(typeof(Storage) == "undefined") {
@@ -143,8 +144,19 @@ function DataManager() {
   }
 
   this.deleteTime = function(index) {
+    this.deleted.push(this.solves[this.getIndex(this.currentSolve)].times[index])
     this.solves[this.getIndex(this.currentSolve)].times.splice(parseInt(index), 1)
     this.refresh();
+    MainLayout.showUndoDelete();
+  }
+
+  this.undoLastDelete = function() {
+    this.solves[this.getIndex(this.currentSolve)].times.push(this.deleted.pop())
+    this.refresh()
+    MainLayout.scrollDown()
+    if (this.deleted.length < 1) {
+        MainLayout.hideUndoDelete();
+    }
   }
 
   this.saveBackground = function() {

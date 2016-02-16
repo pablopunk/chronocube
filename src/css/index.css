@@ -8,6 +8,10 @@ html {
   height: 100%;
 }
 
+a {
+  text-decoration: none;
+}
+
 body {
   font-family: Avenir, Helvetica, sans-serif;
   color: white;
@@ -150,7 +154,7 @@ div#scores p {
 
 div#scroll-parent {
   width: 200pt;
-  height: 40vh;
+  height: 35vh;
   overflow: hidden;
 }
 
@@ -194,6 +198,28 @@ table#times-table td:nth-child(3) {
 
 table#times-table td:hover:nth-child(3) {
   color:red;
+}
+
+#undoDeleteButton {
+  opacity: 0.9;
+  visibility: hidden;
+  width: 90pt;
+  height: 24pt;
+  line-height: 24pt;
+  color: white;
+  margin-top: 5pt;
+}
+
+#undoDeleteButton span {
+  cursor: pointer;
+  padding: 2pt 4pt 2pt 4pt;
+  margin-right: 4pt;
+  border-radius: 5px;
+  background-color: #e74c3c;
+}
+
+#undoDeleteButton i {
+  font-size: 11pt;
 }
 
 div#solvesManager {

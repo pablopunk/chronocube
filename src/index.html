@@ -100,6 +100,7 @@
         </div>
       </div>
     </div>
+    <div id="undoDeleteButton"><span onclick="Data.undoLastDelete()">Undo delete</span><i class="fa fa-times" onclick="MainLayout.hideUndoDelete()"></i></div>
     <div id="solvesManager" class="hideall">
       <input id="newSolveText" type="text" value="" hidden="true" onkeypress="if (this.value.trim() != '')  MainLayout.newSolveClass(event, this.value.trim())"/>
       <i class="fa fa-plus-square" id="add-button" onclick="MainLayout.displayNewSolveText()"></i>
