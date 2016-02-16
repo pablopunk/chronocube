@@ -36,6 +36,26 @@ function Layout() {
 	  });
 	}
 
+	this.updateChronoTime = function(sec) {
+		document.getElementById("chronotime").innerHTML = sec
+	}
+
+	this.setChronoTime = function(min,sec,msec) {
+		document.getElementById("chronotime").innerHTML = min + ":" + sec + "." + msec
+	}
+
+	this.changeChronoColor = function(state) {
+		if (state == chronoState.INSPECTION) {
+			document.getElementById('chronotime').style.color = "#f1c40f"
+		} else if (state == chronoState.HOLDING_INSPECTION) {
+			document.getElementById('chronotime').style.color = "#f39c12"
+		} else if (state == chronoState.HOLDING_SOLVE) {
+			document.getElementById('chronotime').style.color = "#92FE9D"
+		} else {
+			document.getElementById('chronotime').style.color = "white"
+		}
+	}
+
 	this.toggleScrollBars = function() {
 		if (this.hiddenScrollBars==="yes") {
 			this.showScrollBars()
@@ -43,6 +63,10 @@ function Layout() {
 			this.hideScrollBars()
 		}
 		this.scrollUp(); this.scrollDown(); // forces the scroll bar to disappear/appear
+	}
+
+	this.toggleInspection = function() {
+		inspection = !inspection
 	}
 
 	this.scrollUp = function() {
@@ -71,6 +95,7 @@ function Layout() {
 			divs[d].style.transition = 'opacity 0.3s';
 			divs[d].style.opacity = 0
 		}
+		$('#chronotime').css('font-size','160pt')
 	}
 
 	this.showAll = function() {
@@ -79,6 +104,7 @@ function Layout() {
 			divs[d].style.transition = 'opacity 0.3s';
 			divs[d].style.opacity = 1
 		}
+		$('#chronotime').css('font-size','90pt')
 	}
 
 	this.showSettings = function() {

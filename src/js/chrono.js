@@ -6,14 +6,17 @@ var start = 0
 var end = 0
 var diff = 0
 var timerID = 0
+var msec = 0
+var sec = 0
+var min = 0
 
 function chrono(){
 	end = new Date()
 	diff = end - start
 	diff = new Date(diff)
-	var msec = diff.getMilliseconds()
-	var sec = diff.getSeconds()
-	var min = diff.getMinutes()
+	msec = diff.getMilliseconds()
+	sec = diff.getSeconds()
+	min = diff.getMinutes()
 	if (min < 10){
 		min = "0" + min
 	}
@@ -26,8 +29,9 @@ function chrono(){
 	else if(msec < 100){
 		msec = "0" +msec
 	}
-	document.getElementById("chronotime").innerHTML = min + ":" + sec + ":" + msec.toString().substring(0,2)
-	timerID = setTimeout("chrono()", 10)
+	MainLayout.updateChronoTime(sec)
+	if (state == chronoState.INSPECTION && sec > 14) clearTimeout(timerID) // stop
+	else timerID = setTimeout("chrono()", 10) // continue
 }
 function chronoStart(){
 	start = new Date()
@@ -46,5 +50,6 @@ function chronoStopReset(){
 	document.getElementById("chronotime").innerHTML = "00:00:00"
 }
 function chronoStop(){
+	MainLayout.setChronoTime(min,sec,msec.toString().substring(0,2))
 	clearTimeout(timerID)
 }

@@ -67,6 +67,7 @@
     <i class="fa fa-cog" id="settingsIcon" onclick="MainLayout.toggleSettings()"></i>
     <div id="settings">
       <div onclick="MainLayout.toggleScrollBars(); document.getElementById('hideScrollBarsCheckbox').checked = !(document.getElementById('hideScrollBarsCheckbox').checked)"><input id="hideScrollBarsCheckbox" type="checkbox" onchange="MainLayout.toggleScrollBars();"checked/><label>Hide scroll bar</label></div>
+      <div onclick="MainLayout.toggleInspection(); document.getElementById('inspectionCheckbox').checked = !(document.getElementById('inspectionCheckbox').checked)"><input id="inspectionCheckbox" type="checkbox" onchange="MainLayout.toggleInspection();"unchecked/><label>Inspection Timer</label></div>
       <div onclick="MainLayout.nextBackground();">Change background</div>
       <div onclick="MainLayout.showDownloadOptions();">Download solves</div>
       <div id="downloadtxt" onclick="Data.downloadtxt()">Download TXT</div> <div id="downloadcsv" onclick="Data.downloadcsv()">Download CSV</div>
@@ -87,7 +88,7 @@
       <p id="average-5">Average 5: -</p>
     </div>
 
-    <div id="chronotime">00:00:00</div>
+    <div id="chronotime">00:00.00</div>
     <span id="subtitle" class="hideall">Press SPACE to start/stop the timer</span><br>
     <span id="scramble" onclick="Scramble.displayScramble()" class="hideall"></span>
     <br><br>
