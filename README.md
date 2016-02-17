@@ -11,9 +11,23 @@ This app is cross-platform as it's created with *HTML+CSS+JS* and it's packaged 
 - Try it online [here](http://chronocube.pablopunk.com)
 - Check the [releases page](https://github.com/pablopunk/chronocube/releases) for desktop apps
 
+
+
 ## Build and Package
 
+Make sure you have the dependencies installed (instructions are found in each page, but this is how you do it on OS X):
+
+- [nodejs](https://nodejs.org/en/)
+- [electron-builder](https://github.com/maxogden/electron-packager) and [electron-packager](https://github.com/maxogden/electron-packager)
+    ```shell
+  npm install electron-packager -g
+  npm install electron-builder -g
+  # windows builds in no windows platforms
+  brew install wine makensis # asks for XQuartz install
+    ```
+
 Use the *MAKEFILE* to build the executable for all platforms:
+
 - `make all`:
   * creates all builds inside `build/`
   * creates apps for mac and win inside `dist/`
