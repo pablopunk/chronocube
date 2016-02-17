@@ -95,7 +95,8 @@ function Layout() {
 			divs[d].style.transition = 'opacity 0.3s';
 			divs[d].style.opacity = 0
 		}
-		$('#chronotime').css('font-size','160pt')
+		newSize = (parseFloat($('#chronotime').css('font-size')) * 2) + 'px'
+		$('#chronotime').css('font-size', newSize)
 	}
 
 	this.showAll = function() {
@@ -104,7 +105,8 @@ function Layout() {
 			divs[d].style.transition = 'opacity 0.3s';
 			divs[d].style.opacity = 1
 		}
-		$('#chronotime').css('font-size','90pt')
+		newSize = (parseFloat($('#chronotime').css('font-size')) / 2) + 'px'
+		$('#chronotime').css('font-size', newSize)
 	}
 
 	this.showSettings = function() {

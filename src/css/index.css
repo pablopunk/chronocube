@@ -1,7 +1,7 @@
 
 @font-face {
-    font-family: Data;
-    src: url('../fonts/data-latin.ttf');
+    font-family: Digi;
+    src: url('../fonts/DS-DIGI.ttf');
 }
 
 html {
@@ -119,8 +119,8 @@ div#chronotime {
   margin: 0;
   padding: 0;
   text-align: center;
-  font-family: Helvetica;
-  font-size: 90pt;
+  font-family: Digi, Helvetica;
+  font-size: 110pt;
   opacity: 0.85;
 }
 
