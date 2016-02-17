@@ -2,6 +2,8 @@ function Layout() {
 	this.scrollbar = document.getElementById("scroll-child");
 	this.overflowValue = "32pt";
 	this.hiddenScrollBars = "yes";
+	this.bigChrono = "200pt";
+	this.smallChrono = "100pt";
 
 	this.backgrounds = [
 	  "url('img/background.jpg') no-repeat center center fixed",
@@ -95,8 +97,7 @@ function Layout() {
 			divs[d].style.transition = 'opacity 0.3s';
 			divs[d].style.opacity = 0
 		}
-		newSize = (parseFloat($('#chronotime').css('font-size')) * 2) + 'px'
-		$('#chronotime').css('font-size', newSize)
+		$('#chronotime').css('font-size', this.bigChrono)
 	}
 
 	this.showAll = function() {
@@ -105,8 +106,7 @@ function Layout() {
 			divs[d].style.transition = 'opacity 0.3s';
 			divs[d].style.opacity = 1
 		}
-		newSize = (parseFloat($('#chronotime').css('font-size')) / 2) + 'px'
-		$('#chronotime').css('font-size', newSize)
+		$('#chronotime').css('font-size', this.smallChrono)
 	}
 
 	this.showSettings = function() {
