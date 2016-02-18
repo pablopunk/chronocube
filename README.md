@@ -39,7 +39,7 @@ Use the *MAKEFILE* to build the executable for all platforms:
   * `make linux` (both `ia32` and `x64`)
 
 ## License
-Check `LICENSE.md` (MIT License)
+Check `LICENSE` (MIT License)
 
 Also credits to:
 - [Random state scrambles](https://github.com/cubing/jsss)
