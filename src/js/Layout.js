@@ -58,6 +58,19 @@ function Layout() {
 		}
 	}
 
+	this.updateScramble = function() {
+		Data.lastScramble = document.getElementById('scramble').innerHTML
+		Scramble.displayScramble();
+	}
+
+	this.showScrambleForTime = function(i) {
+		document.getElementById('time'+i).innerHTML = Data.getCurrentSolve().times[i].scramble
+	}
+
+	this.hideScrambleForTime = function(i) {
+		document.getElementById('time'+i).innerHTML = Data.getCurrentSolve().times[i].time
+	}
+
 	this.toggleScrollBars = function() {
 		if (this.hiddenScrollBars==="yes") {
 			this.showScrollBars()
