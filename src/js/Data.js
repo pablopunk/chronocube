@@ -1,5 +1,10 @@
 
-function Solve(name, times) {
+function SolveTime(time, scramble) { // solve time object
+  this.time = time
+  this.scramble = scramble
+}
+
+function Solve(name, times) { // session object (multiple times)
   this.name = name
   this.times = times
 }
