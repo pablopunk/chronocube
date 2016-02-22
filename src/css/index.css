@@ -153,8 +153,8 @@ div#scores p {
 }
 
 div#scroll-parent {
+  height: 30vh;
   width: 200pt;
-  height: 35vh;
   overflow: hidden;
 }
 
@@ -201,6 +201,7 @@ table#times-table td:hover:nth-child(3) {
 }
 
 #undoDeleteButton {
+  font-size: 10pt;
   opacity: 0.9;
   visibility: hidden;
   width: 90pt;
@@ -214,7 +215,7 @@ table#times-table td:hover:nth-child(3) {
   cursor: pointer;
   padding: 2pt 4pt 2pt 4pt;
   margin-right: 4pt;
-  border-radius: 5px;
+  border-radius: 2px;
   background-color: #e74c3c;
 }
 
