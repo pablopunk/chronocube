@@ -228,20 +228,21 @@ function DataManager() {
 
     if (dec < 6000) {
       var seconds = (dec < 1000 ? "0" + decString.charAt(0) : decString.charAt(0)+decString.charAt(1))
-      return "00:" + seconds + ":" + decimals
+      return "00:" + seconds + "." + decimals
     } // else
 
     var minutes = Math.floor(dec / 6000);
     var seconds = ((dec % 6000) / 100).toFixed(0);
 
-    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds + ":" + decimals;
+    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds + "." + decimals;
   }
 
   this.getIntFromTimeString = function(time) {
 
-    var r = time.replace(/:/g, ''); // removes ':'
+    var r1 = time.replace(/:/g, ''); // removes ':'
+    var r2 =  r1.replace(/\./g, ''); // removes '.'
 
-    return parseInt(r);
+    return parseInt(r2);
   }
 
   this.downloadtxt = function() {
