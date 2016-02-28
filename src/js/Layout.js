@@ -4,6 +4,7 @@ function Layout() {
 	this.hiddenScrollBars = "yes";
 	this.bigChrono = "200pt";
 	this.smallChrono = "100pt";
+	this.currentScrambleForHoverTime = "";
 
 	this.backgrounds = [
 	  "url('img/background.jpg') no-repeat center center fixed",
@@ -56,6 +57,25 @@ function Layout() {
 		} else {
 			document.getElementById('chronotime').style.color = "white"
 		}
+	}
+
+	this.updateScramble = function() {
+		Data.lastScramble = document.getElementById('scramble').innerHTML
+		Scramble.displayScramble();
+	}
+
+	this.showScrambleForTime = function(i) {
+		var color = "#f1c40f"
+		this.currentScrambleForHoverTime = ""+document.getElementById('scramble').innerText
+		document.getElementById('scramble').innerText = Data.getCurrentSolve().times[i].scramble
+		document.getElementById('time'+i).style.color = color
+		document.getElementById('scramble').style.color = color
+	}
+
+	this.hideScrambleForTime = function(i) {
+		document.getElementById('scramble').innerText = this.currentScrambleForHoverTime
+		Data.refresh()
+		document.getElementById('scramble').style.color = "white"
 	}
 
 	this.toggleScrollBars = function() {

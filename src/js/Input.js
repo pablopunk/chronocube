@@ -35,7 +35,6 @@ function Input() {
     Data.add();
     Data.refresh();
     MainLayout.scrollDown();
-    Scramble.displayScramble();
     MainLayout.showAll()
   }
 

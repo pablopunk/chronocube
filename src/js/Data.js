@@ -1,7 +1,12 @@
 
-function Solve(name, times) {
+function SolveTime(time, scramble) { // solve time object
+  this.time = time
+  this.scramble = scramble
+}
+
+function Solve(name) { // session object (multiple times)
   this.name = name
-  this.times = times
+  this.times = []
 }
 
 function DataManager() {
@@ -9,6 +14,7 @@ function DataManager() {
   this.numberOfSolves = 0 // solves loaded into the app !! not the actual number (solves.length)
   this.currentSolve = 'Default'
   this.deleted = [] // list of deleted solves to undo
+  this.lastScramble = ''
 
   this.init = function() {
     if(typeof(Storage) == "undefined") {
@@ -39,13 +45,26 @@ function DataManager() {
 
   this.load = function() {
     if (this.numberOfSolves == 0) {
-      this.solves = [new Solve('Default', [])]
+      this.solves = [new Solve('Default')]
       this.numberOfSolves = 1
       this.currentSolve = 'Default'
     }
     else {
-      this.solves = JSON.parse(localStorage.getItem('solves')) // JSON object in localstorage
-      if (this.solves == null) this.solves = [new Solve('Default', [])]
+      // checks for old solves and converts them
+      if (typeof(JSON.parse(localStorage.getItem('solves'))[0].times[0]) == "string") { // old solves
+        var slvs = JSON.parse(localStorage.getItem('solves')) // all solves
+        var nslvs = Object.keys(slvs).length
+        for (var i=0; i<nslvs; i++) { // iterate solves
+          var n = new Solve(slvs[i].name)
+          for (var j=0; j<slvs[i].times.length; j++) {
+            n.times.push(new SolveTime(slvs[i].times[j],'no scramble for this solve'))
+          }
+          this.solves.push(n)
+        }
+      } else { // new solves with scrambles
+        this.solves = JSON.parse(localStorage.getItem('solves')) // JSON object in localstorage
+        if (this.solves == null) this.solves = [new Solve('Default', [])]
+      }
       this.currentSolve = localStorage['currentSolve']
       if (this.currentSolve == null) this.currentSolve = 'Default'
     }
@@ -54,7 +73,7 @@ function DataManager() {
   this.save = function() {
     if (this.solves == null) { // no solves
       localStorage['numberOfSolves'] = 1
-      localStorage['solves'] = JSON.stringify([new Solve('Default', [])])
+      localStorage['solves'] = JSON.stringify([new Solve('Default')])
       localStorage['currentSolve'] = 'Default'
     } else {
       localStorage['numberOfSolves'] = this.solves.length
@@ -87,7 +106,7 @@ function DataManager() {
       var index = $("select[id='solveNames'] option:selected").index()
       this.solves.splice(parseInt(index), 1)
       if (this.solves.length == 0) {
-        this.solves[0] = new Solve('Default', [])
+        this.solves[0] = new Solve('Default')
         this.currentSolve = 'Default'
       } else {
         this.currentSolve = this.solves[0].name
@@ -107,9 +126,14 @@ function DataManager() {
     else return -1;
   }
 
+  this.getCurrentSolve = function() {
+    return this.solves[this.getIndex(this.currentSolve)]
+  }
+
   this.add = function() {
     var currentTime = document.getElementById("chronotime").innerHTML
-    this.solves[this.getIndex(this.currentSolve)].times.push(currentTime)
+    MainLayout.updateScramble()
+    this.getCurrentSolve().times.push(new SolveTime(currentTime, this.lastScramble))
     MainLayout.scrollDown()
   }
 
@@ -117,12 +141,12 @@ function DataManager() {
     if (this.solves.length == 0) return;
     var best = this.getBestTime();
     var table = '';
-    var times = this.solves[this.getIndex(this.currentSolve)].times
+    var times = this.getCurrentSolve().times
     for (var i=0; i<times.length; i++) {
       if (i == best) {
-          table += '<tr style="color:#44ff77"><td>'+(parseInt(i)+1)+'</td><td>'+times[i]+'</td><td onclick="Data.deleteTime('+i+')"><i class="fa fa-times"></i></td></tr>';
+          table += "<tr id='time"+i+"' style='color:#44ff77' onmouseover='MainLayout.showScrambleForTime("+i+")' onmouseout='MainLayout.hideScrambleForTime("+i+")'><td>"+(parseInt(i)+1)+"</td><td>"+times[i].time+"</td><td onclick='Data.deleteTime("+i+")'><i class='fa fa-times'></i></td></tr>";
       } else {
-          table += '<tr><td>'+(parseInt(i)+1)+'</td><td>'+times[i]+'</td><td onclick="Data.deleteTime('+i+')"><i class="fa fa-times"></i></td></tr>';
+          table += "<tr id='time"+i+"' onmouseover='MainLayout.showScrambleForTime("+i+")' onmouseout='MainLayout.hideScrambleForTime("+i+")'><td>"+(parseInt(i)+1)+"</td><td>"+times[i].time+"</td><td onclick='Data.deleteTime("+i+")'><i class='fa fa-times'></i></td></tr>";
       }
     }
     document.getElementById('times-table').innerHTML = table
@@ -144,14 +168,14 @@ function DataManager() {
   }
 
   this.deleteTime = function(index) {
-    this.deleted.push(this.solves[this.getIndex(this.currentSolve)].times[index])
-    this.solves[this.getIndex(this.currentSolve)].times.splice(parseInt(index), 1)
+    this.deleted.push(this.getCurrentSolve().times[index])
+    this.getCurrentSolve().times.splice(parseInt(index), 1)
     this.refresh();
     MainLayout.showUndoDelete();
   }
 
   this.undoLastDelete = function() {
-    this.solves[this.getIndex(this.currentSolve)].times.push(this.deleted.pop())
+    this.getCurrentSolve().times.push(this.deleted.pop())
     this.refresh()
     MainLayout.scrollDown()
     if (this.deleted.length < 1) {
@@ -169,12 +193,12 @@ function DataManager() {
 
   // index of the best time in the array
   this.getBestTime = function() {
-    var times = this.solves[this.getIndex(this.currentSolve)].times
+    var times = this.getCurrentSolve().times
     var best = 0; // index 0
     var i = 1;
     for (i=1; i<times.length; i++) {
-      var old = this.getIntFromTimeString(times[best])
-      var cur = this.getIntFromTimeString(times[i])
+      var old = this.getIntFromTimeString(times[best].time)
+      var cur = this.getIntFromTimeString(times[i].time)
 
       if (cur < old) best = i;
     }
@@ -183,12 +207,13 @@ function DataManager() {
   }
 
   this.getAverageAll = function() {
-    var times = this.solves[this.getIndex(this.currentSolve)].times
+    var times = this.getCurrentSolve().times
     var i=0, average=0, min=0, sec=0, dec=0;
+
     for (i=0; i<times.length; i++) {
-      min = parseInt(times[i].charAt(0)+times[i].charAt(1))
-      sec = parseInt(times[i].charAt(3)+times[i].charAt(4))
-      dec = parseInt(times[i].charAt(6)+times[i].charAt(7))
+      min = parseInt(times[i].time.charAt(0)+times[i].time.charAt(1))
+      sec = parseInt(times[i].time.charAt(3)+times[i].time.charAt(4))
+      dec = parseInt(times[i].time.charAt(6)+times[i].time.charAt(7))
       // average in decimals
       average += ( (min*60*100) + (sec*100) + dec)
     }
@@ -199,14 +224,14 @@ function DataManager() {
   }
 
   this.getAverage5 = function() {
-    var times = this.solves[this.getIndex(this.currentSolve)].times
+    var times = this.getCurrentSolve().times
     var i=0, average=0, min=0, sec=0, dec=0;
     times = times.slice(times.length-5, times.length)
-    times.sort()
+    times.sort(function(a,b){ return a.toString().localeCompare(b) }) // custom sort
     for (i=1; i<times.length-1; i++) {
-      min = parseInt(times[i].charAt(0)+times[i].charAt(1))
-      sec = parseInt(times[i].charAt(3)+times[i].charAt(4))
-      dec = parseInt(times[i].charAt(6)+times[i].charAt(7))
+      min = parseInt(times[i].time.charAt(0)+times[i].time.charAt(1))
+      sec = parseInt(times[i].time.charAt(3)+times[i].time.charAt(4))
+      dec = parseInt(times[i].time.charAt(6)+times[i].time.charAt(7))
       // average in decimals
       average += ( (min*60*100) + (sec*100) + dec)
     }
@@ -247,51 +272,51 @@ function DataManager() {
 
   this.downloadtxt = function() {
       alert("This feature will be available soon :)")
-      //this.exportTimesToTxt() @implement with the new objects
+      //this.exportTimesToTxt() @TODO with the new objects
       MainLayout.hideDownloadOptions()
    }
 
   this.downloadcsv = function() {
       alert("This feature will be available soon :)")
-      //this.exportTimesToCsv() @implement with the new objects
+      //this.exportTimesToCsv() @TODO with the new objects
       MainLayout.hideDownloadOptions()
   }
 
-  this.exportTimesToCsv = function() {
-    if (this.savedTimes.length==0) {
-      Error.print('No solves yet')
-      return;
-    }
-    var csvContent = "data:text/csv;charset=utf-8,";
-    var i = 0;
+  // this.exportTimesToCsv = function() {
+  //   if (this.savedTimes.length==0) {
+  //     Error.print('No solves yet')
+  //     return;
+  //   }
+  //   var csvContent = "data:text/csv;charset=utf-8,";
+  //   var i = 0;
+  //
+  //   csvContent += "All solves;Average All"+(this.savedTimes.length>4 ? ";Average 5\n" : "\n")
+  //   csvContent += this.savedTimes[i]+";"+this.getAverageAll()+(this.savedTimes.length>4 ? ";"+this.getAverage5()+"\n" : "\n")
+  //   for (i=1; i<this.savedTimes.length;i++) {
+  //     csvContent += this.savedTimes.length ? this.savedTimes[i] + "\n" : this.savedTimes[i];
+  //   }
+  //
+  //   var encodedUri = encodeURI(csvContent);
+  //   window.open(encodedUri);
+  // }
 
-    csvContent += "All solves;Average All"+(this.savedTimes.length>4 ? ";Average 5\n" : "\n")
-    csvContent += this.savedTimes[i]+";"+this.getAverageAll()+(this.savedTimes.length>4 ? ";"+this.getAverage5()+"\n" : "\n")
-    for (i=1; i<this.savedTimes.length;i++) {
-      csvContent += this.savedTimes.length ? this.savedTimes[i] + "\n" : this.savedTimes[i];
-    }
-
-    var encodedUri = encodeURI(csvContent);
-    window.open(encodedUri);
-  }
-
-  this.exportTimesToTxt = function() {
-    if (this.savedTimes.length==0) {
-      Error.print('No solves yet')
-      return;
-    }
-    var csvContent = "data:text/txt;charset=utf-8,";
-    var i = 0;
-
-    csvContent += "All solves\tAverage All"+(this.savedTimes.length>4 ? "\tAverage 5\n" : "\n")
-    csvContent += this.savedTimes[i]+"\t"+this.getAverageAll()+(this.savedTimes.length>4 ? "\t"+this.getAverage5()+"\n" : "\n")
-    for (i=1; i<this.savedTimes.length;i++) {
-      csvContent += this.savedTimes.length ? this.savedTimes[i] + "\n" : this.savedTimes[i];
-    }
-
-    var encodedUri = encodeURI(csvContent);
-    window.open(encodedUri);
-  }
+  // this.exportTimesToTxt = function() {
+  //   if (this.savedTimes.length==0) {
+  //     Error.print('No solves yet')
+  //     return;
+  //   }
+  //   var csvContent = "data:text/txt;charset=utf-8,";
+  //   var i = 0;
+  //
+  //   csvContent += "All solves\tAverage All"+(this.savedTimes.length>4 ? "\tAverage 5\n" : "\n")
+  //   csvContent += this.savedTimes[i]+"\t"+this.getAverageAll()+(this.savedTimes.length>4 ? "\t"+this.getAverage5()+"\n" : "\n")
+  //   for (i=1; i<this.savedTimes.length;i++) {
+  //     csvContent += this.savedTimes.length ? this.savedTimes[i] + "\n" : this.savedTimes[i];
+  //   }
+  //
+  //   var encodedUri = encodeURI(csvContent);
+  //   window.open(encodedUri);
+  // }
 
   this.importTimes = function(evt) {
     alert("This feature will be available soon :)")
@@ -300,7 +325,7 @@ function DataManager() {
   this.newSolve = function(name) {
     if (this.getIndex(name) == -1) { // it does not exists yet
       this.currentSolve = name
-      this.solves.push(new Solve(name, []))
+      this.solves.push(new Solve(name))
       this.refresh()
     }
   }
