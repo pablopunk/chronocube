@@ -74,8 +74,7 @@ function Layout() {
 
 	this.hideScrambleForTime = function(i) {
 		document.getElementById('scramble').innerText = this.currentScrambleForHoverTime
-		document.getElementById('time'+i).style.color = "white"
-		document.getElementById('scramble').style.color = "white"
+		Data.refresh()
 	}
 
 	this.toggleScrollBars = function() {
