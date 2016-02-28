@@ -214,7 +214,7 @@ function DataManager() {
     var times = this.getCurrentSolve().times
     var i=0, average=0, min=0, sec=0, dec=0;
     times = times.slice(times.length-5, times.length)
-    times.sort(function(a,b){ return a.localeCompare(b) }) // custom sort
+    times.sort(function(a,b){ return a.toString().localeCompare(b) }) // custom sort
     for (i=1; i<times.length-1; i++) {
       min = parseInt(times[i].time.charAt(0)+times[i].time.charAt(1))
       sec = parseInt(times[i].time.charAt(3)+times[i].time.charAt(4))
