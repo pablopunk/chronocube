@@ -50,8 +50,21 @@ function DataManager() {
       this.currentSolve = 'Default'
     }
     else {
-      this.solves = JSON.parse(localStorage.getItem('solves')) // JSON object in localstorage
-      if (this.solves == null) this.solves = [new Solve('Default')]
+      // checks for old solves and converts them
+      if (typeof(JSON.parse(localStorage.getItem('solves'))[0].times[0]) == "string") { // old solves
+        var slvs = JSON.parse(localStorage.getItem('solves')) // all solves
+        var nslvs = Object.keys(slvs).length
+        for (var i=0; i<nslvs; i++) { // iterate solves
+          var n = new Solve(slvs[i].name)
+          for (var j=0; j<slvs[i].times.length; j++) {
+            n.times.push(new SolveTime(slvs[i].times[j],'no scramble for this solve'))
+          }
+          this.solves.push(n)
+        }
+      } else { // new solves with scrambles
+        this.solves = JSON.parse(localStorage.getItem('solves')) // JSON object in localstorage
+        if (this.solves == null) this.solves = [new Solve('Default', [])]
+      }
       this.currentSolve = localStorage['currentSolve']
       if (this.currentSolve == null) this.currentSolve = 'Default'
     }
