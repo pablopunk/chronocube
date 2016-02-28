@@ -4,6 +4,7 @@ function Layout() {
 	this.hiddenScrollBars = "yes";
 	this.bigChrono = "200pt";
 	this.smallChrono = "100pt";
+	this.currentScrambleForHoverTime = "";
 
 	this.backgrounds = [
 	  "url('img/background.jpg') no-repeat center center fixed",
@@ -64,11 +65,17 @@ function Layout() {
 	}
 
 	this.showScrambleForTime = function(i) {
-		document.getElementById('time'+i).innerHTML = Data.getCurrentSolve().times[i].scramble
+		var color = "#f1c40f"
+		this.currentScrambleForHoverTime = ""+document.getElementById('scramble').innerText
+		document.getElementById('scramble').innerText = Data.getCurrentSolve().times[i].scramble
+		document.getElementById('time'+i).style.color = color
+		document.getElementById('scramble').style.color = color
 	}
 
 	this.hideScrambleForTime = function(i) {
-		document.getElementById('time'+i).innerHTML = Data.getCurrentSolve().times[i].time
+		document.getElementById('scramble').innerText = this.currentScrambleForHoverTime
+		document.getElementById('time'+i).style.color = "white"
+		document.getElementById('scramble').style.color = "white"
 	}
 
 	this.toggleScrollBars = function() {
