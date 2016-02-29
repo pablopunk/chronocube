@@ -19,6 +19,7 @@ Make sure you have the dependencies installed (instructions are found in each pa
 
 - [nodejs](https://nodejs.org/en/)
 - [electron-builder](https://github.com/maxogden/electron-packager) and [electron-packager](https://github.com/maxogden/electron-packager)
+
     ```shell
   npm install electron-packager -g
   npm install electron-builder -g
