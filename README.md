@@ -1,4 +1,6 @@
 # Chronocube
+
+[![Join the chat at https://gitter.im/pablopunk/chronocube](https://badges.gitter.im/pablopunk/chronocube.svg)](https://gitter.im/pablopunk/chronocube?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 Simple app to time your Rubik's Cube solves.
 
 ![icon](https://raw.githubusercontent.com/pablopunk/chronocube/master/src/img/icon200px.png)
