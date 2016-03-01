@@ -130,31 +130,16 @@ function Layout() {
 	}
 
 	this.showSettings = function() {
-		this.hideDownloadOptions()
-		document.getElementById('settings').style.transition = "opacity 0.3s";
-		document.getElementById('settings').style.opacity = 0.9
+		document.getElementById('settings').style.visibility = "visible"
 	}
+
 	this.hideSettings = function() {
-		document.getElementById('settings').style.transition = "opacity 0.3s";
-		document.getElementById('settings').style.opacity = 0
-	}
-
-	this.hideDownloadOptions = function() {
-		document.getElementById('downloadtxt').style.position = 'absolute'
-		document.getElementById('downloadcsv').style.position = 'absolute'
-		document.getElementById('downloadtxt').style.opacity = 0
-		document.getElementById('downloadcsv').style.opacity = 0
-	}
-
-	this.showDownloadOptions = function() {
-		document.getElementById('downloadtxt').style.position = 'relative'
-		document.getElementById('downloadcsv').style.position = 'relative'
-		document.getElementById('downloadtxt').style.opacity = 1
-		document.getElementById('downloadcsv').style.opacity = 1
+		document.getElementById('settings').style.visibility = "hidden"
 	}
 
 	this.toggleSettings = function() {
-		if (document.getElementById('settings').style.opacity != 0) {
+		console.log('toggle when is '+document.getElementById('settings').style.visibility)
+		if (document.getElementById('settings').style.visibility == "visible") {
 			this.hideSettings();
 		} else {
 			this.showSettings();

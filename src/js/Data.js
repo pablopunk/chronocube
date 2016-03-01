@@ -272,53 +272,21 @@ function DataManager() {
     return parseInt(r2);
   }
 
-  this.downloadtxt = function() {
-      alert("This feature will be available soon :)")
-      //this.exportTimesToTxt() @TODO with the new objects
+  this.downloadjson = function() {
+      this.exportTimesToJson()
       MainLayout.hideDownloadOptions()
    }
 
-  this.downloadcsv = function() {
-      alert("This feature will be available soon :)")
-      //this.exportTimesToCsv() @TODO with the new objects
-      MainLayout.hideDownloadOptions()
+  this.exportTimesToJson = function() {
+    if (this.getCurrentSolve().times.length==0) {
+      Error.print('No solves yet')
+      return;
+    }
+    var data = JSON.stringify(this.solves);
+    var url = 'data:text/json;charset=utf8,' + encodeURIComponent(data);
+    window.open(url, '_blank');
+    window.focus();
   }
-
-  // this.exportTimesToCsv = function() {
-  //   if (this.savedTimes.length==0) {
-  //     Error.print('No solves yet')
-  //     return;
-  //   }
-  //   var csvContent = "data:text/csv;charset=utf-8,";
-  //   var i = 0;
-  //
-  //   csvContent += "All solves;Average All"+(this.savedTimes.length>4 ? ";Average 5\n" : "\n")
-  //   csvContent += this.savedTimes[i]+";"+this.getAverageAll()+(this.savedTimes.length>4 ? ";"+this.getAverage5()+"\n" : "\n")
-  //   for (i=1; i<this.savedTimes.length;i++) {
-  //     csvContent += this.savedTimes.length ? this.savedTimes[i] + "\n" : this.savedTimes[i];
-  //   }
-  //
-  //   var encodedUri = encodeURI(csvContent);
-  //   window.open(encodedUri);
-  // }
-
-  // this.exportTimesToTxt = function() {
-  //   if (this.savedTimes.length==0) {
-  //     Error.print('No solves yet')
-  //     return;
-  //   }
-  //   var csvContent = "data:text/txt;charset=utf-8,";
-  //   var i = 0;
-  //
-  //   csvContent += "All solves\tAverage All"+(this.savedTimes.length>4 ? "\tAverage 5\n" : "\n")
-  //   csvContent += this.savedTimes[i]+"\t"+this.getAverageAll()+(this.savedTimes.length>4 ? "\t"+this.getAverage5()+"\n" : "\n")
-  //   for (i=1; i<this.savedTimes.length;i++) {
-  //     csvContent += this.savedTimes.length ? this.savedTimes[i] + "\n" : this.savedTimes[i];
-  //   }
-  //
-  //   var encodedUri = encodeURI(csvContent);
-  //   window.open(encodedUri);
-  // }
 
   this.importTimes = function(evt) {
     alert("This feature will be available soon :)")

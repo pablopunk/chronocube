@@ -69,8 +69,7 @@
       <div onclick="MainLayout.toggleScrollBars(); document.getElementById('hideScrollBarsCheckbox').checked = !(document.getElementById('hideScrollBarsCheckbox').checked)"><input id="hideScrollBarsCheckbox" type="checkbox" onchange="MainLayout.toggleScrollBars();"checked/><label>Hide scroll bar</label></div>
       <div onclick="MainLayout.toggleInspection(); document.getElementById('inspectionCheckbox').checked = !(document.getElementById('inspectionCheckbox').checked)"><input id="inspectionCheckbox" type="checkbox" onchange="MainLayout.toggleInspection();"unchecked/><label>Inspection Timer</label></div>
       <div onclick="MainLayout.nextBackground();">Change background</div>
-      <div onclick="MainLayout.showDownloadOptions();">Download solves</div>
-      <div id="downloadtxt" onclick="Data.downloadtxt()">Download TXT</div> <div id="downloadcsv" onclick="Data.downloadcsv()">Download CSV</div>
+      <div id="downloadjson" onclick="Data.downloadjson()">Download solves</div>
       <!-- <div id="import">Import Solves<input type="file" id="importFile" class="upload"/></div> -->
     </div>
   </div>

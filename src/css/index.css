@@ -67,7 +67,7 @@ div#settings {
   width: 100%;
   font-style: italic;
   font-size: 11pt;
-  opacity: 0;
+  visibility: hidden;
   padding: 0;
 }
 
