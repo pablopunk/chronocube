@@ -15,6 +15,8 @@ function DataManager() {
   this.currentSolve = 'Default'
   this.deleted = [] // list of deleted solves to undo
   this.lastScramble = ''
+  this.file = null
+  this.fr = null
 
   this.init = function() {
     if(typeof(Storage) == "undefined") {
@@ -29,10 +31,9 @@ function DataManager() {
       Error.print('Sorry, no html5 support in this browser')
     }
 
-    //document.getElementById('importFile').addEventListener("change", evt = function() {
-    //  Data.importTimes(evt)
-    //});
-    document.getElementById('solve')
+    document.getElementById('uploadjsoninput').addEventListener("change", evt = function() {
+     Data.uploadjson(evt)
+    });
 
     // load number of solves stored
     this.numberOfSolves = localStorage.getItem('numberOfSolves')
@@ -43,14 +44,22 @@ function DataManager() {
     MainLayout.scrollDown()
   }
 
+  this.resetSolves = function() {
+    this.currentSolve = 'Default'
+    this.solves = [new Solve('Default', [])]
+    this.numberOfSolves = 1
+  }
+
   this.load = function() {
     if (this.numberOfSolves == 0) {
-      this.solves = [new Solve('Default')]
-      this.numberOfSolves = 1
-      this.currentSolve = 'Default'
+      this.resetSolves()
     }
     else {
       // checks for old solves and converts them
+      if (localStorage.getItem('solves') == null) {
+        this.resetSolves()
+        return
+      }
       if (typeof(JSON.parse(localStorage.getItem('solves'))[0].times[0]) == "string") { // old solves
         var slvs = JSON.parse(localStorage.getItem('solves')) // all solves
         var nslvs = Object.keys(slvs).length
@@ -63,10 +72,11 @@ function DataManager() {
         }
       } else { // new solves with scrambles
         this.solves = JSON.parse(localStorage.getItem('solves')) // JSON object in localstorage
-        if (this.solves == null) this.solves = [new Solve('Default', [])]
       }
       this.currentSolve = localStorage['currentSolve']
-      if (this.currentSolve == null) this.currentSolve = 'Default'
+      if (this.solves == null) {
+        this.resetSolves()
+      }
     }
   }
 
@@ -118,13 +128,13 @@ function DataManager() {
   }
 
   this.getIndex = function(name) {
-    var exists = "no"
+    var exists = false
     for (var i=0; i<this.solves.length; i++) {
       if (this.solves[i].name == name) {
-        exists = "yes"; break
+        exists = true; break
       }
     }
-    if (exists == "yes") return i;
+    if (exists) return i;
     else return -1;
   }
 
@@ -283,8 +293,49 @@ function DataManager() {
     window.focus();
    }
 
-  this.importTimes = function(evt) {
-    alert("This feature will be available soon :)")
+  this.uploadjson = function(evt) {
+    var input = document.getElementById('uploadjsoninput');
+    if (!input.files[0]) {
+      alert("Please select a file before clicking 'Load'");
+    }
+    else {
+      file = input.files[0];
+      fr = new FileReader();
+      fr.onload = this.saveJsonSolves;
+      fr.readAsText(file);
+    }
+  }
+
+  this.saveJsonSolves = function() {
+    var oldSolves = Object.assign({}, Data.solves); // save current solves for recovery
+    var newSolves = null
+    try {
+        newSolves = JSON.parse(fr.result)
+    } catch (e) {
+        alert('That was not a JSON file, was it?')
+        return;
+    }
+    if (newSolves[0].name == undefined || newSolves[0].times == undefined ) {
+      alert('It was a JSON but there were not solves in it')
+      return;
+    }
+    try {
+      for (var i=0; i<newSolves.length; i++) {
+        var s = newSolves[i]
+        var index = Data.getIndex(s.name)
+        Data.newSolve(s.name)
+        console.log('solve '+s.name);
+        for (var j=0; j<s.times.length; j++) {
+          console.log('\ttime '+s.times[j].time);
+          Data.solves[index].times.push(new SolveTime(s.times[j].time, s.times[j].scramble))
+        }
+      }
+      Data.refresh()
+    } catch(e) {
+      Data.solves = oldSolves // recover
+      alert('There was a problem uploading solves')
+      console.log(e);
+    }
   }
 
   this.newSolve = function(name) {
