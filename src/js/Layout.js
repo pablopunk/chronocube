@@ -138,7 +138,6 @@ function Layout() {
 	}
 
 	this.toggleSettings = function() {
-		console.log('toggle when is '+document.getElementById('settings').style.visibility)
 		if (document.getElementById('settings').style.visibility == "visible") {
 			this.hideSettings();
 		} else {
