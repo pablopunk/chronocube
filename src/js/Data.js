@@ -322,11 +322,9 @@ function DataManager() {
     try {
       for (var i=0; i<newSolves.length; i++) {
         var s = newSolves[i]
+        Data.newSolve(s.name) // could exist, in that case times are pushed to existing solve
         var index = Data.getIndex(s.name)
-        Data.newSolve(s.name)
-        console.log('solve '+s.name);
         for (var j=0; j<s.times.length; j++) {
-          console.log('\ttime '+s.times[j].time);
           Data.solves[index].times.push(new SolveTime(s.times[j].time, s.times[j].scramble))
         }
       }
