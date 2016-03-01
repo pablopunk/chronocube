@@ -98,6 +98,7 @@ function DataManager() {
   this.changeSolve = function(index) {
     this.currentSolve = this.solves[index].name
     this.refresh()
+    MainLayout.hideUndoDelete()
     $('#solveNames').select2("close");
   }
 
@@ -112,6 +113,7 @@ function DataManager() {
         this.currentSolve = this.solves[0].name
       }
       this.refresh()
+      MainLayout.hideUndoDelete()
     }
   }
 
@@ -160,7 +162,7 @@ function DataManager() {
     }
     else {
       // display scores
-      document.getElementById('best-solve').innerHTML = "Best: "+ times[best]
+      document.getElementById('best-solve').innerHTML = "Best: "+ times[best].time
       document.getElementById('average-all').innerHTML = "Average All: " + this.getAverageAll()
       if (times.length>4) document.getElementById('average-5').innerHTML = "Average 5: " + this.getAverage5();
       else document.getElementById('average-5').innerHTML = "Average 5: -"
