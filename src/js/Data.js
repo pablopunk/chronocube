@@ -273,11 +273,6 @@ function DataManager() {
   }
 
   this.downloadjson = function() {
-      this.exportTimesToJson()
-      MainLayout.hideDownloadOptions()
-   }
-
-  this.exportTimesToJson = function() {
     if (this.getCurrentSolve().times.length==0) {
       Error.print('No solves yet')
       return;
@@ -286,7 +281,7 @@ function DataManager() {
     var url = 'data:text/json;charset=utf8,' + encodeURIComponent(data);
     window.open(url, '_blank');
     window.focus();
-  }
+   }
 
   this.importTimes = function(evt) {
     alert("This feature will be available soon :)")
