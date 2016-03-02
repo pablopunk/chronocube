@@ -2,7 +2,7 @@
   "name": "chronocube",
   "productName": "Chronocube",
   "version": "0.3.2",
-  "description": "Rubik's cube timer",
+  "description": "Rubik's Cube timer",
   "main": "src/js/main.js",
   "license": "MIT",
   "author": "Pablo Varela <pablovarela182@gmail.com>",
