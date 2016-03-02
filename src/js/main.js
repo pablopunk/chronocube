@@ -2,7 +2,12 @@ var app = require('app');  // Module to control application life.
 var BrowserWindow = require('browser-window');  // Module to create native browser window.
 
 // Report crashes to our server.
-require('crash-reporter').start();
+require('crash-reporter').start({
+  productName: 'Chronocube',
+  companyName: 'Pablo Varela',
+  submitURL: 'https://github.com/pablopunk/chronocube/issues',
+  autoSubmit: true
+});
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the javascript object is GCed.
