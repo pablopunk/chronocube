@@ -67,5 +67,6 @@ Older versions included:
 - Show best ao5/aoAll
 - csTimer import/export
 - Move time to another solve
+- Google Drive integration (sync across devices)
 - Refactor javascript. It works but the classes and methods are a little bit messy. **Would be nice to make a real/clear MVC** with more consistent roles.
 - *Design is good but it needs a bit of... you know... design.*
