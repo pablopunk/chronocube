@@ -63,6 +63,7 @@ Older versions included:
 ## To do
 - Hotfixes:
   + makefile packages the ``node_modules`` again
+- Download file on exporting (instead of opening new window)
 - Show best ao5/aoAll
 - csTimer import/export
 - Move time to another solve
