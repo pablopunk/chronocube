@@ -34,7 +34,7 @@ Make sure you have the dependencies installed (instructions are found in each pa
     ```shell
   npm install electron-packager -g
   npm install electron-builder -g
-  # windows builds in no windows platforms
+  # windows builds on mac
   brew install wine makensis # asks for XQuartz install
     ```
 
