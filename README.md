@@ -9,7 +9,7 @@
 
 Request new features! [Open an issue](https://github.com/pablopunk/chronocube/issues) or [join the chat](https://gitter.im/pablopunk/chronocube?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge).
 
-Are you a developer or a designer? Fork it and [make a pull request](https://github.com/pablopunk/chronocube/pulls)!
+Are you a developer or a designer? Fork it and [make a pull request](https://github.com/pablopunk/chronocube/pulls)! You can check the To Do list at the end of this file.
 
 Or simply [show me some love](https://twitter.com/pablopunk) ;)
 
@@ -61,5 +61,8 @@ Older versions included:
 - [Electron SuperKit](https://github.com/Aluxian/electron-superkit) for building and packaging
 
 ## To do
-- Add notes to each time
+- Show best ao5/aoAll
+- csTimer import/export
 - Move time to another solve
+- Refactor javascript. It works but the classes and methods are a little bit messy. **Would be nice to make a real/clear MVC** with more consistent roles.
+- *Design is good but it needs a bit of... you know... design.*
