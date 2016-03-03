@@ -264,6 +264,7 @@ select#solveNames {
 }
 
 input#newSolveText {
+  font-family: Avenir, Helvetica, sans-serif;
   margin-right: 10pt;
 }
 
