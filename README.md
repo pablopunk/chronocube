@@ -20,8 +20,8 @@ This app is cross-platform as it's created with *HTML+CSS+JS* and it's packaged 
 ![screnshot](https://s3.amazonaws.com/f.cl.ly/items/360K0M2o1M2i0X32212d/Captura%20de%20pantalla%202015-12-14%20a%20las%207.28.36.png?v=b8fd4955)
 
 ## Download
-- Try it online [here](http://chronocube.pablopunk.com)
-- Check the [releases page](https://github.com/pablopunk/chronocube/releases) for desktop apps
+- Try it [online](http://chronocube.pablopunk.com)
+- Download [desktop apps](https://github.com/pablopunk/chronocube/releases)
 
 
 ## Build and Package
