@@ -61,8 +61,6 @@ Older versions included:
 - [Electron SuperKit](https://github.com/Aluxian/electron-superkit) for building and packaging
 
 ## To do
-- Hotfixes:
-  + makefile packages the ``node_modules`` again
 - Download file on exporting (instead of opening new window)
 - Show best ao5/aoAll
 - csTimer import/export
