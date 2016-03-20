@@ -55,7 +55,10 @@ Check `LICENSE` (MIT License)
 
 Also credits to:
 - [Random state scrambles](https://github.com/cubing/jsss)
+- [Ionic icons](http://ionicons.com/)
 - [Background gradients](http://uigradients.com)
+- [Flat UI Colors](http://flatuicolors.com/)
+- [iOS 7 Colors](http://ios7colors.com/)
 
 Older versions included:
 - [Electron SuperKit](https://github.com/Aluxian/electron-superkit) for building and packaging

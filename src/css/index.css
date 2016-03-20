@@ -42,6 +42,12 @@ div.settings .button:hover {
   color: white;
 }
 
+div.settings .button i {
+  font-size: 16pt;
+  float: left;
+  margin-left: 12pt;
+}
+
 div.scores {
   font-size: 10pt;
   color: #4f5c5d;
