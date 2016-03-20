@@ -24,6 +24,12 @@
   <script type="text/javascript" src="js/Data.js"></script>
   <script type="text/javascript" src="js/Layout.js"></script>
   <script type="text/javascript" src="js/scramble_333.js"></script>
+  
+  <!-- SKELETON
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- For old IEs -->
 	<link rel="shortcut icon" href="img/favicon/favicon.ico" />
@@ -51,67 +57,113 @@
 	<!-- Chrome for Android -->
 	<link rel="icon" sizes="192x192" href="img/favicon/favicon-192.png">
 
-
   <!-- made by www.metatags.org -->
   <meta name="description" content="Time your Rubik's cube solves with this beautiful and simple app. Available on web and desktop." />
   <meta name="keywords" content="rubik, rubiks, cube, timer, speedcube, feliks, zemdegs, chronocube, chronometer, time, record, solve, solves, average, space" />
   <meta name="author" content="metatags generator">
   <meta name="robots" content="index, follow">
   <meta name="revisit-after" content="1 month">
+  
+  <script type="text/javascript">
+  function toggleSettings() {
+    if ( $('div.settings').css('visibility') == 'hidden' ) {
+      $('div.settings').css('visibility', 'visible')
+    } else {
+      $('div.settings').css('visibility', 'hidden')
+    }
+  }
+  
+  function toggleHistory() {
+    if ( $('div.history').css('visibility') == 'hidden' ) {
+      $('div.history').css('visibility', 'visible')
+    } else {
+      $('div.history').css('visibility', 'hidden')
+    }
+  }
+  </script>
 
 </head>
 
-<body unselectable="on" onload='init()'>
-
-  <div id="settingsBox">
-    <i class="fa fa-cog" id="settingsIcon" onclick="MainLayout.toggleSettings()"></i>
-    <div id="settings">
-      <div onclick="MainLayout.toggleScrollBars(); document.getElementById('hideScrollBarsCheckbox').checked = !(document.getElementById('hideScrollBarsCheckbox').checked)"><input id="hideScrollBarsCheckbox" type="checkbox" onchange="MainLayout.toggleScrollBars();"checked/><label>Hide scroll bar</label></div>
-      <div onclick="MainLayout.toggleInspection(); document.getElementById('inspectionCheckbox').checked = !(document.getElementById('inspectionCheckbox').checked)"><input id="inspectionCheckbox" type="checkbox" onchange="MainLayout.toggleInspection();"unchecked/><label>Inspection Timer</label></div>
-      <div onclick="MainLayout.nextBackground();">Change background</div>
-      <div id="downloadjson" onclick="Data.downloadjson()">Download solves</div>
-      <div id="uploadjson">Load Solves<input type="file" id="uploadjsoninput" class="upload"/></div>
-    </div>
-  </div>
-
-  <div id="forkme" onclick="window.open('http://www.github.com/pablopunk/chronocube');">
-    <i class="fa fa-github" id="github-logo" onmouseover="document.getElementById('forkmemsg').style.visibility='visible'" onmouseout="document.getElementById('forkmemsg').style.visibility='hidden'"></i>
-    <p id="forkmemsg">Fork me</p>
-  </div>
-
-  <center>
-
-    <div id="scores" class="hideall">
-      <p id="best-solve">Best: -</p>
-      <p id="average-all">Average All: -</p>
-      <p id="average-5">Average 5: -</p>
-    </div>
-
-    <div id="chronotime">00:00.00</div>
-    <span id="subtitle" class="hideall">Press SPACE to start/stop the timer</span><br>
-    <span id="scramble" onclick="Scramble.displayScramble()" class="hideall"></span>
-    <br><br>
-
-    <div id="history" class="hideall">
-      <div id="scroll-parent">
-        <div id="scroll-child">
-          <table id="times-table"></table>
-        </div>
+<!-- <body unselectable="on" onload='init()'> -->
+<body>
+  
+  <div class="container">
+    <div class="row header"> <!-- header row -->
+      <div class="two columns">
+        <a href="#" onclick="toggleSettings()"><i class="fa fa-cog" title="Settings"></i></a>
+      </div>
+      <div class="ten columns">
+        <a href="#" onclick="toggleHistory()"><i class="fa fa-clock-o" title="History" style="float:right"></i></a>
       </div>
     </div>
-    <div id="solvesManager" class="hideall">
-      <input id="newSolveText" type="text" value="" hidden="true" onkeypress="if (this.value.trim() != '')  MainLayout.newSolveClass(event, this.value.trim())"/>
-      <i class="fa fa-plus-square" id="add-button" onclick="MainLayout.displayNewSolveText()"></i>
-      <select id="solveNames" onchange="Data.changeSolve(this.selectedIndex)">
-      </select>
-      <i class="fa fa-minus-square" id="del-button" onclick="Data.delSolve()"></i>
-      <p id="pressEnterToSaveSolveClass" hidden>Press Enter to save the new Solve class</p>
+    <!-- -->
+    <div class="row">
+      <div class="four columns settings u-full-width">
+        <div class="button"><input type="checkbox"> inspection timer</input></div>
+        <div class="button">change theme</div>
+        <div class="button">save solves</div>
+        <div class="button">load solves</div>
+      </div>
+      <div class="five columns scores u-full-width">
+        <table class="u-full-width">
+          <thead>
+            <th>ao</th><th>Current</th><th>Best</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>5</td><td>-</td><td>-</td>
+            </tr>
+            <tr>
+              <td>12</td><td>-</td><td>-</td>
+            </tr>
+            <tr>
+              <td>All</td><td>-</td><td>-</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="three columns history">
+        <table class="u-full-width">
+          <tr><td>1</td><td>15.77</td><td><a href="#"><i class="fa fa-times"></i></a></td></tr>
+          <tr><td>2</td><td>15.77</td><td><a href="#"><i class="fa fa-times"></i></a></td></tr>
+          <tr><td>3</td><td>15.77</td><td><a href="#"><i class="fa fa-times"></i></a></td></tr>
+          <tr><td>3</td><td>15.77</td><td><a href="#"><i class="fa fa-times"></i></a></td></tr>
+          <tr><td>3</td><td>15.77</td><td><a href="#"><i class="fa fa-times"></i></a></td></tr>
+          <tr><td>3</td><td>15.77</td><td><a href="#"><i class="fa fa-times"></i></a></td></tr>
+          <tr><td>3</td><td>15.77</td><td><a href="#"><i class="fa fa-times"></i></a></td></tr>
+          <tr><td>3</td><td>15.77</td><td><a href="#"><i class="fa fa-times"></i></a></td></tr>
+          <tr><td>3</td><td>15.77</td><td><a href="#"><i class="fa fa-times"></i></a></td></tr>
+          <tr><td>3</td><td>15.77</td><td><a href="#"><i class="fa fa-times"></i></a></td></tr>
+          <tr><td>3</td><td>15.77</td><td><a href="#"><i class="fa fa-times"></i></a></td></tr>
+          <tr><td>3</td><td>15.77</td><td><a href="#"><i class="fa fa-times"></i></a></td></tr>
+        </table>
+      </div>
     </div>
-    <div class="hideall" id="undoDeleteButton"><span onclick="Data.undoLastDelete()">Undo delete</span><i class="fa fa-times" onclick="MainLayout.hideUndoDelete()"></i></div>
-  <br>
-
-    <div id="console"></div>
-  </center>
+    <div class="twelve columns timer u-full-width">
+      00:00.00
+    </div>
+    <div class="row">
+      <div class="twelve columns instructions">
+        Press SPACE to start/stop the timer
+      </div>
+    </div>
+    <div class="row">
+      <div class="twelve columns scramble">
+        L2 D2 R2 F' U2 B F2 U2 L2 D2 R B L B2 U' F L' U L' U2
+      </div>
+    </div>
+    <br>
+    <center id="session">
+        <i class="fa fa-plus" style="color: #27ae60;"></i>
+        <select>
+          <option value="Option 1">Borrar</option>
+          <option value="Option 2">Estos</option>
+          <option value="Option 3">Campos</option>
+        </select>
+      <i class="fa fa-minus" style="color: #e74c3c"></i>
+    </center>
+  </div>
+  
 </body>
 
 </html>
