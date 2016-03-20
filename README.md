@@ -63,6 +63,7 @@ Older versions included:
 ## To do
 - Download file on exporting (instead of opening new window)
 - Show best ao5/aoAll
+- Add time to session manually (delete undo feature?)
 - csTimer import/export
 - Move time to another solve
 - Google Drive integration (sync across devices)
