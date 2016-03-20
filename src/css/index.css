@@ -17,18 +17,13 @@ body {
   height:100%; overflow: hidden; /* prevents scrolling */
 }
 
-.row.header {
-  margin-top: 5pt;
-}
-
 .row.header i {
-  font-size: 50pt;
+  font-size: 40pt;
   color: #1abc9c;
 }
 
 div.settings, div.history {
   visibility: hidden;
-  margin-top: 10pt;
 }
 
 div.settings .button {
@@ -47,6 +42,11 @@ div.settings .button:hover {
   color: white;
 }
 
+div.scores {
+  font-size: 10pt;
+  color: #4f5c5d;
+}
+
 div.history {
   max-height: 170pt;
   overflow-y: scroll;
@@ -54,10 +54,16 @@ div.history {
 
 div.history table {
   font-size: 10pt;
+  color: #4f5c5d;
+}
+
+div.history table td{
+  text-align: right;
 }
 
 div.history i {
   color: #FF2A68;
+  font-size: 12pt;
 }
 
 div.timer {
@@ -80,6 +86,7 @@ div.scramble {
 div.instructions, div.scramble {
   text-align: center;
   font-style: italic;
+  color: #7f8c8d;
 }
 
 #session {
