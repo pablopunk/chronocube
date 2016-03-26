@@ -1739,10 +1739,5 @@ scramblers["333mbf"] = scramblers["333"];
 function ScrambleObject() {
 
   scramblers["333"].initialize()
-
-  this.displayScramble = function() {
-    document.getElementById('scramble').innerHTML = scramblers["333"].getRandomScramble().scramble_string
-  }
-
-  this.displayScramble()
+  
 }

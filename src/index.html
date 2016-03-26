@@ -61,47 +61,29 @@
   <meta name="author" content="metatags generator">
   <meta name="robots" content="index, follow">
   <meta name="revisit-after" content="1 month">
-  
-  <script type="text/javascript">
-  function toggleSettings() {
-    if ( $('div.settings').css('visibility') == 'hidden' ) {
-      $('div.settings').css('visibility', 'visible')
-    } else {
-      $('div.settings').css('visibility', 'hidden')
-    }
-  }
-  
-  function toggleHistory() {
-    if ( $('div.history').css('visibility') == 'hidden' ) {
-      $('div.history').css('visibility', 'visible')
-    } else {
-      $('div.history').css('visibility', 'hidden')
-    }
-  }
-  </script>
 
 </head>
 
 <!-- <body unselectable="on" onload='init()'> -->
-<body>
+<body onload='init()'>
   
   <div class="container">
-    <div class="row header"> <!-- header row -->
+    <div class="row header hideall"> <!-- header row -->
       <div class="two columns">
-        <a href="#" onclick="toggleSettings()"><i class="icon ion-navicon" title="Settings"></i></a>
+        <a href="#" onclick="MainLayout.toggleSettings()"><i class="icon ion-navicon" title="Settings"></i></a>
       </div>
       <div class="ten columns">
-        <a href="#" onclick="toggleHistory()"><i class="icon ion-ios-clock-outline" title="History" style="float:right"></i></a>
+        <a href="#" onclick="MainLayout.toggleHistory()"><i class="icon ion-ios-clock-outline" title="History" style="float:right"></i></a>
       </div>
     </div>
     <!-- -->
-    <div class="row">
+    <div class="row hideall">
       <div class="four columns settings u-full-width">
-        <div class="button"><i class="icon ion-ios-timer-outline"></i> inspection timer</div>
-        <div class="button"><i class="icon ion-contrast"></i> change theme</div>
-        <div class="button"><i class="icon ion-ios-download-outline"></i> save solves</div>
-        <div class="button"><i class="icon ion-ios-upload-outline"></i> load solves</div>
-        <div class="button"><i class="icon ion-social-github-outline"></i> view on github</div>
+        <div class="button" onclick="MainLayout.toggleInspection(this)"><i class="icon ion-ios-timer-outline"></i> inspection timer</div>
+        <div class="button" onclick="alert('Feature available soon...')"><i class="icon ion-contrast"></i> change theme</div>
+        <div class="button" onclick="Data.downloadjson()"><i class="icon ion-ios-download-outline"></i> save solves</div>
+        <div class="button"><i class="icon ion-ios-upload-outline"></i> load solves <input type="file" id="uploadjsoninput" class="upload" style="cursor:pointer;position:absolute;opacity:0;line-height:24pt;left:0;width:25%"/></div>
+        <div class="button" onclick="window.open('https://github.com/pablopunk/chronocube')"><i class="icon ion-social-github-outline"></i> view on github</div>
       </div>
       <div class="five columns scores u-full-width">
         <table class="u-full-width">
@@ -121,45 +103,31 @@
           </tbody>
         </table>
       </div>
-      <div class="three columns history">
-        <table class="u-full-width">
-          <tr><td>1</td><td>15.77</td><td><a href="#"><i class="icon ion-ios-close-outline"></i></a></td></tr>
-          <tr><td>2</td><td>15.77</td><td><a href="#"><i class="icon ion-ios-close-outline"></i></a></td></tr>
-          <tr><td>3</td><td>15.77</td><td><a href="#"><i class="icon ion-ios-close-outline"></i></a></td></tr>
-          <tr><td>3</td><td>15.77</td><td><a href="#"><i class="icon ion-ios-close-outline"></i></a></td></tr>
-          <tr><td>3</td><td>15.77</td><td><a href="#"><i class="icon ion-ios-close-outline"></i></a></td></tr>
-          <tr><td>3</td><td>15.77</td><td><a href="#"><i class="icon ion-ios-close-outline"></i></a></td></tr>
-          <tr><td>3</td><td>15.77</td><td><a href="#"><i class="icon ion-ios-close-outline"></i></a></td></tr>
-          <tr><td>3</td><td>15.77</td><td><a href="#"><i class="icon ion-ios-close-outline"></i></a></td></tr>
-          <tr><td>3</td><td>15.77</td><td><a href="#"><i class="icon ion-ios-close-outline"></i></a></td></tr>
-          <tr><td>3</td><td>15.77</td><td><a href="#"><i class="icon ion-ios-close-outline"></i></a></td></tr>
-          <tr><td>3</td><td>15.77</td><td><a href="#"><i class="icon ion-ios-close-outline"></i></a></td></tr>
-          <tr><td>3</td><td>15.77</td><td><a href="#"><i class="icon ion-ios-close-outline"></i></a></td></tr>
-        </table>
+      <div class="three columns" id="history">
+        <table class="u-full-width"></table>
       </div>
     </div>
-    <div class="twelve columns timer u-full-width">
+    <div class="twelve columns u-full-width" id="timer">
       00:00.00
     </div>
-    <div class="row">
+    <div class="row hideall">
       <div class="twelve columns instructions">
         Press SPACE to start/stop the timer
       </div>
     </div>
-    <div class="row">
-      <div class="twelve columns scramble">
+    <div class="row hideall">
+      <div class="twelve columns" id="scramble" onclick="MainLayout.displayScramble()">
         L2 D2 R2 F' U2 B F2 U2 L2 D2 R B L B2 U' F L' U L' U2
       </div>
     </div>
     <br>
-    <center id="session">
-        <i class="icon ion-ios-plus-outline" style="color: #27ae60;"></i>
-        <select>
-          <option value="Option 1">Borrar</option>
-          <option value="Option 2">Estos</option>
-          <option value="Option 3">Campos</option>
-        </select>
-      <i class="icon ion-ios-minus-outline" style="color: #e74c3c"></i>
+    <center class="hideall" id="session">
+      <i id="add-button" class="icon ion-ios-plus-outline" style="color: #27ae60;" onclick="MainLayout.displayNewSessionText()"></i>
+      <input type="text" id="newSessionText" style="display: none" onkeypress="if (this.value.trim() != '')  MainLayout.newSession(event, this.value.trim())"></input>
+      <select id="sessions" onchange="Data.changeSession(this.selectedIndex)" onfocus="$(this).blur()"></select>
+      <i class="icon ion-ios-minus-outline" onclick="Data.delSolve()" style="color: #e74c3c"></i>
+      <br>
+      <span id="pressEnterToSaveSession" style="display: none">Press ENTER to save session</span>
     </center>
   </div>
   

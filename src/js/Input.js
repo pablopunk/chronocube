@@ -12,8 +12,8 @@ var chronoState = {
 
 function Input() {
 
-  document.body.addEventListener("keyup", spaceUp);
-  document.body.addEventListener("keydown", spaceDown);
+  document.body.addEventListener("keyup", keyUp);
+  document.body.addEventListener("keydown", keyDown);
 
   function startSolve() {
     chronoReset();
@@ -34,14 +34,14 @@ function Input() {
     state = chronoState.SOLVED
     Data.add();
     Data.refresh();
-    MainLayout.scrollDown();
+    MainLayout.scrollHistoryDown();
     MainLayout.showAll()
   }
 
-  function spaceUp(event) { // Starting at SPACE released
+  function keyUp(event) { // Starting at SPACE released
 
-    if ($('#newSolveText').is(":visible")) { // entering new solve
-      if (event.keyCode == 27) MainLayout.hideNewSolveText(); // close on ESC
+    if ($('#newSessionText').is(":visible")) { // entering new solve
+      if (event.keyCode == 27) MainLayout.hideNewSessionText(); // close on ESC
       return
     }
     if (event.which == 32) { // SPACE
@@ -50,9 +50,9 @@ function Input() {
     }
   }
 
-  function spaceDown(event) { // Stoping at SPACE pressed
+  function keyDown(event) { // Stoping at SPACE pressed
     if (state == 1 || state == 3 || state == 5) return; // don't repeat when holding down
-    if ($('#newSolveText').is(":visible")) return; // entering new solve
+    if ($('#newSessionText').is(":visible")) return; // entering new solve
     if (event.which == 32) {
       if (state == chronoState.STOPPED) {
         state = inspection ? chronoState.HOLDING_INSPECTION : chronoState.HOLDING_SOLVE

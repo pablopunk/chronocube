@@ -43,11 +43,11 @@ function chronoContinue(){
 	chrono()
 }
 function chronoReset(){
-	document.getElementById("chronotime").innerHTML = "00:00:00"
+	document.getElementById("timer").innerHTML = "00:00.00"
 	start = new Date()
 }
 function chronoStopReset(){
-	document.getElementById("chronotime").innerHTML = "00:00:00"
+	document.getElementById("timer").innerHTML = "00:00.00"
 }
 function chronoStop(){
 	MainLayout.setChronoTime(min,sec,msec.toString().substring(0,2))

@@ -1,19 +1,18 @@
 
-function SolveTime(time, scramble) { // solve time object
+function Time(time, scramble) { // solve time object
   this.time = time
   this.scramble = scramble
 }
 
-function Solve(name) { // session object (multiple times)
+function Session(name) { // session object (multiple times)
   this.name = name
   this.times = []
 }
 
 function DataManager() {
-  this.solves = [] // array of Solve objects
-  this.numberOfSolves = 0 // solves loaded into the app !! not the actual number (solves.length)
-  this.currentSolve = 'Default'
-  this.deleted = [] // list of deleted solves to undo
+  this.sessions = [] // array of Session objects
+  this.numberOfSessions = 0 // solves loaded into the app !! not the actual number (solves.length)
+  this.currentSession = 'Default'
   this.lastScramble = ''
   this.file = null
   this.fr = null
@@ -36,101 +35,94 @@ function DataManager() {
     });
 
     // load number of solves stored
-    this.numberOfSolves = localStorage.getItem('numberOfSolves')
-    if (this.numberOfSolves == null) this.numberOfSolves = 0
+    this.numberOfSessions = localStorage.getItem('numberOfSessions')
+    if (this.numberOfSessions == null) this.numberOfSessions = 0
     // load solves from storage
     this.load()
     this.refresh()
-    MainLayout.scrollDown()
+    MainLayout.scrollHistoryDown()
   }
 
-  this.resetSolves = function() {
-    this.currentSolve = 'Default'
-    this.solves = [new Solve('Default', [])]
-    this.numberOfSolves = 1
+  this.resetSessions = function() {
+    this.currentSession = 'Default'
+    this.sessions = [new Session('Default', [])]
+    this.numberOfSessions = 1
   }
 
   this.load = function() {
-    if (this.numberOfSolves == 0) {
-      this.resetSolves()
+    if (this.numberOfSessions == 0) {
+      this.resetSessions()
     }
     else {
       // checks for old solves and converts them
-      if (localStorage.getItem('solves') == null) {
-        this.resetSolves()
+      if (localStorage.getItem('sessions') == null) {
+        this.resetSessions()
         return
       }
-      if (typeof(JSON.parse(localStorage.getItem('solves'))[0].times[0]) == "string") { // old solves
-        var slvs = JSON.parse(localStorage.getItem('solves')) // all solves
+      if (typeof(JSON.parse(localStorage.getItem('sessions'))[0].times[0]) == "string") { // old solves
+        var slvs = JSON.parse(localStorage.getItem('sessions')) // all solves
         var nslvs = Object.keys(slvs).length
         for (var i=0; i<nslvs; i++) { // iterate solves
-          var n = new Solve(slvs[i].name)
+          var n = new Session(slvs[i].name)
           for (var j=0; j<slvs[i].times.length; j++) {
-            n.times.push(new SolveTime(slvs[i].times[j],'no scramble for this solve'))
+            n.times.push(new Time(slvs[i].times[j],'no scramble for this solve'))
           }
-          this.solves.push(n)
+          this.sessions.push(n)
         }
       } else { // new solves with scrambles
-        this.solves = JSON.parse(localStorage.getItem('solves')) // JSON object in localstorage
+        this.sessions = JSON.parse(localStorage.getItem('sessions')) // JSON object in localstorage
       }
-      this.currentSolve = localStorage['currentSolve']
-      if (this.solves == null) {
-        this.resetSolves()
+      this.currentSession = localStorage['currentSession']
+      if (this.sessions == null) {
+        this.resetSessions()
       }
     }
   }
 
   this.save = function() {
-    if (this.solves == null) { // no solves
-      localStorage['numberOfSolves'] = 1
-      localStorage['solves'] = JSON.stringify([new Solve('Default')])
-      localStorage['currentSolve'] = 'Default'
+    if (this.sessions == null) { // no solves
+      localStorage['numberOfSessions'] = 1
+      localStorage['sessions'] = JSON.stringify([new Session('Default')])
+      localStorage['currentSession'] = 'Default'
     } else {
-      localStorage['numberOfSolves'] = this.solves.length
-      localStorage['solves'] = JSON.stringify(this.solves)
-      localStorage['currentSolve'] = this.currentSolve
+      localStorage['numberOfSessions'] = this.sessions.length
+      localStorage['sessions'] = JSON.stringify(this.sessions)
+      localStorage['currentSession'] = this.currentSession
     }
   }
 
-  this.updateSolveName = function() {
+  this.updateSessionName = function() {
     var content = ''
-    for (var i=0; i<this.solves.length; i++) {
-      if (this.currentSolve == this.solves[i].name) content += '<option selected>'+this.solves[i].name+'</option>'
-      else content += '<option>'+this.solves[i].name+'</option>'
+    for (var i=0; i<this.sessions.length; i++) {
+      if (this.currentSession == this.sessions[i].name) content += '<option selected>'+this.sessions[i].name+'</option>'
+      else content += '<option>'+this.sessions[i].name+'</option>'
     }
-    document.getElementById('solveNames').innerHTML = content
-    $('#solveNames').select2({
-  			minimumResultsForSearch: Infinity,
-				theme: "classic"
-		});
+    document.getElementById('sessions').innerHTML = content
   }
 
-  this.changeSolve = function(index) {
-    this.currentSolve = this.solves[index].name
+  this.changeSession = function(index) {
+    this.currentSession = this.sessions[index].name
     this.refresh()
-    MainLayout.hideUndoDelete()
-    $('#solveNames').select2("close");
   }
 
   this.delSolve = function() {
-    if (confirm ("Are you sure to delete this Solve class?")) {
-      var index = $("select[id='solveNames'] option:selected").index()
-      this.solves.splice(parseInt(index), 1)
-      if (this.solves.length == 0) {
-        this.solves[0] = new Solve('Default')
-        this.currentSolve = 'Default'
+    if (confirm ("Are you sure to delete this session?")) {
+      var index = $("select[id='sessions'] option:selected").index()
+      this.sessions.splice(parseInt(index), 1)
+      if (this.sessions.length == 0) {
+        this.sessions[0] = new Session('Default')
+        this.currentSession = 'Default'
       } else {
-        this.currentSolve = this.solves[0].name
+        this.currentSession = this.sessions[0].name
       }
       this.refresh()
-      MainLayout.hideUndoDelete()
     }
   }
 
   this.getIndex = function(name) {
     var exists = false
-    for (var i=0; i<this.solves.length; i++) {
-      if (this.solves[i].name == name) {
+    for (var i=0; i<this.sessions.length; i++) {
+      if (this.sessions[i].name == name) {
         exists = true; break
       }
     }
@@ -138,74 +130,55 @@ function DataManager() {
     else return -1;
   }
 
-  this.getCurrentSolve = function() {
-    return this.solves[this.getIndex(this.currentSolve)]
+  this.getCurrentSession = function() {
+    return this.sessions[this.getIndex(this.currentSession)]
   }
 
   this.add = function() {
-    var currentTime = document.getElementById("chronotime").innerHTML
+    var currentTime = document.getElementById("timer").innerHTML
     MainLayout.updateScramble()
-    this.getCurrentSolve().times.push(new SolveTime(currentTime, this.lastScramble))
-    MainLayout.scrollDown()
+    this.getCurrentSession().times.push(new Time(currentTime, this.lastScramble))
+    MainLayout.scrollHistoryDown()
   }
 
   this.refresh = function() {
-    if (this.solves.length == 0) return;
+    if (this.sessions.length == 0) return;
     var best = this.getBestTime();
     var table = '';
-    var times = this.getCurrentSolve().times
+    var times = this.getCurrentSession().times
     for (var i=0; i<times.length; i++) {
       if (i == best) {
-          table += "<tr id='time"+i+"' style='color:#44ff77' onmouseover='MainLayout.showScrambleForTime("+i+")' onmouseout='MainLayout.hideScrambleForTime("+i+")'><td>"+(parseInt(i)+1)+"</td><td>"+times[i].time+"</td><td onclick='Data.deleteTime("+i+")'><i class='fa fa-times'></i></td></tr>";
+          table += '<tr style="color:green;font-size:110%;font-weight:bold;" id="time'+i+'" onmouseover="MainLayout.showScrambleForTime('+i+')" onmouseout="MainLayout.hideScrambleForTime('+i+')"><td>'+(i+1)+'</td><td>'+times[i].time+'</td><td><a href="javascript:Data.deleteTime('+i+')"><i class="icon ion-ios-close-outline"></i></a></td></tr>'
       } else {
-          table += "<tr id='time"+i+"' onmouseover='MainLayout.showScrambleForTime("+i+")' onmouseout='MainLayout.hideScrambleForTime("+i+")'><td>"+(parseInt(i)+1)+"</td><td>"+times[i].time+"</td><td onclick='Data.deleteTime("+i+")'><i class='fa fa-times'></i></td></tr>";
+          table += '<tr id="time'+i+'" onmouseover="MainLayout.showScrambleForTime('+i+')" onmouseout="MainLayout.hideScrambleForTime('+i+')"><td>'+(i+1)+'</td><td>'+times[i].time+'</td><td><a href="javascript:Data.deleteTime('+i+')"><i class="icon ion-ios-close-outline"></i></a></td></tr>'
       }
     }
-    document.getElementById('times-table').innerHTML = table
+    $('#history').find('table').html(table)
     this.save()
-    this.updateSolveName()
+    this.updateSessionName()
 
-    if (times.length == 0) {
-      document.getElementById('best-solve').innerHTML = "Best: -"
-      document.getElementById('average-all').innerHTML = "Average All: -"
-      document.getElementById('average-5').innerHTML = "Average 5: -"
-    }
-    else {
-      // display scores
-      document.getElementById('best-solve').innerHTML = "Best: "+ times[best].time
-      document.getElementById('average-all').innerHTML = "Average All: " + this.getAverageAll()
-      if (times.length>4) document.getElementById('average-5').innerHTML = "Average 5: " + this.getAverage5();
-      else document.getElementById('average-5').innerHTML = "Average 5: -"
-    }
+    // if (times.length == 0) {
+    //   document.getElementById('best-solve').innerHTML = "Best: -"
+    //   document.getElementById('average-all').innerHTML = "Average All: -"
+    //   document.getElementById('average-5').innerHTML = "Average 5: -"
+    // }
+    // else {
+    //   // display scores
+    //   document.getElementById('best-solve').innerHTML = "Best: "+ times[best].time
+    //   document.getElementById('average-all').innerHTML = "Average All: " + this.getAverageAll()
+    //   if (times.length>4) document.getElementById('average-5').innerHTML = "Average 5: " + this.getAverage5();
+    //   else document.getElementById('average-5').innerHTML = "Average 5: -"
+    // }
   }
 
   this.deleteTime = function(index) {
-    this.deleted.push(this.getCurrentSolve().times[index])
-    this.getCurrentSolve().times.splice(parseInt(index), 1)
+    this.getCurrentSession().times.splice(parseInt(index), 1)
     this.refresh();
-    MainLayout.showUndoDelete();
-  }
-
-  this.undoLastDelete = function() {
-    this.getCurrentSolve().times.push(this.deleted.pop())
-    this.refresh()
-    MainLayout.scrollDown()
-    if (this.deleted.length < 1) {
-        MainLayout.hideUndoDelete();
-    }
-  }
-
-  this.saveBackground = function() {
-    localStorage['bgIndex'] = (""+MainLayout.backgroundSelected)
-  }
-
-  this.restoreBackground = function() {
-    return ( (localStorage.getItem('bgIndex') == 'undefined' || isNaN(localStorage.getItem('bgIndex'))) ? 0 : parseInt(localStorage.getItem('bgIndex')) )
   }
 
   // index of the best time in the array
   this.getBestTime = function() {
-    var times = this.getCurrentSolve().times
+    var times = this.getCurrentSession().times
     var best = 0; // index 0
     var i = 1;
     for (i=1; i<times.length; i++) {
@@ -219,7 +192,7 @@ function DataManager() {
   }
 
   this.getAverageAll = function() {
-    var times = this.getCurrentSolve().times
+    var times = this.getCurrentSession().times
     var i=0, average=0, min=0, sec=0, dec=0;
 
     for (i=0; i<times.length; i++) {
@@ -236,7 +209,7 @@ function DataManager() {
   }
 
   this.getAverage5 = function() {
-    var times = this.getCurrentSolve().times
+    var times = this.getCurrentSession().times
     var i=0, average=0, min=0, sec=0, dec=0;
     times = times.slice(times.length-5, times.length)
     times.sort(function(a,b){ return a.toString().localeCompare(b) }) // custom sort
@@ -283,11 +256,11 @@ function DataManager() {
   }
 
   this.downloadjson = function() {
-    if (this.getCurrentSolve().times.length==0) {
+    if (this.getCurrentSession().times.length==0) {
       Error.print('No solves yet')
       return;
     }
-    var data = JSON.stringify(this.solves);
+    var data = JSON.stringify(this.sessions);
     var url = 'data:text/json;charset=utf8,' + encodeURIComponent(data);
     window.open(url, '_blank');
     window.focus();
@@ -308,24 +281,24 @@ function DataManager() {
 
   this.saveJsonSolves = function() {
     var oldSolves = Object.assign({}, Data.solves); // save current solves for recovery
-    var newSolves = null
+    var newSessions = null
     try {
-        newSolves = JSON.parse(fr.result)
+        newSessions = JSON.parse(fr.result)
     } catch (e) {
         alert('That was not a JSON file, was it?')
         return;
     }
-    if (newSolves[0].name == undefined || newSolves[0].times == undefined ) {
+    if (newSessions[0].name == undefined || newSessions[0].times == undefined ) {
       alert('It was a JSON but there were not solves in it')
       return;
     }
     try {
-      for (var i=0; i<newSolves.length; i++) {
-        var s = newSolves[i]
-        Data.newSolve(s.name) // could exist, in that case times are pushed to existing solve
+      for (var i=0; i<newSessions.length; i++) {
+        var s = newSessions[i]
+        Data.newSession(s.name) // could exist, in that case times are pushed to existing solve
         var index = Data.getIndex(s.name)
         for (var j=0; j<s.times.length; j++) {
-          Data.solves[index].times.push(new SolveTime(s.times[j].time, s.times[j].scramble))
+          Data.solves[index].times.push(new Time(s.times[j].time, s.times[j].scramble))
         }
       }
       Data.refresh()
@@ -336,10 +309,10 @@ function DataManager() {
     }
   }
 
-  this.newSolve = function(name) {
+  this.newSession = function(name) {
     if (this.getIndex(name) == -1) { // it does not exists yet
-      this.currentSolve = name
-      this.solves.push(new Solve(name))
+      this.currentSession = name
+      this.sessions.push(new Session(name))
       this.refresh()
     }
   }

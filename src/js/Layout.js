@@ -1,114 +1,85 @@
 function Layout() {
-	this.scrollbar = document.getElementById("scroll-child");
-	this.overflowValue = "32pt";
-	this.hiddenScrollBars = "yes";
-	this.bigChrono = "200pt";
-	this.smallChrono = "100pt";
+	this.bigChrono = "210pt";
+	this.smallChrono = "130pt";
 	this.currentScrambleForHoverTime = "";
-
-	this.backgrounds = [
-	  "url('img/background.jpg') no-repeat center center fixed",
-	  "-webkit-linear-gradient(90deg, #f857a6 10%, #ff5858 90%)",
-	  "-webkit-linear-gradient(90deg, #00d2ff 10%, #3a7bd5 90%)",
-	  "-webkit-linear-gradient(90deg, #673AB7 10%, #512DA8 90%)",
-	  "-webkit-linear-gradient(90deg, #fc00ff 10%, #00dbde 90%)",
-	  "-webkit-linear-gradient(90deg, #dc2430 10%, #7b4397 90%)"
-	];
+	this.historyDiv = document.getElementById('history')
 
 	this.init = function() {
-		$('#solveNames').select2();
-		$('#solveNames').select2({
-  			minimumResultsForSearch: Infinity,
-				theme: "classic"
-		});
-		this.backgroundSelected = Data.restoreBackground();
-    if (this.backgroundSelected == null || isNaN(this.backgroundSelected)) this.backgroundSelected = 0;
-		this.changeBackground(this.backgrounds[this.backgroundSelected])
+		// initial config
 	}
-
-  this.nextBackground = function() {
-	  var newbg = this.backgrounds[ this.backgroundSelected >= this.backgrounds.length-1 ? this.backgroundSelected=0 : ++(this.backgroundSelected) ]
-	  this.changeBackground(newbg)
-	  Data.saveBackground();
-	}
-
-	this.changeBackground = function(bg) {
-	  $('body').css({
-	    "background": bg,
-	    "background-size": "cover"
-	  });
+	
+	this.toggleSettings = function() {
+    if ( $('div.settings').css('visibility') == 'hidden' ) {
+      $('div.settings').css('visibility', 'visible')
+    } else {
+      $('div.settings').css('visibility', 'hidden')
+    }
+  }
+  
+  this.toggleHistory = function() {
+    if ( $('div#history').css('visibility') == 'hidden' ) {
+      $('div#history').css('visibility', 'visible')
+    } else {
+      $('div#history').css('visibility', 'hidden')
+    }
+  }
+	
+	this.scrollHistoryDown = function() {
+		this.historyDiv.scrollTop = this.historyDiv.scrollHeight;
 	}
 
 	this.updateChronoTime = function(sec) {
-		document.getElementById("chronotime").innerHTML = sec
+		document.getElementById("timer").innerHTML = sec
 	}
 
 	this.setChronoTime = function(min,sec,msec) {
-		document.getElementById("chronotime").innerHTML = min + ":" + sec + "." + msec
+		document.getElementById("timer").innerHTML = min + ":" + sec + "." + msec
 	}
 
 	this.changeChronoColor = function(state) {
 		if (state == chronoState.INSPECTION) {
-			document.getElementById('chronotime').style.color = "#f1c40f"
+			document.getElementById('timer').style.color = "#f1c40f"
 		} else if (state == chronoState.HOLDING_INSPECTION) {
-			document.getElementById('chronotime').style.color = "#f39c12"
+			document.getElementById('timer').style.color = "#f39c12"
 		} else if (state == chronoState.HOLDING_SOLVE) {
-			document.getElementById('chronotime').style.color = "#92FE9D"
+			document.getElementById('timer').style.color = "#92FE9D"
 		} else {
-			document.getElementById('chronotime').style.color = "white"
+			document.getElementById('timer').style.color = "#2980b9"
 		}
 	}
 
 	this.updateScramble = function() {
 		Data.lastScramble = document.getElementById('scramble').innerHTML
-		Scramble.displayScramble();
+		this.displayScramble();
+	}
+	
+	this.displayScramble = function() {
+		document.getElementById('scramble').innerHTML = scramblers["333"].getRandomScramble().scramble_string
 	}
 
 	this.showScrambleForTime = function(i) {
-		var color = "#f1c40f"
+		var color = "#f1c40f" // orange
 		this.currentScrambleForHoverTime = ""+document.getElementById('scramble').innerText
-		document.getElementById('scramble').innerText = Data.getCurrentSolve().times[i].scramble
+		document.getElementById('scramble').innerHTML = Data.getCurrentSession().times[i].scramble
 		document.getElementById('time'+i).style.color = color
 		document.getElementById('scramble').style.color = color
 	}
 
 	this.hideScrambleForTime = function(i) {
-		document.getElementById('scramble').innerText = this.currentScrambleForHoverTime
+		document.getElementById('scramble').innerHTML = this.currentScrambleForHoverTime
 		Data.refresh()
-		document.getElementById('scramble').style.color = "white"
+		document.getElementById('scramble').style.color = "#7f8c8d"
 	}
-
-	this.toggleScrollBars = function() {
-		if (this.hiddenScrollBars==="yes") {
-			this.showScrollBars()
-		} else {
-			this.hideScrollBars()
+	
+	this.toggleInspection = function(elem) {
+		if (inspection) { // deactivate
+			$(elem).css('background-color', 'white');
+			$(elem).css('color', '#1abc9c');
+		} else { // activate
+			$(elem).css('background-color', '#1abc9c');
+			$(elem).css('color', 'white');
 		}
-		this.scrollUp(); this.scrollDown(); // forces the scroll bar to disappear/appear
-	}
-
-	this.toggleInspection = function() {
-		inspection = !inspection
-	}
-
-	this.scrollUp = function() {
-	  var scroll = document.getElementById('scroll-child')
-	  scroll.scrollTop = 0;
-	}
-
-	this.scrollDown = function() {
-	  var scroll = document.getElementById('scroll-child')
-	  scroll.scrollTop = scroll.scrollHeight;
-	}
-
-	this.hideScrollBars = function() {
-		this.scrollbar.style.paddingRight = this.overflowValue
-		this.hiddenScrollBars = "yes"
-	}
-
-	this.showScrollBars = function() {
-		this.scrollbar.style.paddingRight = "0"
-		this.hiddenScrollBars = "no"
+		inspection = !inspection // toggle
 	}
 
 	this.hideAll = function() {
@@ -117,7 +88,7 @@ function Layout() {
 			divs[d].style.transition = 'opacity 0.3s';
 			divs[d].style.opacity = 0
 		}
-		$('#chronotime').css('font-size', this.bigChrono)
+		$('#timer').css('font-size', this.bigChrono)
 	}
 
 	this.showAll = function() {
@@ -126,51 +97,27 @@ function Layout() {
 			divs[d].style.transition = 'opacity 0.3s';
 			divs[d].style.opacity = 1
 		}
-		$('#chronotime').css('font-size', this.smallChrono)
+		$('#timer').css('font-size', this.smallChrono)
 	}
 
-	this.showSettings = function() {
-		document.getElementById('settings').style.visibility = "visible"
-	}
-
-	this.hideSettings = function() {
-		document.getElementById('settings').style.visibility = "hidden"
-	}
-
-	this.toggleSettings = function() {
-		if (document.getElementById('settings').style.visibility == "visible") {
-			this.hideSettings();
-		} else {
-			this.showSettings();
-		}
-	}
-
-	this.showUndoDelete = function() {
-		document.getElementById('undoDeleteButton').style.visibility = "visible"
-	}
-
-	this.hideUndoDelete = function() {
-		document.getElementById('undoDeleteButton').style.visibility = "hidden"
-	}
-
-	this.displayNewSolveText = function() {
+	this.displayNewSessionText = function() {
 		$('#add-button').fadeOut(50)
-		$('#newSolveText').fadeIn()
-		$('#newSolveText').focus()
-		$('#pressEnterToSaveSolveClass').fadeIn()
+		$('#newSessionText').fadeIn()
+		$('#newSessionText').focus()
+		$('#pressEnterToSaveSession').fadeIn()
 	}
 
-	this.hideNewSolveText = function() {
-		$('#newSolveText').fadeOut(50);
-		$('#newSolveText').val('')
-		$('#pressEnterToSaveSolveClass').fadeOut(50);
+	this.hideNewSessionText = function() {
+		$('#newSessionText').fadeOut(50);
+		$('#newSessionText').val('')
+		$('#pressEnterToSaveSession').fadeOut(50);
 		$('#add-button').fadeIn();
 	}
 
-	this.newSolveClass = function(event, name) {
+	this.newSession = function(event, name) {
 		if (event.keyCode == 13) {// enter key
-			this.hideNewSolveText()
-			Data.newSolve(name)
+			this.hideNewSessionText()
+			Data.newSession(name)
 		}
 	}
 }
