@@ -153,6 +153,9 @@ function DataManager() {
           table += '<tr id="time'+i+'" onmouseover="MainLayout.showScrambleForTime('+i+')" onmouseout="MainLayout.hideScrambleForTime('+i+')"><td>'+(i+1)+'</td><td>'+times[i].time+'</td><td><a href="javascript:Data.deleteTime('+i+')"><i class="icon ion-ios-close-outline"></i></a></td></tr>'
       }
     }
+    if (times.length == 0) {
+      table = '<tbody><td>No data yet</td></tbody>'
+    }
     $('#history').find('table').html(table)
     this.save()
     this.updateSessionName()
@@ -280,7 +283,7 @@ function DataManager() {
   }
 
   this.saveJsonSolves = function() {
-    var oldSolves = Object.assign({}, Data.solves); // save current solves for recovery
+    var oldSessions = Object.assign({}, Data.sessions); // save current solves for recovery
     var newSessions = null
     try {
         newSessions = JSON.parse(fr.result)
@@ -298,12 +301,12 @@ function DataManager() {
         Data.newSession(s.name) // could exist, in that case times are pushed to existing solve
         var index = Data.getIndex(s.name)
         for (var j=0; j<s.times.length; j++) {
-          Data.solves[index].times.push(new Time(s.times[j].time, s.times[j].scramble))
+          Data.sessions[index].times.push(new Time(s.times[j].time, s.times[j].scramble))
         }
       }
       Data.refresh()
     } catch(e) {
-      Data.solves = oldSolves // recover
+      Data.sessions = oldSessions // recover
       alert('There was a problem uploading solves')
       console.log(e);
     }

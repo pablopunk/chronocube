@@ -6,6 +6,7 @@ function Layout() {
 
 	this.init = function() {
 		// initial config
+		this.displayScramble()
 	}
 	
 	this.toggleSettings = function() {

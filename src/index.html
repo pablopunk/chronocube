@@ -85,25 +85,25 @@
         <div class="button"><i class="icon ion-ios-upload-outline"></i> load solves <input type="file" id="uploadjsoninput" class="upload" style="cursor:pointer;position:absolute;opacity:0;line-height:24pt;left:0;width:25%"/></div>
         <div class="button" onclick="window.open('https://github.com/pablopunk/chronocube')"><i class="icon ion-social-github-outline"></i> view on github</div>
       </div>
-      <div class="five columns scores u-full-width">
+      <div class="five columns scores u-full-width card">
         <table class="u-full-width">
           <thead>
-            <th>ao</th><th>Current</th><th>Best</th>
+            <th></th><th>ao</th><th>Current</th><th>Best</th>
           </thead>
           <tbody>
             <tr>
-              <td>5</td><td>-</td><td>-</td>
+              <td></td><td>5</td><td>-</td><td>-</td>
             </tr>
             <tr>
-              <td>12</td><td>-</td><td>-</td>
+              <td></td><td>12</td><td>-</td><td>-</td>
             </tr>
             <tr>
-              <td>All</td><td>-</td><td>-</td>
+              <td></td><td>All</td><td>-</td><td>-</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div class="three columns" id="history">
+      <div class="three columns card" id="history">
         <table class="u-full-width"></table>
       </div>
     </div>
@@ -116,18 +116,18 @@
       </div>
     </div>
     <div class="row hideall">
-      <div class="twelve columns" id="scramble" onclick="MainLayout.displayScramble()">
-        L2 D2 R2 F' U2 B F2 U2 L2 D2 R B L B2 U' F L' U L' U2
-      </div>
+      <div class="twelve columns" id="scramble" onclick="MainLayout.displayScramble()"></div>
     </div>
     <br>
     <center class="hideall" id="session">
-      <i id="add-button" class="icon ion-ios-plus-outline" style="color: #27ae60;" onclick="MainLayout.displayNewSessionText()"></i>
-      <input type="text" id="newSessionText" style="display: none" onkeypress="if (this.value.trim() != '')  MainLayout.newSession(event, this.value.trim())"></input>
-      <select id="sessions" onchange="Data.changeSession(this.selectedIndex)" onfocus="$(this).blur()"></select>
-      <i class="icon ion-ios-minus-outline" onclick="Data.delSolve()" style="color: #e74c3c"></i>
-      <br>
-      <span id="pressEnterToSaveSession" style="display: none">Press ENTER to save session</span>
+      <div class="card" style="line-height:100%;">
+        <i id="add-button" class="icon ion-ios-plus-outline" style="color: #27ae60;" onclick="MainLayout.displayNewSessionText()"></i>
+        <input type="text" id="newSessionText" style="display: none" onkeypress="if (this.value.trim() != '')  MainLayout.newSession(event, this.value.trim())"></input>
+        <select id="sessions" onchange="Data.changeSession(this.selectedIndex)" onfocus="$(this).blur()"></select>
+        <i class="icon ion-ios-minus-outline" onclick="Data.delSolve()" style="color: #e74c3c"></i>
+        <br>
+        <span id="pressEnterToSaveSession" style="display: none">Press ENTER to save session</span>
+      </div>
     </center>
   </div>
   
