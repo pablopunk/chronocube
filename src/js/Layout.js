@@ -3,6 +3,7 @@ function Layout() {
 	this.smallChrono = "130pt";
 	this.currentScrambleForHoverTime = "";
 	this.historyDiv = document.getElementById('history')
+	this.theme = 'bright'
 
 	this.init = function() {
 		// initial config
@@ -45,7 +46,9 @@ function Layout() {
 		} else if (state == chronoState.HOLDING_SOLVE) {
 			document.getElementById('timer').style.color = "#92FE9D"
 		} else {
-			document.getElementById('timer').style.color = "#2980b9"
+			color = "#2a82bb"
+			if (this.theme == 'dark') color = "#1abc9c"
+			document.getElementById('timer').style.color = color
 		}
 	}
 
@@ -120,5 +123,17 @@ function Layout() {
 			this.hideNewSessionText()
 			Data.newSession(name)
 		}
+	}
+	
+	this.changeTheme = function() {
+	 var oldlink = document.getElementsByTagName("link").item(1);
+	 if (this.theme == 'bright') {
+		 oldlink.href = 'css/dark.css';
+		 this.theme = 'dark'
+	 } else {
+		 oldlink.href = 'css/bright.css';
+  	 this.theme = 'bright' 
+	 }
+	 this.changeChronoColor(-1)
 	}
 }

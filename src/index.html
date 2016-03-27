@@ -14,6 +14,7 @@
   }
   </script>
   <link href="css/ionicons.min.css" rel="stylesheet">
+  <link href="css/bright.css" rel="stylesheet"/>
   <link href="css/index.css" rel="stylesheet"/>
   <script type="text/javascript" src="js/app.js"></script>
   <script type="text/javascript" src="js/ErrorHandle.js"></script>
@@ -80,7 +81,7 @@
     <div class="row hideall">
       <div class="four columns settings u-full-width">
         <div class="button" onclick="MainLayout.toggleInspection(this)"><i class="icon ion-ios-timer-outline"></i> inspection timer</div>
-        <div class="button" onclick="alert('Feature available soon...')"><i class="icon ion-contrast"></i> change theme</div>
+        <div class="button" onclick="MainLayout.changeTheme()"><i class="icon ion-contrast"></i> change theme</div>
         <div class="button" onclick="Data.downloadjson()"><i class="icon ion-ios-download-outline"></i> save solves</div>
         <div class="button"><i class="icon ion-ios-upload-outline"></i> load solves <input type="file" id="uploadjsoninput" class="upload" style="cursor:pointer;position:absolute;opacity:0;line-height:24pt;left:0;width:25%"/></div>
         <div class="button" onclick="window.open('https://github.com/pablopunk/chronocube')"><i class="icon ion-social-github-outline"></i> view on github</div>
@@ -120,14 +121,13 @@
     </div>
     <br>
     <center class="hideall" id="session">
-      <div class="card" style="line-height:100%;">
+      <input type="text" id="newSessionText" style="display: none" onkeypress="if (this.value.trim() != '')  MainLayout.newSession(event, this.value.trim())"></input>
+      <div class="card" style="line-height:100%; display:inline-block">
         <i id="add-button" class="icon ion-ios-plus-outline" style="color: #27ae60;" onclick="MainLayout.displayNewSessionText()"></i>
-        <input type="text" id="newSessionText" style="display: none" onkeypress="if (this.value.trim() != '')  MainLayout.newSession(event, this.value.trim())"></input>
         <select id="sessions" onchange="Data.changeSession(this.selectedIndex)" onfocus="$(this).blur()"></select>
-        <i class="icon ion-ios-minus-outline" onclick="Data.delSolve()" style="color: #e74c3c"></i>
-        <br>
-        <span id="pressEnterToSaveSession" style="display: none">Press ENTER to save session</span>
+        <i class="icon ion-ios-minus-outline minus" onclick="Data.delSolve()"></i>
       </div>
+      <div id="pressEnterToSaveSession" style="display: none">Press ENTER to save session</div>
     </center>
   </div>
   

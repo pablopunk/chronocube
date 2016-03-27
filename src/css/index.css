@@ -13,7 +13,6 @@ html {
 }
 
 body {
-  background-color: white;
   height:100%; overflow: hidden; /* prevents scrolling */
 }
 
@@ -27,7 +26,7 @@ div.settings, div#history {
 }
 
 div.settings .button {
-  width: 90%;
+  width: 85%;
   padding: 0;
   font-weight: lighter;
   border-color: #1abc9c;
@@ -50,7 +49,6 @@ div.settings .button i {
 
 div.scores {
   font-size: 10pt;
-  color: #4f5c5d;
 }
 
 table tr:last-child td {
@@ -63,7 +61,6 @@ div#history {
 
 div#history table {
   font-size: 10pt;
-  color: #4f5c5d;
   margin-bottom: 0;
 }
 
@@ -72,7 +69,6 @@ div#history table td{
 }
 
 div#history i {
-  color: #FF2A68;
   font-size: 12pt;
 }
 
@@ -82,7 +78,6 @@ div#timer {
   font-size: 130pt;
   text-align: center;
   padding: 0;
-  color: #2980b9;
 }
 
 div.instructions {
@@ -96,7 +91,6 @@ div#scramble {
 div.instructions, div#scramble {
   text-align: center;
   font-style: italic;
-  color: #7f8c8d;
 }
 
 #session {
@@ -116,8 +110,7 @@ div.instructions, div#scramble {
   vertical-align: middle;
 }
 
-#pressEnterToSaveSolveClass {
-  opacity: 0.7;
+#pressEnterToSaveSession {
   font-style: italic;
 }
 
