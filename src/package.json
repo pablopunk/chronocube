@@ -1,7 +1,7 @@
 {
   "name": "chronocube",
   "productName": "Chronocube",
-  "version": "0.3.3",
+  "version": "0.4.0",
   "description": "Rubik's Cube timer",
   "main": "js/main.js",
   "license": "MIT",
