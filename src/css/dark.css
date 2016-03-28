@@ -21,7 +21,7 @@ select, option {
   color: #F62459;
 }
 
-#newSessionText {
+#newTimeText , #newSessionText {
   background-color: #2c3e50;
   color: #ecf0f1;
 }

@@ -73,8 +73,18 @@ div#history table td{
   text-align: center;
 }
 
+div#history table tr:last-child {
+  margin: 0;
+  padding: 0;
+}
+
 div#history i {
   font-size: 12pt;
+}
+
+#newTimeText {
+  max-width: 70pt;
+  margin: 0;
 }
 
 div#timer {

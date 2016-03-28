@@ -149,6 +149,13 @@ function DataManager() {
     MainLayout.scrollHistoryDown()
   }
 
+  this.manualAdd = function(time) {
+    MainLayout.updateScramble()
+    this.getCurrentSession().times.push(new Time(time, this.lastScramble))
+    MainLayout.scrollHistoryDown()
+    this.refresh()
+  }
+
   this.refresh = function() {
     if (this.sessions.length == 0) return;
     var best = this.getBestTimeSession();
@@ -163,7 +170,6 @@ function DataManager() {
       }
     }
     if (len == 0) {
-      table = '<tbody><td>No data yet</td></tbody>';
       $('#ao5').html('-')
       $('#ao12').html('-')
       $('#aoAll').html('-')
@@ -185,6 +191,7 @@ function DataManager() {
       this.ao[2] != '-' ? $('#aoAll-best').html(this.ao[2]) : $('#aoAll-best').html('-')
     }
 
+    table += MainLayout.newTimeButtonHTML
     $('#history').find('table').html(table)
     this.save()
     this.updateSessionName()
@@ -197,7 +204,7 @@ function DataManager() {
 
   // index of the best time in the array
   this.getBestTimeSession = function() {
-    var times = this.getCurrentSession().times
+    var times = this.getCurrentSession().times.slice()
     var best = 0; // index 0
     var i = 1;
     for (i=1; i<times.length; i++) {
@@ -215,8 +222,9 @@ function DataManager() {
     if (len == 0) return '-';
 
     var array = []
+    var sess  = this.sessions.slice()
     for (var i=0; i<len; i++) {
-      array.push(this.min(this.sessions[i].times))
+      array.push(this.min(sess[i].times.slice()))
     }
     array.sort();
     if (typeof array[0] == 'undefined') return '-';

@@ -40,8 +40,7 @@ function Input() {
 
   function keyUp(event) { // Starting at SPACE released
 
-    if ($('#newSessionText').is(":visible")) { // entering new solve
-      if (event.keyCode == 27) MainLayout.hideNewSessionText(); // close on ESC
+    if ( $('#newSessionText').is(":visible") || $('#newTimeText').is(":visible") ) { // entering new solve
       return
     }
     if (event.which == 32) { // SPACE
@@ -52,7 +51,7 @@ function Input() {
 
   function keyDown(event) { // Stoping at SPACE pressed
     if (state == 1 || state == 3 || state == 5) return; // don't repeat when holding down
-    if ($('#newSessionText').is(":visible")) return; // entering new solve
+    if ($('#newSessionText').is(":visible") || $('#newTimeText').is(":visible")) return; // entering new solve
     if (event.which == 32) {
       if (state == chronoState.STOPPED) {
         state = inspection ? chronoState.HOLDING_INSPECTION : chronoState.HOLDING_SOLVE

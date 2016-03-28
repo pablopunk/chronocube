@@ -4,12 +4,13 @@ function Layout() {
 	this.currentScrambleForHoverTime = "";
 	this.historyDiv = document.getElementById('history')
 	this.theme = 'bright'
-
+	this.newTimeButtonHTML = '<tr onclick="MainLayout.displayNewTimeText()"><td colspan="3" style="cursor:pointer" ><i id="add-button" class="icon ion-ios-plus-outline"></i> New solve</td></tr>'
+	this.newTimeTextHTML = '<tr><td colspan="3"><input type="text" id="newTimeText" onkeyup="MainLayout.newTime(event, this.value)"> <i id="del-button" class="icon ion-ios-close-outline minus" onclick="MainLayout.hideNewTimeText()"></i></td></tr>'
 	this.init = function() {
 		// initial config
 		this.displayScramble()
 	}
-	
+
 	this.toggleSettings = function() {
     if ( $('div.settings').css('visibility') == 'hidden' ) {
       $('div.settings').css('visibility', 'visible')
@@ -17,7 +18,7 @@ function Layout() {
       $('div.settings').css('visibility', 'hidden')
     }
   }
-  
+
   this.toggleHistory = function() {
     if ( $('div#history').css('visibility') == 'hidden' ) {
       $('div#history').css('visibility', 'visible')
@@ -25,7 +26,7 @@ function Layout() {
       $('div#history').css('visibility', 'hidden')
     }
   }
-	
+
 	this.scrollHistoryDown = function() {
 		this.historyDiv.scrollTop = this.historyDiv.scrollHeight;
 	}
@@ -56,7 +57,7 @@ function Layout() {
 		Data.lastScramble = document.getElementById('scramble').innerHTML
 		this.displayScramble();
 	}
-	
+
 	this.displayScramble = function() {
 		document.getElementById('scramble').innerHTML = scramblers["333"].getRandomScramble().scramble_string
 	}
@@ -74,7 +75,7 @@ function Layout() {
 		Data.refresh()
 		document.getElementById('scramble').style.color = "#7f8c8d"
 	}
-	
+
 	this.toggleInspection = function(elem) {
 		if (inspection) { // deactivate
 			$(elem).css('background-color', 'white');
@@ -105,7 +106,7 @@ function Layout() {
 	}
 
 	this.displayNewSessionText = function() {
-		$('#add-button').fadeOut(50)
+		$('#session #add-button').fadeOut(50)
 		$('#newSessionText').fadeIn()
 		$('#newSessionText').focus()
 		$('#pressEnterToSaveSession').fadeIn()
@@ -115,16 +116,47 @@ function Layout() {
 		$('#newSessionText').fadeOut(50);
 		$('#newSessionText').val('')
 		$('#pressEnterToSaveSession').fadeOut(50);
-		$('#add-button').fadeIn();
+		$('#session #add-button').fadeIn();
+	}
+
+	this.displayNewTimeText = function() {
+		$('#history tr:last-child').replaceWith(this.newTimeTextHTML)
+		$('#newTimeText').focus()
+	}
+
+	this.hideNewTimeText = function() {
+		$('#history tr:last-child').replaceWith(this.newTimeButtonHTML)
 	}
 
 	this.newSession = function(event, name) {
+		if (event.keyCode == 27) {// ESC
+			this.hideNewSessionText()
+			return
+		}
 		if (event.keyCode == 13) {// enter key
+			if (name.trim() == '') return
 			this.hideNewSessionText()
 			Data.newSession(name)
 		}
 	}
-	
+
+	this.newTime = function(event, time) {
+		if (event.keyCode == 27) {// ESC
+			this.hideNewTimeText()
+			return
+		}
+		if (event.keyCode == 13) {// enter key
+			if (time.trim() == '') return
+			re = /([0-9]{2}:[0-5]?[0-9]?\.[0-9]{2})/
+			if (! time.match(re)) {
+				alert('Wrong time format (00:00.00)')
+				return
+			}
+			this.hideNewTimeText()
+			Data.manualAdd(time)
+		}
+	}
+
 	this.changeTheme = function() {
 	 var oldlink = document.getElementsByTagName("link").item(1);
 	 if (this.theme == 'bright') {
@@ -132,7 +164,7 @@ function Layout() {
 		 this.theme = 'dark'
 	 } else {
 		 oldlink.href = 'css/bright.css';
-  	 this.theme = 'bright' 
+  	 this.theme = 'bright'
 	 }
 	 Data.save()
 	 this.changeChronoColor(-1)

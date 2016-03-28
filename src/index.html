@@ -23,7 +23,7 @@
   <script type="text/javascript" src="js/Data.js"></script>
   <script type="text/javascript" src="js/Layout.js"></script>
   <script type="text/javascript" src="js/scramble_333.js"></script>
-  
+
   <!-- SKELETON
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="stylesheet" href="css/normalize.css">
@@ -67,7 +67,7 @@
 
 <!-- <body unselectable="on" onload='init()'> -->
 <body onload='init()'>
-  
+
   <div class="container">
     <div class="row header hideall"> <!-- header row -->
       <div class="two columns">
@@ -124,7 +124,7 @@
     </div>
     <br>
     <center class="hideall" id="session">
-      <input type="text" id="newSessionText" style="display: none" onkeypress="if (this.value.trim() != '')  MainLayout.newSession(event, this.value.trim())"></input>
+      <input type="text" id="newSessionText" style="display: none" onkeyup="MainLayout.newSession(event, this.value)"></input>
       <div class="card" style="line-height:100%; display:inline-block">
         <i id="add-button" class="icon ion-ios-plus-outline" style="color: #27ae60;" onclick="MainLayout.displayNewSessionText()"></i>
         <select id="sessions" onchange="Data.changeSession(this.selectedIndex)" onfocus="$(this).blur()"></select>
@@ -133,7 +133,7 @@
       <div id="pressEnterToSaveSession" style="display: none">Press ENTER to save session</div>
     </center>
   </div>
-  
+
 </body>
 
 </html>
