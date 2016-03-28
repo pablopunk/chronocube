@@ -147,7 +147,7 @@ function Layout() {
 		}
 		if (event.keyCode == 13) {// enter key
 			if (time.trim() == '') return
-			re = /([0-9]{2}:[0-5]?[0-9]?\.[0-9]{2})/
+			re = /^([0-9]{2}):([0-5])([0-9])\.([0-9]{2})$/
 			if (! time.match(re)) {
 				alert('Wrong time format (00:00.00)')
 				return
