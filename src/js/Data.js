@@ -16,6 +16,7 @@ function DataManager() {
   this.lastScramble = ''
   this.file = null
   this.fr = null
+  this.ao = ['-','-','-'] // best global [ao5,ao12,aoAll]
 
   this.init = function() {
     if(typeof(Storage) == "undefined") {
@@ -47,6 +48,7 @@ function DataManager() {
     this.currentSession = 'Default'
     this.sessions = [new Session('Default', [])]
     this.numberOfSessions = 1
+    this.ao = []
   }
 
   this.load = function() {
@@ -73,6 +75,8 @@ function DataManager() {
         this.sessions = JSON.parse(localStorage.getItem('sessions')) // JSON object in localstorage
       }
       this.currentSession = localStorage['currentSession']
+      this.ao = ( localStorage['ao'] == null ? ['-','-','-'] : JSON.parse(localStorage['ao']) )
+      if (localStorage['theme'] == 'dark') MainLayout.changeTheme()
       if (this.sessions == null) {
         this.resetSessions()
       }
@@ -84,10 +88,14 @@ function DataManager() {
       localStorage['numberOfSessions'] = 1
       localStorage['sessions'] = JSON.stringify([new Session('Default')])
       localStorage['currentSession'] = 'Default'
+      localStorage['ao'] = JSON.stringify([])
+      localStorage['theme'] = MainLayout.theme
     } else {
       localStorage['numberOfSessions'] = this.sessions.length
       localStorage['sessions'] = JSON.stringify(this.sessions)
       localStorage['currentSession'] = this.currentSession
+      localStorage['ao'] = JSON.stringify(this.ao)
+      localStorage['theme'] = MainLayout.theme
     }
   }
 
@@ -105,7 +113,7 @@ function DataManager() {
     this.refresh()
   }
 
-  this.delSolve = function() {
+  this.deleteSession = function() {
     if (confirm ("Are you sure to delete this session?")) {
       var index = $("select[id='sessions'] option:selected").index()
       this.sessions.splice(parseInt(index), 1)
@@ -143,35 +151,43 @@ function DataManager() {
 
   this.refresh = function() {
     if (this.sessions.length == 0) return;
-    var best = this.getBestTime();
+    var best = this.getBestTimeSession();
     var table = '';
     var times = this.getCurrentSession().times
-    for (var i=0; i<times.length; i++) {
+    var len = times.length
+    for (var i=0; i<len; i++) {
       if (i == best) {
           table += '<tr style="color:#2ecc71;font-size:110%;font-weight:bold;" id="time'+i+'" onmouseover="MainLayout.showScrambleForTime('+i+')" onmouseout="MainLayout.hideScrambleForTime('+i+')"><td>'+(i+1)+'</td><td>'+times[i].time+'</td><td><a href="javascript:Data.deleteTime('+i+')"><i class="icon ion-ios-close-outline minus"></i></a></td></tr>'
       } else {
           table += '<tr id="time'+i+'" onmouseover="MainLayout.showScrambleForTime('+i+')" onmouseout="MainLayout.hideScrambleForTime('+i+')"><td>'+(i+1)+'</td><td>'+times[i].time+'</td><td><a href="javascript:Data.deleteTime('+i+')"><i class="icon ion-ios-close-outline minus"></i></a></td></tr>'
       }
     }
-    if (times.length == 0) {
-      table = '<tbody><td>No data yet</td></tbody>'
+    if (len == 0) {
+      table = '<tbody><td>No data yet</td></tbody>';
+      $('#ao5').html('-')
+      $('#ao12').html('-')
+      $('#aoAll').html('-')
+      $('#best').html('-')
+      $('#best-best').html(this.getBestGlobalTime())
+      this.ao[0] != '-' ? $('#ao5-best').html(this.ao[0]) : $('#ao5-best').html('-')
+      this.ao[1] != '-' ? $('#ao12-best').html(this.ao[1]) : $('#ao12-best').html('-')
+      this.ao[2] != '-' ? $('#aoAll-best').html(this.ao[2]) : $('#aoAll-best').html('-')
     }
+    else {
+      // display scores
+      $('#best').html(times[best].time)
+      len > 4 ? $('#ao5').html(this.getAverageOf(5)) : $('#ao5').html('-')
+      len > 11 ? $('#ao12').html(this.getAverageOf(12)) : $('#ao12').html('-')
+      len > 2 ? $('#aoAll').html(this.getAverageAll()) : $('#aoAll').html('-')
+      $('#best-best').html(this.getBestGlobalTime())
+      this.ao[0] != '-' ? $('#ao5-best').html(this.ao[0]) : $('#ao5-best').html('-')
+      this.ao[1] != '-' ? $('#ao12-best').html(this.ao[1]) : $('#ao12-best').html('-')
+      this.ao[2] != '-' ? $('#aoAll-best').html(this.ao[2]) : $('#aoAll-best').html('-')
+    }
+    
     $('#history').find('table').html(table)
     this.save()
     this.updateSessionName()
-
-    // if (times.length == 0) {
-    //   document.getElementById('best-solve').innerHTML = "Best: -"
-    //   document.getElementById('average-all').innerHTML = "Average All: -"
-    //   document.getElementById('average-5').innerHTML = "Average 5: -"
-    // }
-    // else {
-    //   // display scores
-    //   document.getElementById('best-solve').innerHTML = "Best: "+ times[best].time
-    //   document.getElementById('average-all').innerHTML = "Average All: " + this.getAverageAll()
-    //   if (times.length>4) document.getElementById('average-5').innerHTML = "Average 5: " + this.getAverage5();
-    //   else document.getElementById('average-5').innerHTML = "Average 5: -"
-    // }
   }
 
   this.deleteTime = function(index) {
@@ -180,7 +196,7 @@ function DataManager() {
   }
 
   // index of the best time in the array
-  this.getBestTime = function() {
+  this.getBestTimeSession = function() {
     var times = this.getCurrentSession().times
     var best = 0; // index 0
     var i = 1;
@@ -193,29 +209,44 @@ function DataManager() {
 
     return best;
   }
-
-  this.getAverageAll = function() {
-    var times = this.getCurrentSession().times
-    var i=0, average=0, min=0, sec=0, dec=0;
-
-    for (i=0; i<times.length; i++) {
-      min = parseInt(times[i].time.charAt(0)+times[i].time.charAt(1))
-      sec = parseInt(times[i].time.charAt(3)+times[i].time.charAt(4))
-      dec = parseInt(times[i].time.charAt(6)+times[i].time.charAt(7))
-      // average in decimals
-      average += ( (min*60*100) + (sec*100) + dec)
+  
+  this.getBestGlobalTime = function() {
+    len=this.sessions.length
+    if (len == 0) return '-';
+    
+    var array = []
+    for (var i=0; i<len; i++) {
+      array.push(this.min(this.sessions[i].times))
     }
-    average /= times.length
-    average = average.toFixed(0);
-
-    return this.getAverageStringFromDec(average)
+    array.sort();
+    if (typeof array[0] == 'undefined') return '-';
+    return array[0].time
+  }
+  
+  this.getBestGlobalAverageAll = function() {
+    this.getBestGlobalAverageOf(-1)
+  }
+  
+  this.getBestGlobalAverageOf = function(ao) {
+    if (ao == 5) return this.ao[0]
+    if (ao == 12) return this.ao[1]
+    return this.ao[2]
+  }
+  
+  this.min = function(times) {
+    times.sort(function(a,b){ return a.time.toString().localeCompare(b.time) })
+    return times[0]
   }
 
-  this.getAverage5 = function() {
+  this.getAverageAll = function() {
+    return this.getAverageOf(this.getCurrentSession().times.length)
+  }
+
+  this.getAverageOf = function(ao) {
     var times = this.getCurrentSession().times
     var i=0, average=0, min=0, sec=0, dec=0;
-    times = times.slice(times.length-5, times.length)
-    times.sort(function(a,b){ return a.toString().localeCompare(b) }) // custom sort
+    times = times.slice(times.length-ao, times.length)
+    times.sort(function(a,b){ return a.time.toString().localeCompare(b.time) }) // custom sort
     for (i=1; i<times.length-1; i++) {
       min = parseInt(times[i].time.charAt(0)+times[i].time.charAt(1))
       sec = parseInt(times[i].time.charAt(3)+times[i].time.charAt(4))
@@ -223,10 +254,20 @@ function DataManager() {
       // average in decimals
       average += ( (min*60*100) + (sec*100) + dec)
     }
-    average /= 3
+    average /= (ao-2)
     average = average.toFixed(0);
+    average = this.getAverageStringFromDec(average)
+    
+    // update scores
+    if (ao == 5 && (this.ao[0] == '-' || this.ao[0].localeCompare(average))) {
+        this.ao[0] = average
+    } else if (ao == 12 && (this.ao[1] == '-' || this.ao[1].localeCompare(average))) {
+        this.ao[1] = average
+    } else if (this.ao[2] == '-' || this.ao[2].localeCompare(average)) {
+        this.ao[2] = average
+    }
 
-    return this.getAverageStringFromDec(average)
+    return average
   }
 
   this.getAverageStringFromDec = function(dec) {

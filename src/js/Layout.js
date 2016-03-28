@@ -134,6 +134,7 @@ function Layout() {
 		 oldlink.href = 'css/bright.css';
   	 this.theme = 'bright' 
 	 }
+	 Data.save()
 	 this.changeChronoColor(-1)
 	}
 }

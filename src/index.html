@@ -73,8 +73,8 @@
       <div class="two columns">
         <a href="#" onclick="MainLayout.toggleSettings()"><i class="icon ion-navicon" title="Settings"></i></a>
       </div>
-      <div class="ten columns">
-        <a href="#" onclick="MainLayout.toggleHistory()"><i class="icon ion-ios-clock-outline" title="History" style="float:right"></i></a>
+      <div class="ten columns" style="text-align:right">
+        <a href="#" onclick="MainLayout.toggleHistory()"><i class="icon ion-ios-clock-outline" title="History"></i></a>
       </div>
     </div>
     <!-- -->
@@ -89,17 +89,20 @@
       <div class="five columns scores u-full-width card">
         <table class="u-full-width">
           <thead>
-            <th></th><th>ao</th><th>Current</th><th>Best</th>
+            <th></th><th></th><th>Current</th><th>Best</th>
           </thead>
           <tbody>
             <tr>
-              <td></td><td>5</td><td>-</td><td>-</td>
+              <td></td><td>ao5</td><td id="ao5">-</td><td id="ao5-best">-</td>
             </tr>
             <tr>
-              <td></td><td>12</td><td>-</td><td>-</td>
+              <td></td><td>ao12</td><td id="ao12">-</td><td id="ao12-best">-</td>
             </tr>
             <tr>
-              <td></td><td>All</td><td>-</td><td>-</td>
+              <td></td><td>aoAll</td><td id="aoAll">-</td><td id="aoAll-best">-</td>
+            </tr>
+            <tr>
+              <td></td><td>PB single</td><td id="best">-</td><td id="best-best">-</td>
             </tr>
           </tbody>
         </table>
@@ -125,7 +128,7 @@
       <div class="card" style="line-height:100%; display:inline-block">
         <i id="add-button" class="icon ion-ios-plus-outline" style="color: #27ae60;" onclick="MainLayout.displayNewSessionText()"></i>
         <select id="sessions" onchange="Data.changeSession(this.selectedIndex)" onfocus="$(this).blur()"></select>
-        <i class="icon ion-ios-minus-outline minus" onclick="Data.delSolve()"></i>
+        <i class="icon ion-ios-minus-outline minus" onclick="Data.deleteSession()"></i>
       </div>
       <div id="pressEnterToSaveSession" style="display: none">Press ENTER to save session</div>
     </center>
