@@ -80,6 +80,7 @@ function Layout() {
 		if (inspection) { // deactivate
 			$(elem).css('background-color', 'white');
 			$(elem).css('color', '#1abc9c');
+			if (this.theme == 'dark') $(elem).css('background-color', '#2c3e50');
 		} else { // activate
 			$(elem).css('background-color', '#1abc9c');
 			$(elem).css('color', 'white');
@@ -159,12 +160,15 @@ function Layout() {
 
 	this.changeTheme = function() {
 	 var oldlink = document.getElementsByTagName("link").item(1);
+
 	 if (this.theme == 'bright') {
 		 oldlink.href = 'css/dark.css';
 		 this.theme = 'dark'
+		 if (!inspection) $('.settings .button:first').css('background-color', '#2c3e50');
 	 } else {
 		 oldlink.href = 'css/bright.css';
   	 this.theme = 'bright'
+		 if (!inspection) $('.settings .button:first').css('background-color', 'white');
 	 }
 	 Data.save()
 	 this.changeChronoColor(-1)
