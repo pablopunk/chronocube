@@ -48,7 +48,7 @@ function DataManager() {
     this.currentSession = 'Default'
     this.sessions = [new Session('Default', [])]
     this.numberOfSessions = 1
-    this.ao = []
+    this.ao = ['-','-','-']
   }
 
   this.load = function() {
@@ -184,7 +184,7 @@ function DataManager() {
       this.ao[1] != '-' ? $('#ao12-best').html(this.ao[1]) : $('#ao12-best').html('-')
       this.ao[2] != '-' ? $('#aoAll-best').html(this.ao[2]) : $('#aoAll-best').html('-')
     }
-    
+
     $('#history').find('table').html(table)
     this.save()
     this.updateSessionName()
@@ -209,11 +209,11 @@ function DataManager() {
 
     return best;
   }
-  
+
   this.getBestGlobalTime = function() {
     len=this.sessions.length
     if (len == 0) return '-';
-    
+
     var array = []
     for (var i=0; i<len; i++) {
       array.push(this.min(this.sessions[i].times))
@@ -222,17 +222,17 @@ function DataManager() {
     if (typeof array[0] == 'undefined') return '-';
     return array[0].time
   }
-  
+
   this.getBestGlobalAverageAll = function() {
     this.getBestGlobalAverageOf(-1)
   }
-  
+
   this.getBestGlobalAverageOf = function(ao) {
     if (ao == 5) return this.ao[0]
     if (ao == 12) return this.ao[1]
     return this.ao[2]
   }
-  
+
   this.min = function(times) {
     times.sort(function(a,b){ return a.time.toString().localeCompare(b.time) })
     return times[0]
@@ -257,7 +257,7 @@ function DataManager() {
     average /= (ao-2)
     average = average.toFixed(0);
     average = this.getAverageStringFromDec(average)
-    
+
     // update scores
     if (ao == 5 && (this.ao[0] == '-' || this.ao[0].localeCompare(average))) {
         this.ao[0] = average
