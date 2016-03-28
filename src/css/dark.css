@@ -1,0 +1,31 @@
+
+body {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+}
+
+.instructions, #scramble, .scores, #history tr {
+  color: #ecf0f1;
+}
+
+select, option {
+  background-color: #2c3e50 !important;
+  color: #ecf0f1 !important;
+}
+
+#timer {
+  color: #1abc9c;
+}
+
+.minus {
+  color: #F62459;
+}
+
+#newTimeText , #newSessionText {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+}
+
+#pressEnterToSaveSession {
+  color: #ecf0f1;
+}
