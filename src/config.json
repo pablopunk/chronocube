@@ -12,7 +12,7 @@
   },
   "win" : {
     "title" : "Chronocube",
-    "version": "0.2.2",
+    "version": "0.4.0",
     "publisher": "Pablo Varela",
     "icon" : "../resources/win/app.ico",
     "verbosity": 1

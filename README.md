@@ -17,7 +17,7 @@ Or simply [show me some love](https://twitter.com/pablopunk) ;)
 
 This app is cross-platform as it's created with *HTML+CSS+JS* and it's packaged on *[Electron](https://github.com/atom/electron)*, a tool to create apps from webapps, so you can use it as a native app on your desktop.
 
-![screnshot](https://s3.amazonaws.com/f.cl.ly/items/360K0M2o1M2i0X32212d/Captura%20de%20pantalla%202015-12-14%20a%20las%207.28.36.png?v=b8fd4955)
+![screenshot](http://f.cl.ly/items/1T2L0b1R0O3M0k3Z0P45/screenshot-black.png)
 
 ## Download
 - Try it [online](http://chronocube.pablopunk.com)
@@ -64,10 +64,8 @@ Older versions included:
 - [Electron SuperKit](https://github.com/Aluxian/electron-superkit) for building and packaging
 
 ## To do
-- Download file on exporting (instead of opening new window)
-- Show best ao5/aoAll
+- Hotfixes:
+  - Download file on exporting (instead of opening new window)
 - csTimer import/export
-- Move time to another solve
 - Google Drive integration (sync across devices)
 - Refactor javascript. It works but the classes and methods are a little bit messy. **Would be nice to make a real/clear MVC** with more consistent roles.
-- *Design is good but it needs a bit of... you know... design.*
