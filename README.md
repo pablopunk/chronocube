@@ -65,6 +65,7 @@ Older versions included:
 
 ## To do
 - Hotfixes:
+  - Reset an average-best
   - Download file on exporting (instead of opening new window)
 - csTimer import/export
 - Google Drive integration (sync across devices)
