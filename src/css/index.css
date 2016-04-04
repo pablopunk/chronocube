@@ -130,7 +130,7 @@ div.instructions, div#scramble {
 }
 
 .card {
-  max-height: 180pt;
+  max-height: 150pt;
   max-width: 220pt;
   border-radius: 2pt;
   padding: 5pt;

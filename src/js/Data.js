@@ -16,7 +16,6 @@ function DataManager() {
   this.lastScramble = ''
   this.file = null
   this.fr = null
-  this.ao = ['-','-','-'] // best global [ao5,ao12,aoAll]
 
   this.init = function() {
     if(typeof(Storage) == "undefined") {
@@ -48,7 +47,6 @@ function DataManager() {
     this.currentSession = 'Default'
     this.sessions = [new Session('Default', [])]
     this.numberOfSessions = 1
-    this.ao = ['-','-','-']
   }
 
   this.load = function() {
@@ -75,7 +73,6 @@ function DataManager() {
         this.sessions = JSON.parse(localStorage.getItem('sessions')) // JSON object in localstorage
       }
       this.currentSession = localStorage['currentSession']
-      this.ao = ( localStorage['ao'] == null ? ['-','-','-'] : JSON.parse(localStorage['ao']) )
       if (localStorage['theme'] == 'dark') MainLayout.changeTheme()
       if (this.sessions == null) {
         this.resetSessions()
@@ -88,13 +85,11 @@ function DataManager() {
       localStorage['numberOfSessions'] = 1
       localStorage['sessions'] = JSON.stringify([new Session('Default')])
       localStorage['currentSession'] = 'Default'
-      localStorage['ao'] = JSON.stringify([])
       localStorage['theme'] = MainLayout.theme
     } else {
       localStorage['numberOfSessions'] = this.sessions.length
       localStorage['sessions'] = JSON.stringify(this.sessions)
       localStorage['currentSession'] = this.currentSession
-      localStorage['ao'] = JSON.stringify(this.ao)
       localStorage['theme'] = MainLayout.theme
     }
   }
@@ -174,10 +169,6 @@ function DataManager() {
       $('#ao12').html('-')
       $('#aoAll').html('-')
       $('#best').html('-')
-      $('#best-best').html(this.getBestGlobalTime())
-      this.ao[0] != '-' ? $('#ao5-best').html(this.ao[0]) : $('#ao5-best').html('-')
-      this.ao[1] != '-' ? $('#ao12-best').html(this.ao[1]) : $('#ao12-best').html('-')
-      this.ao[2] != '-' ? $('#aoAll-best').html(this.ao[2]) : $('#aoAll-best').html('-')
     }
     else {
       // display scores
@@ -185,10 +176,6 @@ function DataManager() {
       len > 4 ? $('#ao5').html(this.getAverageOf(5)) : $('#ao5').html('-')
       len > 11 ? $('#ao12').html(this.getAverageOf(12)) : $('#ao12').html('-')
       len > 2 ? $('#aoAll').html(this.getAverageAll()) : $('#aoAll').html('-')
-      $('#best-best').html(this.getBestGlobalTime())
-      this.ao[0] != '-' ? $('#ao5-best').html(this.ao[0]) : $('#ao5-best').html('-')
-      this.ao[1] != '-' ? $('#ao12-best').html(this.ao[1]) : $('#ao12-best').html('-')
-      this.ao[2] != '-' ? $('#aoAll-best').html(this.ao[2]) : $('#aoAll-best').html('-')
     }
 
     table += MainLayout.newTimeButtonHTML
@@ -217,30 +204,6 @@ function DataManager() {
     return best;
   }
 
-  this.getBestGlobalTime = function() {
-    len=this.sessions.length
-    if (len == 0) return '-';
-
-    var array = []
-    var sess  = this.sessions.slice()
-    for (var i=0; i<len; i++) {
-      array.push(this.min(sess[i].times.slice()))
-    }
-    array.sort();
-    if (typeof array[0] == 'undefined') return '-';
-    return array[0].time
-  }
-
-  this.getBestGlobalAverageAll = function() {
-    this.getBestGlobalAverageOf(-1)
-  }
-
-  this.getBestGlobalAverageOf = function(ao) {
-    if (ao == 5) return this.ao[0]
-    if (ao == 12) return this.ao[1]
-    return this.ao[2]
-  }
-
   this.min = function(times) {
     times.sort(function(a,b){ return a.time.toString().localeCompare(b.time) })
     return times[0]
@@ -265,15 +228,6 @@ function DataManager() {
     average /= (ao-2)
     average = average.toFixed(0);
     average = this.getAverageStringFromDec(average)
-
-    // update scores
-    if (ao == 5 && (this.ao[0] == '-' || this.ao[0].localeCompare(average))) {
-        this.ao[0] = average
-    } else if (ao == 12 && (this.ao[1] == '-' || this.ao[1].localeCompare(average))) {
-        this.ao[1] = average
-    } else if (this.ao[2] == '-' || this.ao[2].localeCompare(average)) {
-        this.ao[2] = average
-    }
 
     return average
   }
