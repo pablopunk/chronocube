@@ -1,7 +1,6 @@
 SHELL := /bin/bash
 
-all:
-	make osx && make win && make linux
+all: osx win linux
 
 osx:
 	rm -rf dist/Chronocube-Mac.dmg
