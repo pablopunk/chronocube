@@ -14,8 +14,7 @@ win:
 	cd src && electron-builder ../build/Chronocube-win32-ia32 --platform=win --out=../dist/ --config=config.json && cd ../dist/ && mv "Chronocube Setup.exe" Chronocube-Windows-Installer.exe
 	cd build && zip -r ../dist/Chronocube-Windows-Portable.zip Chronocube-win32-ia32
 
-linux:
-		make linux32 && make linux64
+linux: linux32 linux64
 
 linux32:
 		cd src && electron-packager . Chronocube --platform linux --arch=ia32 --version=0.30.1 --icon=img/icon.png --out=../build --overwrite --ignore=node_modules
