@@ -95,7 +95,7 @@ div#timer {
   padding: 0;
 }
 
-div.instructions {
+div#instructions {
   font-size: 10pt;
 }
 
@@ -103,7 +103,7 @@ div#scramble {
   font-size: 17pt;
 }
 
-div.instructions, div#scramble {
+div#instructions, div#scramble {
   text-align: center;
   font-style: italic;
 }
