@@ -147,3 +147,7 @@ div#instructions, div#scramble {
   user-select: none;           /* Non-prefixed version, currently
                                   not supported by any browser */
 }
+
+#toucharea {
+  display: inline-block;
+}
