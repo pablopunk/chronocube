@@ -59,7 +59,7 @@ function Input() {
     if ( $('#newSessionText').is(":visible") || $('#newTimeText').is(":visible") ) { // entering new solve
       return
     }
-    if (event.which == 32 || event.which == 0) { // SPACE
+    if (event.which == 32 || event.which == 0) { // SPACE or TOUCH
       if (state == chronoState.SOLVED) state = chronoState.STOPPED;
       else startSolve()
     }
@@ -68,7 +68,7 @@ function Input() {
   function keyDown(event) { // Stoping at SPACE pressed
     if (state == 1 || state == 3 || state == 5) return; // don't repeat when holding down
     if ($('#newSessionText').is(":visible") || $('#newTimeText').is(":visible")) return; // entering new solve
-    if (event.which == 32 || event.which == 0) {
+    if (event.which == 32 || event.which == 0) { // SPACE or TOUCH
       if (state == chronoState.STOPPED) {
         state = inspection ? chronoState.HOLDING_INSPECTION : chronoState.HOLDING_SOLVE
         MainLayout.changeChronoColor(state)
