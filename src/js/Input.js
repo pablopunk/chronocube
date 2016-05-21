@@ -77,6 +77,8 @@ function Input() {
         MainLayout.changeChronoColor(state)
       } else {
         stop()
+        if (event.which == 0) {        // when the chrono is stopped with touch, keyup event is not called
+          state = chronoState.STOPPED; // so this fixes it
       }
     }
   }
