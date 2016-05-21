@@ -4,7 +4,7 @@ body {
   color: #7f8c8d;
 }
 
-.instructions, #scramble, .scores, #history tr {
+#instructions, #scramble, .scores, #history tr {
   color: #7f8c8d;
 }
 

@@ -14,6 +14,10 @@ function Input() {
 
   document.body.addEventListener("keyup", keyUp);
   document.body.addEventListener("keydown", keyDown);
+  document.getElementById('toucharea').addEventListener('touchstart', keyDown);
+  document.addEventListener('touchstart', screenTouchDown);
+  document.getElementById('toucharea').addEventListener('touchend', keyUp);
+  document.addEventListener('touchend', screenTouchUp);
 
   function startSolve() {
     chronoReset();
@@ -27,6 +31,18 @@ function Input() {
     }
     MainLayout.changeChronoColor(state)
     MainLayout.hideAll()
+  }
+  
+  function screenTouchDown(event) {
+    if (state == chronoState.SOLVING || state == chronoState.INSPECTION) {
+      keyDown(event);
+    }
+  }
+  
+  function screenTouchUp(event) {
+    if (state == chronoState.HOLDING_SOLVE || state == chronoState.HOLDING_INSPECTION) {
+      keyUp(event);
+    }
   }
 
   function stop() {
@@ -43,7 +59,7 @@ function Input() {
     if ( $('#newSessionText').is(":visible") || $('#newTimeText').is(":visible") ) { // entering new solve
       return
     }
-    if (event.which == 32) { // SPACE
+    if (event.which == 32 || event.which == 0) { // SPACE
       if (state == chronoState.SOLVED) state = chronoState.STOPPED;
       else startSolve()
     }
@@ -52,7 +68,7 @@ function Input() {
   function keyDown(event) { // Stoping at SPACE pressed
     if (state == 1 || state == 3 || state == 5) return; // don't repeat when holding down
     if ($('#newSessionText').is(":visible") || $('#newTimeText').is(":visible")) return; // entering new solve
-    if (event.which == 32) {
+    if (event.which == 32 || event.which == 0) {
       if (state == chronoState.STOPPED) {
         state = inspection ? chronoState.HOLDING_INSPECTION : chronoState.HOLDING_SOLVE
         MainLayout.changeChronoColor(state)

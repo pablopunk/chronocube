@@ -95,7 +95,7 @@ div#timer {
   padding: 0;
 }
 
-div.instructions {
+div#instructions {
   font-size: 10pt;
 }
 
@@ -103,7 +103,7 @@ div#scramble {
   font-size: 17pt;
 }
 
-div.instructions, div#scramble {
+div#instructions, div#scramble {
   text-align: center;
   font-style: italic;
 }
@@ -136,4 +136,18 @@ div.instructions, div#scramble {
   padding: 5pt;
   text-align: center;
   box-shadow: 1px 1px 5px rgba(0,0,0,0.1), 1px 1px 4px rgba(0,0,0,0.12);
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* Internet Explorer/Edge */
+  user-select: none;           /* Non-prefixed version, currently
+                                  not supported by any browser */
+}
+
+#toucharea {
+  display: inline-block;
 }
