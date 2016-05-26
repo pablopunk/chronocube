@@ -17,7 +17,7 @@ Or simply [show me some love](https://twitter.com/pablopunk) ;)
 
 This app is cross-platform as it's created with *HTML+CSS+JS* and it's packaged on *[Electron](https://github.com/atom/electron)*, a tool to create apps from webapps, so you can use it as a native app on your desktop.
 
-![screenshot](http://f.cl.ly/items/1T2L0b1R0O3M0k3Z0P45/screenshot-black.png)
+![screenshot](http://f.cl.ly/items/2C1t2m3r3D0H3A392a2t/screenshot-black.png)
 
 ## Download
 - Try it [online](http://chronocube.pablopunk.com)
