@@ -8,6 +8,7 @@
   <meta charset="utf-8">
   <title>Chronocube</title>
   <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="js/jquery-ui.js"></script>
   <script type="text/javascript">
   if (typeof(require) == "function") {
     window.$ = window.jQuery = require('./js/jquery.js') // This line is for a working ELectron app with jQuery )
@@ -81,6 +82,7 @@
     <div class="row hideall">
       <div class="four columns settings u-full-width">
         <div class="button" onclick="MainLayout.toggleInspection(this)"><i class="icon ion-ios-timer-outline"></i> inspection timer</div>
+        <div class="button" onclick="MainLayout.toggleHideTimer(this)"><i class="icon ion-eye"></i> hide timer</div>
         <div class="button" onclick="MainLayout.changeTheme()"><i class="icon ion-contrast"></i> change theme</div>
         <div class="button" onclick="Data.downloadjson()"><i class="icon ion-ios-download-outline"></i> save solves</div>
         <div class="button"><i class="icon ion-ios-upload-outline"></i> load solves <input type="file" id="uploadjsoninput" class="upload" style="cursor:pointer;position:absolute;opacity:0;line-height:24pt;left:0;width:25%"/></div>

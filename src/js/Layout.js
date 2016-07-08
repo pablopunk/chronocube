@@ -6,17 +6,19 @@ function Layout() {
 	this.theme = 'bright'
 	this.newTimeButtonHTML = '<tr onclick="MainLayout.displayNewTimeText()"><td colspan="3" style="cursor:pointer" ><i id="add-button" class="icon ion-ios-plus-outline"></i> New solve</td></tr>'
 	this.newTimeTextHTML = '<tr><td colspan="3"><input type="text" id="newTimeText" onkeyup="MainLayout.newTime(event, this.value)"> <i id="del-button" class="icon ion-ios-close-outline minus" onclick="MainLayout.hideNewTimeText()"></i></td></tr>'
-	this.init = function() {
+	this.hideTimerWhileSolving=0
+	this.isAllHidden=false
+  this.init = function() {
 		// initial config
 		this.displayScramble()
-	}
+  }
 
-	this.toggleSettings = function() {
-    if ( $('div.settings').css('visibility') == 'hidden' ) {
-      $('div.settings').css('visibility', 'visible')
-    } else {
-      $('div.settings').css('visibility', 'hidden')
-    }
+  this.toggleSettings = function() {
+		if ( $('div.settings').css('visibility') == 'hidden' ) {
+		$('div.settings').css('visibility', 'visible')
+		} else {
+		$('div.settings').css('visibility', 'hidden')
+		}
   }
 
   this.toggleHistory = function() {
@@ -33,6 +35,9 @@ function Layout() {
 
 	this.updateChronoTime = function(sec) {
 		document.getElementById("timer").innerHTML = sec
+		if (state==chronoState.SOLVING && this.hideTimerWhileSolving) {
+			document.getElementById("timer").innerHTML = '<i class="icon ion-ios-stopwatch-outline"></i>'
+		}
 	}
 
 	this.setChronoTime = function(min,sec,msec) {
@@ -86,22 +91,51 @@ function Layout() {
 		inspection = !inspection // toggle
 	}
 
+	this.toggleHideTimer = function(elem) {
+		if (this.hideTimerWhileSolving) { // deactivate
+			$(elem).removeAttr('style');
+		} else {
+			$(elem).css('background-color', '#1abc9c');
+			$(elem).css('color', 'white');
+		}
+		this.hideTimerWhileSolving = !this.hideTimerWhileSolving; // toggle
+	}
+
+	this.getTimerInBigAndCentered = function() {
+		$('#timer').css('font-size', this.bigChrono)						// increase timer size
+		$('#timer').animate({ "margin-top": "-=15%"}, 300, "easeOutCirc")	// center on the screen
+	}
+
+	this.getTimerBackToNormal = function() {
+		$('#timer').animate({ "margin-top": "+=15%"}, 300, "easeOutCirc")	// go back to normal
+		$('#timer').css('font-size', this.smallChrono)						// go back to normal
+	}
+
 	this.hideAll = function() {
+		if (this.isAllHidden) return; // exit if it's already hidden
+
+		this.isAllHidden = true;
+
 		var divs = document.getElementsByClassName('hideall')
 		for (var d=0; d<divs.length; d++) {
 			divs[d].style.transition = 'opacity 0.3s';
 			divs[d].style.opacity = 0
 		}
-		$('#timer').css('font-size', this.bigChrono)
+
+		this.getTimerInBigAndCentered();
 	}
 
 	this.showAll = function() {
 		var divs = document.getElementsByClassName('hideall')
+
+		this.getTimerBackToNormal();
+
 		for (var d=0; d<divs.length; d++) {
 			divs[d].style.transition = 'opacity 0.3s';
 			divs[d].style.opacity = 1
 		}
-		$('#timer').css('font-size', this.smallChrono)
+
+		this.isAllHidden = false;
 	}
 
 	this.displayNewSessionText = function() {

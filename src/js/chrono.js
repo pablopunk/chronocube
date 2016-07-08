@@ -30,7 +30,7 @@ function chrono(){
 		msec = "0" +msec
 	}
 	if (min > 0) MainLayout.updateChronoTime(min+":"+sec)	// more than 1 minute (m:ss)
-	else MainLayout.updateChronoTime(sec)									// less than 1 minute (  ss)
+	else MainLayout.updateChronoTime(sec)					// less than 1 minute (  ss)
 	if (state == chronoState.INSPECTION && sec > 14) clearTimeout(timerID) // stop
 	else timerID = setTimeout("chrono()", 10) // continue
 }
