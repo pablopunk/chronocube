@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "noImplicitAny": true,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "outFile": "../js/tsc.js",
+        "sourceMap": true
+    },
+    "files": [
+        "Model/Chrono.ts",
+        "Model/Session.ts",
+        "Model/Solve.ts"
+    ],
+    "compileOnSave": true
+}
