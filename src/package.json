@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "electron-builder": "^2.6.0",
-    "electron-packager": "^5.2.1"
+    "electron-packager": "^5.2.1",
+    "typescript": "~1.8.10"
   }
 }

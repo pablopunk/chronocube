@@ -76,4 +76,23 @@ var Session = (function () {
     };
     return Session;
 }());
+var Settings = (function () {
+    function Settings() {
+    }
+    Settings.prototype.toggleInspection = function () {
+        this.inspection = !this.inspection;
+    };
+    Settings.prototype.toggleHideTime = function () {
+        this.hideTime = !this.hideTime;
+    };
+    Settings.prototype.toggleTheme = function () {
+        if (this.theme == 'bright') {
+            this.theme = 'dark';
+        }
+        else {
+            this.theme = 'bright';
+        }
+    };
+    return Settings;
+}());
 //# sourceMappingURL=tsc.js.map

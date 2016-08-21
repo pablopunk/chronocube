@@ -9,7 +9,8 @@
     "files": [
         "Model/Chrono.ts",
         "Model/Session.ts",
-        "Model/Solve.ts"
+        "Model/Solve.ts",
+        "Model/Settings.ts"
     ],
     "compileOnSave": true
 }
