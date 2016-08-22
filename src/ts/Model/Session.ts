@@ -1,11 +1,9 @@
 
-/// <reference path="Solve.ts"/>
-
 class Session {
     name :string;
     solves :Array<Solve>;
 
-    constructor(name :string)
+    constructor(name = 'Default')
     {
         this.name = name;
         this.solves = new Array();

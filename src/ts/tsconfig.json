@@ -10,7 +10,9 @@
         "Model/Chrono.ts",
         "Model/Session.ts",
         "Model/Solve.ts",
-        "Model/Settings.ts"
+        "Model/Settings.ts",
+        "Model/Model.ts",
+        "Controller/Controller.ts"
     ],
     "compileOnSave": true
 }

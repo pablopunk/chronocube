@@ -5,6 +5,7 @@ var ChronoType;
 })(ChronoType || (ChronoType = {}));
 var Chrono = (function () {
     function Chrono(type) {
+        if (type === void 0) { type = ChronoType.Timer; }
         this.type = type;
     }
     Chrono.prototype.loop = function () {
@@ -36,27 +37,9 @@ var Chrono = (function () {
     };
     return Chrono;
 }());
-var Solve = (function () {
-    function Solve() {
-    }
-    Solve.prototype.setTime = function (time) {
-        var re = /^([0-9]{2}):([0-5])([0-9])\.([0-9]{2})$/;
-        if (!time.match(re)) {
-            console.log('String ' + time + ' doesn\'t seem like a correct time');
-            return;
-        }
-        this.min = parseInt(time.substr(0, 2));
-        this.sec = parseInt(time.substr(3, 5));
-        this.dec = parseInt(time.substr(6, 8));
-    };
-    Solve.prototype.getTime = function () {
-        var str = this.min + ':' + this.sec + '.' + this.dec;
-        return str;
-    };
-    return Solve;
-}());
 var Session = (function () {
     function Session(name) {
+        if (name === void 0) { name = 'Default'; }
         this.name = name;
         this.solves = new Array();
     }
@@ -76,8 +59,33 @@ var Session = (function () {
     };
     return Session;
 }());
+var Solve = (function () {
+    function Solve() {
+    }
+    Solve.prototype.setTime = function (time) {
+        var re = /^([0-9]{2}):([0-5])([0-9])\.([0-9]{2})$/;
+        if (!time.match(re)) {
+            console.log('String ' + time + ' doesn\'t seem like a correct time');
+            return;
+        }
+        this.min = parseInt(time.substr(0, 2));
+        this.sec = parseInt(time.substr(3, 5));
+        this.dec = parseInt(time.substr(6, 8));
+    };
+    Solve.prototype.getTime = function () {
+        var str = this.min + ':' + this.sec + '.' + this.dec;
+        return str;
+    };
+    return Solve;
+}());
 var Settings = (function () {
-    function Settings() {
+    function Settings(inspection, hideTime, theme) {
+        if (inspection === void 0) { inspection = false; }
+        if (hideTime === void 0) { hideTime = false; }
+        if (theme === void 0) { theme = 'bright'; }
+        this.inspection = inspection;
+        this.hideTime = hideTime;
+        this.theme = theme;
     }
     Settings.prototype.toggleInspection = function () {
         this.inspection = !this.inspection;
@@ -94,5 +102,20 @@ var Settings = (function () {
         }
     };
     return Settings;
+}());
+var Model = (function () {
+    function Model() {
+        this.settings = new Settings();
+        this.sessions = new Array();
+        this.sessions.push(new Session());
+        this.chrono = new Chrono();
+    }
+    return Model;
+}());
+var Controller = (function () {
+    function Controller() {
+        this.model = new Model();
+    }
+    return Controller;
 }());
 //# sourceMappingURL=tsc.js.map

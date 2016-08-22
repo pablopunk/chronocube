@@ -14,7 +14,7 @@ class Chrono {
     min :number;
     type :ChronoType;
 
-    constructor(type :ChronoType) {
+    constructor(type = ChronoType.Timer) {
         this.type = type;
     }
 

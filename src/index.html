@@ -11,7 +11,7 @@
   <script type="text/javascript" src="js/jquery-ui.js"></script>
   <script type="text/javascript">
   if (typeof(require) == "function") {
-    window.$ = window.jQuery = require('./js/jquery.js') // This line is for a working ELectron app with jQuery )
+    window.$ = window.jQuery = require('./js/jquery.js') // This line is for a working ELectron app with jQuery
   }
   </script>
   <link href="css/ionicons.min.css" rel="stylesheet">
@@ -59,76 +59,19 @@
   
   <!--prevent zooming-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-
+  
+  <!-- INIT APP -->
+  <script type="text/javascript">
+  var controller = null;
+  $(document).ready(function() {
+    controller = new Controller();
+  });
+  </script>
 
 </head>
 
-<!-- <body unselectable="on" onload='init()'> -->
-<body onload='init()'>
+<body>
 
-  <div class="container">
-    <div class="row header hideall"> <!-- header row -->
-      <div class="two columns">
-        <a href="#" onclick="MainLayout.toggleSettings()"><i class="icon ion-navicon" title="Settings"></i></a>
-      </div>
-      <div class="ten columns" style="text-align:right">
-        <a href="#" onclick="MainLayout.toggleHistory()"><i class="icon ion-ios-clock-outline" title="History"></i></a>
-      </div>
-    </div>
-    <!-- -->
-    <div class="row hideall">
-      <div class="four columns settings u-full-width">
-        <div class="button" onclick="MainLayout.toggleInspection(this)"><i class="icon ion-ios-timer-outline"></i> inspection timer</div>
-        <div class="button" onclick="MainLayout.toggleHideTimer(this)"><i class="icon ion-eye"></i> hide timer</div>
-        <div class="button" onclick="MainLayout.changeTheme()"><i class="icon ion-contrast"></i> change theme</div>
-        <div class="button" onclick="Data.downloadjson()"><i class="icon ion-ios-download-outline"></i> save solves</div>
-        <div class="button"><i class="icon ion-ios-upload-outline"></i> load solves <input type="file" id="uploadjsoninput" class="upload" style="cursor:pointer;position:absolute;opacity:0;line-height:24pt;left:0;width:25%"/></div>
-        <div class="button" onclick="window.open('https://github.com/pablopunk/chronocube')"><i class="icon ion-social-github-outline"></i> view on github</div>
-      </div>
-      <div class="five columns scores u-full-width card">
-        <table class="u-full-width">
-          <tbody>
-            <tr>
-              <td></td><td>ao5</td><td id="ao5">-</td>
-            </tr>
-            <tr>
-              <td></td><td>ao12</td><td id="ao12">-</td>
-            </tr>
-            <tr>
-              <td></td><td>aoAll</td><td id="aoAll">-</td>
-            </tr>
-            <tr>
-              <td></td><td>PB single</td><td id="best">-</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="three columns card" id="history">
-        <table class="u-full-width"></table>
-      </div>
-    </div>
-    <div class="twelve columns u-full-width noselect" id="toucharea">
-      <div id="timer">00:00.00</div>
-    </div>
-    <div class="row hideall noselect">
-      <div class="twelve columns" id="instructions">
-        Press SPACE to start/stop the timer
-      </div>
-    </div>
-    <div class="row hideall noselect">
-      <div class="twelve columns" id="scramble" onclick="MainLayout.displayScramble()"></div>
-    </div>
-    <br>
-    <center class="hideall" id="session">
-      <input type="text" id="newSessionText" style="display: none" onkeyup="MainLayout.newSession(event, this.value)"></input>
-      <div class="card" style="line-height:100%; display:inline-block">
-        <i id="add-button" class="icon ion-ios-plus-outline" style="color: #27ae60;" onclick="MainLayout.displayNewSessionText()"></i>
-        <select id="sessions" onchange="Data.changeSession(this.selectedIndex)" onfocus="$(this).blur()"></select>
-        <i class="icon ion-ios-minus-outline minus" onclick="Data.deleteSession()"></i>
-      </div>
-      <div id="pressEnterToSaveSession" style="display: none">Press ENTER to save session</div>
-    </center>
-  </div>
 
 </body>
 
