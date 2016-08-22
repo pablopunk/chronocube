@@ -1,5 +1,5 @@
 
-class Session {
+class Session implements Dump {
     name :string;
     solves :Array<Solve>;
 
@@ -26,5 +26,10 @@ class Session {
     {
         if (this.solves == null) return 0;
         else return this.solves.length;
+    }
+
+    dump() {
+        console.log('#Session');
+        console.log('@Name: ' + this.name + ' @Solves: ' + this.solves);
     }
 }

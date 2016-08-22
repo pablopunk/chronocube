@@ -35,6 +35,10 @@ var Chrono = (function () {
             this.timerId = setTimeout('loop()', 10);
         }
     };
+    Chrono.prototype.dump = function () {
+        console.log('#Chrono');
+        console.log('@Type: ' + this.type);
+    };
     return Chrono;
 }());
 var Session = (function () {
@@ -57,6 +61,10 @@ var Session = (function () {
         else
             return this.solves.length;
     };
+    Session.prototype.dump = function () {
+        console.log('#Session');
+        console.log('@Name: ' + this.name + ' @Solves: ' + this.solves);
+    };
     return Session;
 }());
 var Solve = (function () {
@@ -75,6 +83,10 @@ var Solve = (function () {
     Solve.prototype.getTime = function () {
         var str = this.min + ':' + this.sec + '.' + this.dec;
         return str;
+    };
+    Solve.prototype.dump = function () {
+        console.log('#Solve');
+        console.log('@Time: ' + this.getTime() + ' @Scramble: ' + this.scramble);
     };
     return Solve;
 }());
@@ -101,6 +113,10 @@ var Settings = (function () {
             this.theme = 'bright';
         }
     };
+    Settings.prototype.dump = function () {
+        console.log('#Settings');
+        console.log('@Inspection: ' + this.inspection + ' @HideTime: ' + this.hideTime + ' @Theme: ' + this.theme);
+    };
     return Settings;
 }());
 var Model = (function () {
@@ -110,12 +126,22 @@ var Model = (function () {
         this.sessions.push(new Session());
         this.chrono = new Chrono();
     }
+    Model.prototype.dump = function () {
+        this.chrono.dump();
+        this.sessions.forEach(function (element) {
+            element.dump();
+        });
+        this.settings.dump();
+    };
     return Model;
 }());
 var Controller = (function () {
     function Controller() {
         this.model = new Model();
     }
+    Controller.prototype.dump = function () {
+        this.model.dump();
+    };
     return Controller;
 }());
 //# sourceMappingURL=tsc.js.map

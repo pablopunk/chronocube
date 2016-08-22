@@ -12,7 +12,8 @@
         "Model/Solve.ts",
         "Model/Settings.ts",
         "Model/Model.ts",
-        "Controller/Controller.ts"
+        "Controller/Controller.ts",
+        "Core/Interfaces.ts"
     ],
     "compileOnSave": true
 }

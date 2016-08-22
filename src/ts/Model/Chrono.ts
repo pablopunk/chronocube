@@ -4,7 +4,7 @@ enum ChronoType {
     Inspection
 }
 
-class Chrono {
+class Chrono implements Dump {
     startTime :any;
     endTime :any;
     diff :any;
@@ -53,5 +53,10 @@ class Chrono {
             this.timerId = setTimeout('loop()', 10); // keep in loop
         }
         //TODO: update view
+    }
+
+    dump() {
+        console.log('#Chrono');
+        console.log('@Type: ' + this.type);
     }
 }
