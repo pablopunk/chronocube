@@ -7,6 +7,7 @@ var Chrono = (function () {
     function Chrono(type) {
         if (type === void 0) { type = ChronoType.Timer; }
         this.type = type;
+        this.dec = this.sec = this.min = 0;
     }
     Chrono.prototype.loop = function () {
         this.endTime = new Date();
@@ -28,12 +29,14 @@ var Chrono = (function () {
         this.startTime = new Date();
     };
     Chrono.prototype.continue = function () {
+        var _this = this;
         if (this.type == ChronoType.Inspection && this.sec > 14) {
             clearTimeout(this.timerId);
         }
         else {
-            this.timerId = setTimeout('loop()', 10);
+            this.timerId = setTimeout(function () { return _this.loop(); }, 10);
         }
+        this.helper.show(this.sec.toString());
     };
     Chrono.prototype.dump = function () {
         console.log('#Chrono');
@@ -138,10 +141,27 @@ var Model = (function () {
 var Controller = (function () {
     function Controller() {
         this.model = new Model();
+        this.chronoHelper = new ChronoHelper(this.model);
     }
+    Controller.prototype.startChrono = function () {
+        this.chronoHelper.start();
+    };
     Controller.prototype.dump = function () {
         this.model.dump();
     };
     return Controller;
+}());
+var ChronoHelper = (function () {
+    function ChronoHelper(model) {
+        this.model = model;
+        this.model.chrono.helper = this;
+    }
+    ChronoHelper.prototype.start = function () {
+        this.model.chrono.start();
+    };
+    ChronoHelper.prototype.show = function (time) {
+        document.getElementById('timer').innerText = time;
+    };
+    return ChronoHelper;
 }());
 //# sourceMappingURL=tsc.js.map

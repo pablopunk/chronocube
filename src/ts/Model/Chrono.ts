@@ -5,6 +5,7 @@ enum ChronoType {
 }
 
 class Chrono implements Dump {
+    helper :ChronoHelper;
     startTime :any;
     endTime :any;
     diff :any;
@@ -16,6 +17,7 @@ class Chrono implements Dump {
 
     constructor(type = ChronoType.Timer) {
         this.type = type;
+        this.dec = this.sec = this.min = 0;
     }
 
     loop()
@@ -50,9 +52,9 @@ class Chrono implements Dump {
         if (this.type == ChronoType.Inspection && this.sec > 14 ) {
             clearTimeout(this.timerId);
         } else {
-            this.timerId = setTimeout('loop()', 10); // keep in loop
+            this.timerId = setTimeout(() => this.loop(), 10); // keep in loop
         }
-        //TODO: update view
+        this.helper.show(this.sec.toString());
     }
 
     dump() {

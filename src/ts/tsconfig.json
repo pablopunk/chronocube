@@ -13,6 +13,7 @@
         "Model/Settings.ts",
         "Model/Model.ts",
         "Controller/Controller.ts",
+        "Controller/ChronoHelper.ts",
         "Core/Interfaces.ts"
     ],
     "compileOnSave": true
