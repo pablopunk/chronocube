@@ -13,6 +13,10 @@ class Controller implements Dump {
         this.chronoHelper.start();
     }
 
+    stopChrono() {
+        this.chronoHelper.stop();
+    }
+
     dump() {
         this.model.dump();
     }

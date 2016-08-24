@@ -1,4 +1,9 @@
 
+enum ChronoState {
+    Stopped = 0,
+    Running
+}
+
 enum ChronoType {
     Timer = 1,
     Inspection
@@ -14,9 +19,11 @@ class Chrono implements Dump {
     sec :number;
     min :number;
     type :ChronoType;
+    state :ChronoState;
 
     constructor(type = ChronoType.Timer) {
         this.type = type;
+        this.state = ChronoState.Stopped;
         this.dec = this.sec = this.min = 0;
     }
 
@@ -33,13 +40,19 @@ class Chrono implements Dump {
 
     start()
     {
-        this.startTime = new Date();
-        this.loop();
+        if (this.state == ChronoState.Stopped) {
+            this.state = ChronoState.Running;
+            this.startTime = new Date();
+            this.loop();
+        }
     }
 
     stop()
     {
-        clearTimeout(this.timerId);
+        if (this.state == ChronoState.Running) {
+            this.state = ChronoState.Stopped;
+            clearTimeout(this.timerId);
+        }
     }
 
     reset()
@@ -52,7 +65,7 @@ class Chrono implements Dump {
         if (this.type == ChronoType.Inspection && this.sec > 14 ) {
             clearTimeout(this.timerId);
         } else {
-            this.timerId = setTimeout(() => this.loop(), 10); // keep in loop
+            this.timerId = setTimeout(() => this.loop(), 100); // keep in loop
         }
         this.helper.show(this.sec.toString());
     }

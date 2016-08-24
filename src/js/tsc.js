@@ -1,3 +1,8 @@
+var ChronoState;
+(function (ChronoState) {
+    ChronoState[ChronoState["Stopped"] = 0] = "Stopped";
+    ChronoState[ChronoState["Running"] = 1] = "Running";
+})(ChronoState || (ChronoState = {}));
 var ChronoType;
 (function (ChronoType) {
     ChronoType[ChronoType["Timer"] = 1] = "Timer";
@@ -7,6 +12,7 @@ var Chrono = (function () {
     function Chrono(type) {
         if (type === void 0) { type = ChronoType.Timer; }
         this.type = type;
+        this.state = ChronoState.Stopped;
         this.dec = this.sec = this.min = 0;
     }
     Chrono.prototype.loop = function () {
@@ -19,11 +25,17 @@ var Chrono = (function () {
         this.continue();
     };
     Chrono.prototype.start = function () {
-        this.startTime = new Date();
-        this.loop();
+        if (this.state == ChronoState.Stopped) {
+            this.state = ChronoState.Running;
+            this.startTime = new Date();
+            this.loop();
+        }
     };
     Chrono.prototype.stop = function () {
-        clearTimeout(this.timerId);
+        if (this.state == ChronoState.Running) {
+            this.state = ChronoState.Stopped;
+            clearTimeout(this.timerId);
+        }
     };
     Chrono.prototype.reset = function () {
         this.startTime = new Date();
@@ -34,7 +46,7 @@ var Chrono = (function () {
             clearTimeout(this.timerId);
         }
         else {
-            this.timerId = setTimeout(function () { return _this.loop(); }, 10);
+            this.timerId = setTimeout(function () { return _this.loop(); }, 100);
         }
         this.helper.show(this.sec.toString());
     };
@@ -146,6 +158,9 @@ var Controller = (function () {
     Controller.prototype.startChrono = function () {
         this.chronoHelper.start();
     };
+    Controller.prototype.stopChrono = function () {
+        this.chronoHelper.stop();
+    };
     Controller.prototype.dump = function () {
         this.model.dump();
     };
@@ -159,8 +174,18 @@ var ChronoHelper = (function () {
     ChronoHelper.prototype.start = function () {
         this.model.chrono.start();
     };
+    ChronoHelper.prototype.stop = function () {
+        this.model.chrono.stop();
+        this.show(this.getTimeString());
+    };
     ChronoHelper.prototype.show = function (time) {
         document.getElementById('timer').innerText = time;
+    };
+    ChronoHelper.prototype.getTimeString = function () {
+        var min = (this.model.chrono.min > 10) ? this.model.chrono.min : '0' + this.model.chrono.min;
+        var sec = (this.model.chrono.sec > 10) ? this.model.chrono.sec : '0' + this.model.chrono.sec;
+        var dec = this.model.chrono.dec;
+        return min + ':' + sec + '.' + dec;
     };
     return ChronoHelper;
 }());
