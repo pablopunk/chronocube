@@ -6,13 +6,6 @@
 
 [![Join the chat at https://gitter.im/pablopunk/chronocube](https://badges.gitter.im/pablopunk/chronocube.svg)](https://gitter.im/pablopunk/chronocube?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![License](http://img.shields.io/:license-mit-blue.svg)](https://raw.githubusercontent.com/pablopunk/chronocube/master/LICENSE)
-
-Request new features! [Open an issue](https://github.com/pablopunk/chronocube/issues) or [join the chat](https://gitter.im/pablopunk/chronocube?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge).
-
-Are you a developer or a designer? Fork it and [make a pull request](https://github.com/pablopunk/chronocube/pulls)! You can check the To Do list at the end of this file.
-
-Or simply [show me some love](https://twitter.com/pablopunk) ;)
-
 ---
 
 This app is cross-platform as it's created with *HTML+CSS+JS* and it's packaged on *[Electron](https://github.com/atom/electron)*, a tool to create apps from webapps, so you can use it as a native app on your desktop.
@@ -50,6 +43,17 @@ Use the *MAKEFILE* to build the executable for all platforms:
   * `make linux64`
   * `make linux` (both `ia32` and `x64`)
 
+## Contribution
+
+*NOTE: Right now I'm working on a [refactored](https://github.com/pablopunk/chronocube/commits/refactor) version of Chronocube, so all the code in the 'master' branch is being written from scratch in [typescript](https://github.com/Microsoft/TypeScript). Keep this in mind if you're going to contribute to this project, as it would pointless to add new features to the live version without having the new refactor in mind.*
+
+Request new features! [Open an issue](https://github.com/pablopunk/chronocube/issues) or [join the chat](https://gitter.im/pablopunk/chronocube?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge).
+
+Are you a developer or a designer? Fork it and [make a pull request](https://github.com/pablopunk/chronocube/pulls)!
+
+Or simply [show me some love](https://twitter.com/pablopunk) ;)
+
+
 ## License
 Check `LICENSE` (MIT License)
 
@@ -63,9 +67,3 @@ Also credits to:
 Older versions included:
 - [Electron SuperKit](https://github.com/Aluxian/electron-superkit) for building and packaging
 
-## To do
-- Hotfixes:
-  - Download file on exporting (instead of opening new window)
-- csTimer import/export
-- Google Drive integration (sync across devices)
-- Refactor javascript. It works but the classes and methods are a little bit messy. **Would be nice to make a real/clear MVC** with more consistent roles.
