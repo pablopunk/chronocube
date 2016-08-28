@@ -15,7 +15,8 @@
         "Controller/Controller.ts",
         "Controller/ChronoHelper.ts",
         "Controller/InputHelper.ts",
-        "Core/Interfaces.ts"
+        "Core/Interfaces.ts",
+        "Core/Classes.ts"
     ],
     "compileOnSave": true
 }

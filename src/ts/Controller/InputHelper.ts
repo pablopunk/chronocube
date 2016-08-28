@@ -1,33 +1,38 @@
 
+enum KeyType {
+    SPACE = 32
+}
+
 class InputHelper {
 
-    keysPressed : { [key: number] : boolean; };
+    chronoHelper :ChronoHelper;
+    // keysPressed : { [key: number] : boolean; };
 
-    constructor() {
+    constructor(chronoHelper :ChronoHelper) {
+        this.chronoHelper = chronoHelper;
         this.bindEventsToBody();
-        this.resetKeys();
     }
 
     bindEventsToBody() {
-        document.body.addEventListener("keyup", this.keyUp);
-        document.body.addEventListener("keydown", this.keyDown);
+        document.body.addEventListener("keyup", e => this.cb_keyUp(e));
+        document.body.addEventListener("keydown", e => this.cb_keyDown(e));
         // document.getElementById('toucharea').addEventListener('touchstart', this.keyDown);
         // document.addEventListener('touchstart', this.screenTouchDown);
         // document.getElementById('toucharea').addEventListener('touchend', this.keyUp);
         // document.addEventListener('touchend', this.screenTouchUp);
     }
 
-    resetKeys() {
-        this.keysPressed = {};
-    }
-
-    keyUp(event :KeyboardEvent) {
+    cb_keyUp(event :KeyboardEvent) {
         var key = event.which;
-        this.keysPressed[key] = false;
+        if (key == KeyType.SPACE) {
+            this.chronoHelper.spaceEnd();
+        }
     }
     
-    keyDown(event :KeyboardEvent) {
+    cb_keyDown(event :KeyboardEvent) {
         var key = event.which;
-        this.keysPressed[key] = true;
+        if (key == KeyType.SPACE) {
+            this.chronoHelper.spaceStart();
+        }
     }
 }

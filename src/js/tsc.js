@@ -1,8 +1,13 @@
 var ChronoState;
 (function (ChronoState) {
-    ChronoState[ChronoState["Stopped"] = 0] = "Stopped";
-    ChronoState[ChronoState["Running"] = 1] = "Running";
+    ChronoState[ChronoState["STOPPED"] = 0] = "STOPPED";
+    ChronoState[ChronoState["HOLDING_INSPECTION"] = 1] = "HOLDING_INSPECTION";
+    ChronoState[ChronoState["INSPECTING"] = 2] = "INSPECTING";
+    ChronoState[ChronoState["HOLDING_SOLVE"] = 3] = "HOLDING_SOLVE";
+    ChronoState[ChronoState["SOLVING"] = 4] = "SOLVING";
+    ChronoState[ChronoState["SOLVED"] = 5] = "SOLVED";
 })(ChronoState || (ChronoState = {}));
+;
 var ChronoType;
 (function (ChronoType) {
     ChronoType[ChronoType["Timer"] = 1] = "Timer";
@@ -12,7 +17,7 @@ var Chrono = (function () {
     function Chrono(type) {
         if (type === void 0) { type = ChronoType.Timer; }
         this.type = type;
-        this.state = ChronoState.Stopped;
+        this.state = ChronoState.STOPPED;
         this.dec = this.sec = this.min = 0;
     }
     Chrono.prototype.loop = function () {
@@ -25,15 +30,15 @@ var Chrono = (function () {
         this.continue();
     };
     Chrono.prototype.start = function () {
-        if (this.state == ChronoState.Stopped) {
-            this.state = ChronoState.Running;
+        if (this.state == (ChronoState.STOPPED | ChronoState.HOLDING_SOLVE)) {
+            this.state = ChronoState.SOLVING;
             this.startTime = new Date();
             this.loop();
         }
     };
     Chrono.prototype.stop = function () {
-        if (this.state == ChronoState.Running) {
-            this.state = ChronoState.Stopped;
+        if (this.state == ChronoState.SOLVING) {
+            this.state = ChronoState.STOPPED;
             clearTimeout(this.timerId);
         }
     };
@@ -154,14 +159,8 @@ var Controller = (function () {
     function Controller() {
         this.model = new Model();
         this.chronoHelper = new ChronoHelper(this.model);
-        this.inputHelper = new InputHelper();
+        this.inputHelper = new InputHelper(this.chronoHelper);
     }
-    Controller.prototype.startChrono = function () {
-        this.chronoHelper.start();
-    };
-    Controller.prototype.stopChrono = function () {
-        this.chronoHelper.stop();
-    };
     Controller.prototype.dump = function () {
         this.model.dump();
     };
@@ -173,6 +172,7 @@ var ChronoHelper = (function () {
         this.model.chrono.helper = this;
     }
     ChronoHelper.prototype.start = function () {
+        document.getElementById('timer').style.color = 'black';
         this.model.chrono.start();
     };
     ChronoHelper.prototype.stop = function () {
@@ -188,27 +188,53 @@ var ChronoHelper = (function () {
         var dec = this.model.chrono.dec;
         return min + ':' + sec + '.' + dec;
     };
+    ChronoHelper.prototype.getState = function () {
+        return this.model.chrono.state;
+    };
+    ChronoHelper.prototype.setState = function (state) {
+        this.model.chrono.state = state;
+    };
+    ChronoHelper.prototype.spaceStart = function () {
+        if (this.getState() == ChronoState.SOLVING) {
+            this.stop();
+        }
+        else if (this.getState() == ChronoState.STOPPED) {
+            this.setState(ChronoState.HOLDING_SOLVE);
+            document.getElementById('timer').style.color = 'lawngreen';
+        }
+    };
+    ChronoHelper.prototype.spaceEnd = function () {
+        if (this.getState() == (ChronoState.STOPPED | ChronoState.HOLDING_SOLVE)) {
+            this.start();
+        }
+    };
     return ChronoHelper;
 }());
+var KeyType;
+(function (KeyType) {
+    KeyType[KeyType["SPACE"] = 32] = "SPACE";
+})(KeyType || (KeyType = {}));
 var InputHelper = (function () {
-    function InputHelper() {
+    function InputHelper(chronoHelper) {
+        this.chronoHelper = chronoHelper;
         this.bindEventsToBody();
-        this.resetKeys();
     }
     InputHelper.prototype.bindEventsToBody = function () {
-        document.body.addEventListener("keyup", this.keyUp);
-        document.body.addEventListener("keydown", this.keyDown);
+        var _this = this;
+        document.body.addEventListener("keyup", function (e) { return _this.cb_keyUp(e); });
+        document.body.addEventListener("keydown", function (e) { return _this.cb_keyDown(e); });
     };
-    InputHelper.prototype.resetKeys = function () {
-        this.keysPressed = {};
-    };
-    InputHelper.prototype.keyUp = function (event) {
+    InputHelper.prototype.cb_keyUp = function (event) {
         var key = event.which;
-        this.keysPressed[key] = false;
+        if (key == KeyType.SPACE) {
+            this.chronoHelper.spaceEnd();
+        }
     };
-    InputHelper.prototype.keyDown = function (event) {
+    InputHelper.prototype.cb_keyDown = function (event) {
         var key = event.which;
-        this.keysPressed[key] = true;
+        if (key == KeyType.SPACE) {
+            this.chronoHelper.spaceStart();
+        }
     };
     return InputHelper;
 }());

@@ -1,8 +1,12 @@
 
 enum ChronoState {
-    Stopped = 0,
-    Running
-}
+  STOPPED = 0,
+  HOLDING_INSPECTION,
+  INSPECTING,
+  HOLDING_SOLVE,
+  SOLVING,
+  SOLVED,
+};
 
 enum ChronoType {
     Timer = 1,
@@ -23,7 +27,7 @@ class Chrono implements Dump {
 
     constructor(type = ChronoType.Timer) {
         this.type = type;
-        this.state = ChronoState.Stopped;
+        this.state = ChronoState.STOPPED;
         this.dec = this.sec = this.min = 0;
     }
 
@@ -40,8 +44,8 @@ class Chrono implements Dump {
 
     start()
     {
-        if (this.state == ChronoState.Stopped) {
-            this.state = ChronoState.Running;
+        if (this.state == (ChronoState.STOPPED | ChronoState.HOLDING_SOLVE)) {
+            this.state = ChronoState.SOLVING;
             this.startTime = new Date();
             this.loop();
         }
@@ -49,8 +53,8 @@ class Chrono implements Dump {
 
     stop()
     {
-        if (this.state == ChronoState.Running) {
-            this.state = ChronoState.Stopped;
+        if (this.state == ChronoState.SOLVING) {
+            this.state = ChronoState.STOPPED;
             clearTimeout(this.timerId);
         }
     }

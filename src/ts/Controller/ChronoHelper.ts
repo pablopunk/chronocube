@@ -9,6 +9,7 @@ class ChronoHelper {
     }
 
     start() {
+        document.getElementById('timer').style.color = 'black';
         this.model.chrono.start();
     }
 
@@ -27,5 +28,28 @@ class ChronoHelper {
         var dec = this.model.chrono.dec;
 
         return min+':'+sec+'.'+dec;
+    }
+
+    getState() {
+        return this.model.chrono.state;
+    }
+
+    setState(state :ChronoState) {
+        this.model.chrono.state = state;
+    }
+
+    spaceStart() {
+        if (this.getState() == ChronoState.SOLVING) {
+            this.stop();
+        } else if (this.getState() == ChronoState.STOPPED) { // holding for solve
+            this.setState(ChronoState.HOLDING_SOLVE);
+            document.getElementById('timer').style.color = 'lawngreen';
+        }
+    }
+
+    spaceEnd() {
+        if (this.getState() == (ChronoState.STOPPED | ChronoState.HOLDING_SOLVE)) {
+            this.start();
+        }
     }
 }

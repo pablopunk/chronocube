@@ -8,15 +8,7 @@ class Controller implements Dump {
     constructor() {
         this.model = new Model();
         this.chronoHelper = new ChronoHelper(this.model);
-        this.inputHelper = new InputHelper();
-    }
-
-    startChrono() {
-        this.chronoHelper.start();
-    }
-
-    stopChrono() {
-        this.chronoHelper.stop();
+        this.inputHelper = new InputHelper(this.chronoHelper);
     }
 
     dump() {
