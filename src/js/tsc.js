@@ -154,6 +154,7 @@ var Controller = (function () {
     function Controller() {
         this.model = new Model();
         this.chronoHelper = new ChronoHelper(this.model);
+        this.inputHelper = new InputHelper();
     }
     Controller.prototype.startChrono = function () {
         this.chronoHelper.start();
@@ -188,5 +189,27 @@ var ChronoHelper = (function () {
         return min + ':' + sec + '.' + dec;
     };
     return ChronoHelper;
+}());
+var InputHelper = (function () {
+    function InputHelper() {
+        this.bindEventsToBody();
+        this.resetKeys();
+    }
+    InputHelper.prototype.bindEventsToBody = function () {
+        document.body.addEventListener("keyup", this.keyUp);
+        document.body.addEventListener("keydown", this.keyDown);
+    };
+    InputHelper.prototype.resetKeys = function () {
+        this.keysPressed = {};
+    };
+    InputHelper.prototype.keyUp = function (event) {
+        var key = event.which;
+        this.keysPressed[key] = false;
+    };
+    InputHelper.prototype.keyDown = function (event) {
+        var key = event.which;
+        this.keysPressed[key] = true;
+    };
+    return InputHelper;
 }());
 //# sourceMappingURL=tsc.js.map
