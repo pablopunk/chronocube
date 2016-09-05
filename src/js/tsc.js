@@ -53,7 +53,7 @@ var Chrono = (function () {
         else {
             this.timerId = setTimeout(function () { return _this.loop(); }, 100);
         }
-        this.helper.show(this.sec.toString());
+        this.helper.show();
     };
     Chrono.prototype.dump = function () {
         console.log('#Chrono');
@@ -158,7 +158,8 @@ var Model = (function () {
 var Controller = (function () {
     function Controller() {
         this.model = new Model();
-        this.chronoHelper = new ChronoHelper(this.model);
+        this.view = new ViewController();
+        this.chronoHelper = new ChronoHelper(this.model, this.view);
         this.inputHelper = new InputHelper(this.chronoHelper);
     }
     Controller.prototype.dump = function () {
@@ -167,9 +168,11 @@ var Controller = (function () {
     return Controller;
 }());
 var ChronoHelper = (function () {
-    function ChronoHelper(model) {
+    function ChronoHelper(model, view) {
         this.model = model;
+        this.view = view;
         this.model.chrono.helper = this;
+        this.regExp = new RegExp('([0-9]+):([0-5]*[0-9]+)\.([0-9]+)');
     }
     ChronoHelper.prototype.start = function () {
         document.getElementById('timer').style.color = 'black';
@@ -177,15 +180,35 @@ var ChronoHelper = (function () {
     };
     ChronoHelper.prototype.stop = function () {
         this.model.chrono.stop();
-        this.show(this.getTimeString());
+        this.show();
     };
-    ChronoHelper.prototype.show = function (time) {
-        document.getElementById('timer').innerText = time;
+    ChronoHelper.prototype.show = function () {
+        if (this.getState() == ChronoState.SOLVING) {
+            this.showSolving();
+        }
+        else {
+            this.showStopped();
+        }
+    };
+    ChronoHelper.prototype.showSolving = function () {
+        var html = '';
+        if (this.min() > 0)
+            html += this.min().toString();
+        html += this.sec().toString();
+        this.view.showTime(html);
+    };
+    ChronoHelper.prototype.showStopped = function () {
+        var html = '';
+        if (this.min() > 0)
+            html += this.min().toString();
+        this.sec() > 10 ? html += this.sec().toString() : html += ('0' + this.sec().toString());
+        html += ('.' + this.dec().toString());
+        this.view.showTime(html);
     };
     ChronoHelper.prototype.getTimeString = function () {
-        var min = (this.model.chrono.min > 10) ? this.model.chrono.min : '0' + this.model.chrono.min;
-        var sec = (this.model.chrono.sec > 10) ? this.model.chrono.sec : '0' + this.model.chrono.sec;
-        var dec = this.model.chrono.dec;
+        var min = (this.min() > 10) ? this.min() : '0' + this.min();
+        var sec = (this.sec() > 10) ? this.sec() : '0' + this.sec();
+        var dec = this.dec();
         return min + ':' + sec + '.' + dec;
     };
     ChronoHelper.prototype.getState = function () {
@@ -193,6 +216,17 @@ var ChronoHelper = (function () {
     };
     ChronoHelper.prototype.setState = function (state) {
         this.model.chrono.state = state;
+    };
+    ChronoHelper.prototype.min = function () {
+        return this.model.chrono.min;
+    };
+    ChronoHelper.prototype.sec = function () {
+        return this.model.chrono.sec;
+    };
+    ChronoHelper.prototype.dec = function () {
+        var str = this.model.chrono.dec.toString();
+        var int = str[0] + str[1];
+        return parseInt(int);
     };
     ChronoHelper.prototype.spaceStart = function () {
         if (this.getState() == ChronoState.SOLVING) {
@@ -237,5 +271,14 @@ var InputHelper = (function () {
         }
     };
     return InputHelper;
+}());
+var ViewController = (function () {
+    function ViewController() {
+        this.timerDivId = 'timer';
+    }
+    ViewController.prototype.showTime = function (time) {
+        document.getElementById(this.timerDivId).innerText = time;
+    };
+    return ViewController;
 }());
 //# sourceMappingURL=tsc.js.map

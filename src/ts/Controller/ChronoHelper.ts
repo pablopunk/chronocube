@@ -2,10 +2,14 @@
 class ChronoHelper {
 
     model :Model;
+    view :ViewController;
+    regExp :RegExp;
 
-    constructor(model :Model) {
+    constructor(model :Model, view :ViewController) {
         this.model = model;
+        this.view = view;
         this.model.chrono.helper = this;
+        this.regExp = new RegExp('([0-9]+):([0-5]*[0-9]+)\.([0-9]+)');
     }
 
     start() {
@@ -15,17 +19,36 @@ class ChronoHelper {
 
     stop() {
         this.model.chrono.stop();
-        this.show(this.getTimeString());
+        this.show();
     }
 
-    show(time :string) {
-        document.getElementById('timer').innerText = time;
+    show() {
+        if (this.getState() == ChronoState.SOLVING) {
+            this.showSolving();
+        } else {
+            this.showStopped();
+        }
+    }
+
+    showSolving() {
+        var html = '';
+        if (this.min() > 0) html += this.min().toString();
+        html += this.sec().toString();  
+        this.view.showTime(html);
+    }
+
+    showStopped() {
+        var html = '';
+        if (this.min() > 0) html += this.min().toString();
+        this.sec() > 10 ? html += this.sec().toString() : html += ('0' + this.sec().toString());
+        html += ('.' + this.dec().toString());
+        this.view.showTime(html);
     }
 
     getTimeString() :string {
-        var min = (this.model.chrono.min > 10) ? this.model.chrono.min : '0'+this.model.chrono.min;
-        var sec = (this.model.chrono.sec > 10) ? this.model.chrono.sec : '0'+this.model.chrono.sec;
-        var dec = this.model.chrono.dec;
+        var min = (this.min() > 10) ? this.min() : '0'+this.min();
+        var sec = (this.sec() > 10) ? this.sec() : '0'+this.sec();
+        var dec = this.dec();
 
         return min+':'+sec+'.'+dec;
     }
@@ -36,6 +59,20 @@ class ChronoHelper {
 
     setState(state :ChronoState) {
         this.model.chrono.state = state;
+    }
+
+    min() {
+        return this.model.chrono.min;
+    }
+
+    sec() {
+        return this.model.chrono.sec;
+    }
+
+    dec() {
+        var str = this.model.chrono.dec.toString();
+        var int = str[0] + str[1];
+        return parseInt(int);
     }
 
     spaceStart() {

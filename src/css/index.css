@@ -1,4 +1,9 @@
 
+@font-face {
+    font-family: Digital;
+    src: url('../fonts/digital.ttf');
+}
+
 body {
     margin:0;
     padding:0;
@@ -6,4 +11,7 @@ body {
 
 #timer {
     text-align: center;
+    width: 100%;
+    font-size: 13em;
+    font-family: Digital, Monospace;
 }

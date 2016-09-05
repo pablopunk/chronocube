@@ -15,6 +15,7 @@
         "Controller/Controller.ts",
         "Controller/ChronoHelper.ts",
         "Controller/InputHelper.ts",
+        "Controller/ViewController.ts",
         "Core/Interfaces.ts",
         "Core/Classes.ts"
     ],

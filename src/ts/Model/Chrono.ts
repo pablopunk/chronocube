@@ -71,7 +71,7 @@ class Chrono implements Dump {
         } else {
             this.timerId = setTimeout(() => this.loop(), 100); // keep in loop
         }
-        this.helper.show(this.sec.toString());
+        this.helper.show();
     }
 
     dump() {
