@@ -7,6 +7,7 @@
     <meta name="Keywords" content="rubik, cube, rubik cube, puzzle, rubiks, feliks, aolong, ctimer, timer, chronocube">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="css/new-age.css" rel="stylesheet">
     <script src="https://use.fontawesome.com/8db8d4d5ed.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,15 +18,16 @@
         background-color: black;
     }
     .container {
-        margin-top: 10%;
         text-align: center;
     }
-    .row {
+    .navbar-text {
+        color: white !important;
+    }
+    #buttons {
         margin-top: 4em;
     }
     .btn {
         margin: 1em;
-        border-radius: 2em;
     }
     </style>
     <script type="text/javascript">
@@ -53,19 +55,29 @@
     </script>
 </head>
 <body>
-    <div class="container">
-        <div class="row">
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Chronocube</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <p class="navbar-text navbar-right">A simple and beautiful way to manage your Rubik's cube solves</p>
+            </div>
+        </div>
+    </nav>
+    <section>
+        <div class="container">
             <div class="col-lg-12 logo">
                 <img src="src/img/icon200px.png" />
             </div>
         </div>
-        <div class="row">
+        <div class="container">
             <div class="col-lg-12 buttons">
                 <a href="#" id="download" class="btn btn-lg btn-info"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i><span> Download</span></a>
                 <a href="src/" class="btn btn-lg btn-success"><i class="fa fa-html5" aria-hidden="true"></i><span> Use it online</span></a>
                 <a href="https://github.com/pablopunk/chronocube" class="btn btn-lg btn-warning"><i class="fa fa-code" aria-hidden="true"></i><span> Source Code</span></a>
             </div>
         </div>
-    </div>
+    </section>
 </body>
 </html>
