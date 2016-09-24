@@ -9,8 +9,12 @@
     },
     "files": [
         "./typings/index.d.ts",
-        "./src/components/Hello.tsx",
-        "./src/index.tsx"
+        "./src/index.tsx",
+        "./src/Model/Model.ts",
+        "./src/Model/Session.ts",
+        "./src/Model/Settings.ts",
+        "./src/Model/Solve.ts",
+        "./src/View/Chrono.tsx"
     ],
     "exclude": [
         "node_modules"

@@ -1,5 +1,5 @@
 
-class Session implements Dump {
+class Session {
     name :string;
     solves :Array<Solve>;
 

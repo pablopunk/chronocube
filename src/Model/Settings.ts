@@ -1,5 +1,5 @@
 
-class Settings implements Dump {
+class Settings {
     inspection :boolean;
     hideTime :boolean;
     theme :string;
@@ -24,10 +24,5 @@ class Settings implements Dump {
         } else {
             this.theme = 'bright';
         }
-    }
-
-    dump() {
-        console.log('#Settings');
-        console.log('@Inspection: ' + this.inspection + ' @HideTime: ' + this.hideTime  + ' @Theme: ' + this.theme);
     }
 }

@@ -1,9 +1,9 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import { Hello } from "./components/Hello";
+import { Chrono } from "./View/Chrono";
 
 ReactDOM.render(
-    <Hello compiler="TypeScript" framework="React" />,
+    <Chrono/>,
     document.getElementById("example")
 );

@@ -1,5 +1,5 @@
 
-class Solve implements Dump {
+class Solve {
     min :number;
     sec :number;
     dec :number;
@@ -21,10 +21,5 @@ class Solve implements Dump {
     {
         let str :string = this.min+':'+this.sec+'.'+this.dec;
         return str;
-    }
-
-    dump() {
-        console.log('#Solve');
-        console.log('@Time: ' + this.getTime() + ' @Scramble: ' + this.scramble)
     }
 }

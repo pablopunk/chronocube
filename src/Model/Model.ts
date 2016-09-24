@@ -1,5 +1,7 @@
 
-class Model implements Dump {
+import { Chrono } from "../View/Chrono";
+
+class Model {
     chrono :Chrono;
     sessions :Array<Session>;
     settings :Settings;
@@ -10,13 +12,5 @@ class Model implements Dump {
         this.sessions = new Array();
         this.sessions.push(new Session());
         this.chrono = new Chrono();
-    }
-
-    dump() {
-        this.chrono.dump();
-        this.sessions.forEach(element => {
-            element.dump();
-        });
-        this.settings.dump();
     }
 }

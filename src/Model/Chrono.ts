@@ -25,8 +25,7 @@ class Chrono implements Dump {
     type :ChronoType;
     state :ChronoState;
 
-    constructor(type = ChronoType.Timer) {
-        this.type = type;
+    constructor() {
         this.state = ChronoState.STOPPED;
         this.dec = this.sec = this.min = 0;
     }
@@ -72,10 +71,5 @@ class Chrono implements Dump {
             this.timerId = setTimeout(() => this.loop(), 100); // keep in loop
         }
         this.helper.show();
-    }
-
-    dump() {
-        console.log('#Chrono');
-        console.log('@Type: ' + this.type);
     }
 }
