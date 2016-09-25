@@ -37,7 +37,4 @@ Older versions included:
 
 ## To do
 
-- [ ] Session bussines logic (controllers and helpers)
-- [ ] Settings logic
-- [ ] Design UI
-  - [ ] Separate in React Components
+Check the Projects section in GitHub.
