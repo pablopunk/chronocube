@@ -17,6 +17,7 @@ export class Chrono extends React.Component<{},{}>  {
     regExp :RegExp;
     inspection :Boolean = false;
     spacePressed :Boolean = false;
+    classNames :string = 'container';
     startTime :any;
     endTime :any;
     diff :any;
@@ -58,11 +59,11 @@ export class Chrono extends React.Component<{},{}>  {
 
             default:
             return (
-                <div style={divStyle}>No status found</div>
+                <div style={divStyle} className={this.classNames}>No status found</div>
             );
         }
         return (
-            <div style={divStyle}>{this.text}</div>
+            <div style={divStyle} className={this.classNames}>{this.text}</div>
         );
     }
 

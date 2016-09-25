@@ -9,27 +9,22 @@ class Session {
         this.solves = new Array();
     }
 
-    addSolve(newSolve :Solve)
+    new(newSolve :Solve)
     {
         this.solves.push(newSolve);
     }
 
-    deleteSolve(index :number)
+    remove(index :number)
     {
-        if (this.getNumberOfSolves() <= index)
+        if (this.count() <= index)
         {
             this.solves.splice(index);
         }
     }
 
-    getNumberOfSolves()
+    count()
     {
         if (this.solves == null) return 0;
         else return this.solves.length;
-    }
-
-    dump() {
-        console.log('#Session');
-        console.log('@Name: ' + this.name + ' @Solves: ' + this.solves);
     }
 }

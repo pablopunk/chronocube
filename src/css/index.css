@@ -3,6 +3,15 @@
     font-family: Digital;
     src: url('../fonts/digital.ttf');
 }
+@font-face {
+    font-family: Roboto;
+    src: url('../fonts/Roboto-Regular.ttf');
+}
+
+@font-face {
+    font-family: Roboto-Light;
+    src: url('../fonts/Roboto-Light.ttf');
+}
 
 body {
     margin:0;
