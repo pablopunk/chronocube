@@ -8,11 +8,6 @@ const enum Status {
     Solving,
 }
 
-const enum Type {
-    NoInspection,
-    Inspection
-}
-
 enum KeyType {
     SPACE = 32
 }
@@ -20,7 +15,8 @@ enum KeyType {
 export class Chrono extends React.Component<{},{}>  {
     status: Status;
     regExp :RegExp;
-    type: Type;
+    inspection :Boolean = false;
+    spacePressed :Boolean = false;
     startTime :any;
     endTime :any;
     diff :any;
@@ -29,7 +25,6 @@ export class Chrono extends React.Component<{},{}>  {
     sec :number;
     min :number;
     text :string;
-    color :string;
 
     constructor() {
         super();
@@ -40,9 +35,9 @@ export class Chrono extends React.Component<{},{}>  {
     }
 
     render() {
-        this.getStateColor();
+        this.getStatusColor();
         var divStyle = {
-            color: this.getStateColor(),
+            color: this.getStatusColor(),
             width: '100%',
             textAlign: 'center',
             fontSize: '10em',
@@ -53,11 +48,12 @@ export class Chrono extends React.Component<{},{}>  {
             case Status.HoldingSolve:
             case Status.Inspecting:
             case Status.Solving:
-            this.text = this.sec.toString();
+            var min = (this.min > 0) ? this.min.toString() + ':' : '';
+            this.text = min+this.sec;
             break;
 
             case Status.Stopped:
-            var min = (this.min > 0) ? this.min.toString + ':' : '';
+            var min = (this.min > 0) ? this.min.toString() + ':' : '';
             this.text = min+this.sec+'.'+this.dec;
             break;
 
@@ -79,24 +75,18 @@ export class Chrono extends React.Component<{},{}>  {
         this.dec = this.diff.getMilliseconds();
         this.sec = this.diff.getSeconds();
         this.min = this.diff.getMinutes();
-        this.continue();
+        if (this.status != Status.Stopped) this.continue();
     }
 
     start()
     {
-        if (this.status == (Status.Stopped | Status.HoldingSolve)) {
-            this.status = Status.Solving;
-            this.startTime = new Date();
-            this.loop();
-        }
+        this.startTime = new Date();
+        this.loop();
     }
 
     stop()
     {
-        if (this.status == Status.Solving) {
-            this.status = Status.Stopped;
-            clearTimeout(this.timerId);
-        }
+        clearTimeout(this.timerId);
     }
 
     reset()
@@ -106,12 +96,12 @@ export class Chrono extends React.Component<{},{}>  {
 
     continue()
     {
-        if (this.type == Type.Inspection && this.sec > 14 ) {
+        if (this.status == Status.Inspecting && this.sec > 14 ) {
             clearTimeout(this.timerId);
         } else {
             this.timerId = setTimeout(() => this.loop(), 100); // keep in loop
         }
-        this.render();
+        this.setState({});
     }
 
     bindEventsToBody() {
@@ -125,37 +115,40 @@ export class Chrono extends React.Component<{},{}>  {
 
     cb_keyUp(event :KeyboardEvent) {
         var key = event.which;
-        if (key == KeyType.SPACE) {
-            this.spaceEnd();
-        }
+        if (key == KeyType.SPACE)
+            if (this.spacePressed) // If I'm already holding space
+                this.spaceEnd();
     }
     
     cb_keyDown(event :KeyboardEvent) {
         var key = event.which;
-        if (key == KeyType.SPACE) {
-            this.spaceStart();
-        }
+        if (key == KeyType.SPACE)
+            if (!this.spacePressed) // If I'm not holding space already
+                this.spaceStart();
     }
 
     spaceStart() {
+        this.spacePressed = true;
         switch(this.status) {
             case Status.Inspecting:
             this.status = Status.HoldingSolve;
-            this.stop();
             break;
             case Status.Solving:
-            this.status = Status.Stopped;
             this.stop();
+            this.status = Status.Stopped;
             break;
             case Status.Stopped:
-            this.status = (this.type == Type.Inspection ? Status.HoldingInspection : Status.HoldingSolve);
+            this.min = this.sec = this.dec = 0;
+            this.status = (this.inspection ? Status.HoldingInspection : Status.HoldingSolve);
             break;
             default: // do nothing when holding
             break;
         }
+        this.setState({});
     }
 
     spaceEnd() {
+        this.spacePressed = false;
         switch(this.status) {
             case Status.HoldingInspection:
             this.status = Status.Inspecting;
@@ -170,12 +163,12 @@ export class Chrono extends React.Component<{},{}>  {
         }
     }
 
-    getStateColor() {
+    getStatusColor() {
         switch(this.status) {
             case Status.HoldingInspection:
             return 'yellow';
             case Status.HoldingSolve:
-            return 'lawn green';
+            return 'lawngreen';
             case Status.Inspecting:
             return 'orange';
             case Status.Solving:
