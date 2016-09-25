@@ -24,6 +24,7 @@ Or simply [show me some love](https://twitter.com/pablopunk) ;)
 ## Download
 - Use it [online](http://chronocube.live)
 - Download [desktop apps](https://github.com/pablopunk/chronocube/releases)
+
 ## License
 Check `LICENSE` file (MIT License)
 
