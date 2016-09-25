@@ -35,7 +35,6 @@ export class Chrono extends React.Component<{},{}>  {
     }
 
     render() {
-        this.getStatusColor();
         var divStyle = {
             color: this.getStatusColor(),
             width: '100%',
@@ -43,18 +42,18 @@ export class Chrono extends React.Component<{},{}>  {
             fontSize: '10em',
             fontFamily: 'Digital, Monospace'
         };
+        var min = (this.min > 0) ? this.min.toString() + ':' : ''; // don't show 0 minutes
+        var dec = this.dec.toString().slice(0,2); // truncate decimals
         switch(this.status) {
             case Status.HoldingInspection:
             case Status.HoldingSolve:
             case Status.Inspecting:
             case Status.Solving:
-            var min = (this.min > 0) ? this.min.toString() + ':' : '';
             this.text = min+this.sec;
             break;
 
             case Status.Stopped:
-            var min = (this.min > 0) ? this.min.toString() + ':' : '';
-            this.text = min+this.sec+'.'+this.dec;
+            this.text = min+this.sec+'.'+dec;
             break;
 
             default:
