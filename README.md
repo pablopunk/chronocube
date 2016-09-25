@@ -1,6 +1,6 @@
 # Chronocube
 
-*Simple app to time your Rubik's Cube solves.*
+*A simple and beautiful way to manage your Rubik's cube solves*
 
 ***
 
@@ -14,58 +14,30 @@ Are you a developer or a designer? Fork it and [make a pull request](https://git
 Or simply [show me some love](https://twitter.com/pablopunk) ;)
 
 ---
+## Technologies
 
-This app is cross-platform as it's created with *HTML+CSS+JS* and it's packaged on *[Electron](https://github.com/atom/electron)*, a tool to create apps from webapps, so you can use it as a native app on your desktop.
-
-![screenshot](http://f.cl.ly/items/2C1t2m3r3D0H3A392a2t/screenshot-black.png)
+- [React JS](https://facebook.github.io/react/) for the View 
+- [Typescript](https://www.typescriptlang.org/) language for the logic.
+- [Webpack](https://webpack.github.io/) to get all modules together.
+- [Electron](http://electron.atom.io/) to build a **cross-platform** desktop app.
 
 ## Download
-- Try it [online](http://chronocube.pablopunk.com)
+- Use it [online](http://chronocube.live)
 - Download [desktop apps](https://github.com/pablopunk/chronocube/releases)
-
-
-## Build and Package
-
-Make sure you have the dependencies installed (instructions are found in each page, but this is how you do it on OS X):
-
-- [nodejs](https://nodejs.org/en/)
-- [electron-builder](https://github.com/maxogden/electron-packager) and [electron-packager](https://github.com/maxogden/electron-packager)
-
-    ```shell
-  npm install electron-packager -g
-  npm install electron-builder -g
-  # windows builds on mac
-  brew install wine makensis # asks for XQuartz install
-    ```
-
-Use the *MAKEFILE* to build the executable for all platforms:
-
-- `make all`:
-  * creates all builds inside `build/`
-  * creates apps for mac and win inside `dist/`
-- Specific arquitectures:
-  * `make osx`
-  * `make win`
-  * `make linux32`
-  * `make linux64`
-  * `make linux` (both `ia32` and `x64`)
-
 ## License
-Check `LICENSE` (MIT License)
+Check `LICENSE` file (MIT License)
 
-Also credits to:
+Older versions included:
+- [Electron SuperKit](https://github.com/Aluxian/electron-superkit)
 - [Random state scrambles](https://github.com/cubing/jsss)
 - [Ionic icons](http://ionicons.com/)
 - [Background gradients](http://uigradients.com)
 - [Flat UI Colors](http://flatuicolors.com/)
 - [iOS 7 Colors](http://ios7colors.com/)
 
-Older versions included:
-- [Electron SuperKit](https://github.com/Aluxian/electron-superkit) for building and packaging
-
 ## To do
-- Hotfixes:
-  - Download file on exporting (instead of opening new window)
-- csTimer import/export
-- Google Drive integration (sync across devices)
-- Refactor javascript. It works but the classes and methods are a little bit messy. **Would be nice to make a real/clear MVC** with more consistent roles.
+
+- [ ] Session bussines logic (controllers and helpers)
+- [ ] Settings logic
+- [ ] Design UI
+  - [ ] Separate in React Components
