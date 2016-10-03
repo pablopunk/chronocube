@@ -19,7 +19,7 @@ module.exports = {
             // Custom CSS
             { test: /\.css$/, loader: "style-loader!css-loader" },
             // Custom Fonts
-            { test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' }
+            { test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader', query: { limit: 50000, mimetype: 'application/font-ttf', name: './src/fonts/[hash].[ext]' } }
         ],
 
         preLoaders: [
