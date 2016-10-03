@@ -16,7 +16,8 @@
         "./src/Model/Solve.ts",
         "./src/View/Chrono.tsx",
         "./src/View/Test.tsx",
-        "./src/Controller/SessionHelper.ts"
+        "./src/Services/SessionService.ts",
+        "./src/Services/SettingsService.ts"
     ],
     "exclude": [
         "node_modules"

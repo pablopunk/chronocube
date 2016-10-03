@@ -1,5 +1,5 @@
 
-export class SessionHelper {
+export class SessionService {
     sessions :Array<Session>;
 
     constructor(sessions :Array<Session> = [new Session()]) {
