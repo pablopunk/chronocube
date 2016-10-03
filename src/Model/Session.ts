@@ -1,5 +1,7 @@
 
-class Session {
+import { Solve } from './Solve';
+
+export class Session {
     name :string;
     solves :Array<Solve>;
 

@@ -1,5 +1,5 @@
 
-class Solve {
+export class Solve {
     min :number;
     sec :number;
     dec :number;
