@@ -47,7 +47,7 @@
 
     function getFileName(tag) {
         var nav = window.navigator.appVersion;
-        var url = 'https://github.com/pablopunk/chronocube/releases/download/'+tag;
+        var url = 'https://github.com/pablopunk/chronocube/releases/download/'+tag+'/';
         if (nav.indexOf('Mac')>-1) return [' Download for Mac' , url+'Chronocube-Mac.dmg'];
         if (nav.indexOf('Windows')>-1) return [' Download for Windows', url+'Chronocube-Windows-Installer.exe'];
         return [' Download' , 'https://github.com/pablopunk/chronocube/releases/latest']; // default
