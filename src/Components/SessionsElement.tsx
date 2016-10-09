@@ -16,7 +16,7 @@ export class SessionsElement extends React.Component<SessionsProps,{}> {
 
         return (
             <div>
-                <h3 style={{textAlign:"center"}}>Sessions</h3>
+                <h3 style={{textAlign:"center"}}>Sessions<i className="ion-plus-circled" style={{float:"right"}} onClick={e => this.props.view.addSessionAction()}></i></h3>
                 {rows}
             </div>
         );
