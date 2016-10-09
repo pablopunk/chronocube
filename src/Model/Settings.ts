@@ -1,15 +1,13 @@
-import * as React from "react";
 
-export class Settings extends React.Component<{},{}> {
+export class Settings {
     inspection :boolean;
     hideTime :boolean;
     theme :string;
 
-    constructor() { /* Defaults */
-        super();
-        this.inspection = false;
-        this.hideTime = false;
-        this.theme = 'bright';
+    constructor(inspection = false, hideTime = false, theme = 'bright') { /* Defaults */
+        this.inspection = inspection;
+        this.hideTime = hideTime;
+        this.theme = theme;
     }
 
     toggleInspection() {
@@ -28,5 +26,3 @@ export class Settings extends React.Component<{},{}> {
         }
     }
 }
-
-export default Settings;

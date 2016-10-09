@@ -41,10 +41,53 @@
 
         <!-- Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap-theme.min.css">
+
+        <!-- Font Awesome -->
+        <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">-->
+
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+        <script type="text/javascript">
+        var sidebarWidth = "";
+        var sidebarPadding = "";
+        var sidebarClosed = false;
+
+        function toggleNav() {
+            if (sidebarClosed) {
+                openNav();
+            } else {
+                closeNav();
+            }
+        }
+
+        function openNav() {
+            document.getElementById("sidenav").style.width = sidebarWidth;
+            document.getElementById("sidenav").style.padding = sidebarPadding;
+            document.getElementById("main").style.marginLeft = sidebarWidth;
+            sidebarClosed = false;
+        }
+
+        function closeNav() {
+            sidebarWidth = document.getElementById("sidenav").style.width;
+            sidebarPadding = document.getElementById("sidenav").style.padding;
+            document.getElementById("sidenav").style.width = "0";
+            document.getElementById("sidenav").style.padding = "0";
+            document.getElementById("main").style.marginLeft= "0";
+            sidebarClosed = true;
+        }
+        </script>
     </head>
     <body>
-        <div id="sidenav" class="sidenav"></div>
-        <div id="timer"></div>
+        <div id="sidenav" class="sidenav">
+            <div id="sessions"></div>
+        </div>
+        <div id="main">
+            <a href="#" class="btn" onclick="toggleNav()"><i class="ion-navicon"></i></a>
+            <div id="toucharea">
+                <div id="timer"></div>
+            </div>
+        </div>
 
         <!-- Dependencies -->
         <script src="./node_modules/react/dist/react.js"></script>

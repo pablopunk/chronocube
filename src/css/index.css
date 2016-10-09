@@ -18,6 +18,8 @@ body {
     padding:0;
     width: 100%;
     height: 100%;
+    user-select: none;         /* Prevents  */
+    -webkit-user-select: none; /* selection */
 }
 
 .sidenav {
@@ -26,4 +28,20 @@ body {
     background-color: #333;
     color: white;
     position: fixed;
+    transition: 0.5s;
+    overflow-x: hidden;
+    padding: 1rem;
+}
+
+#main {
+    transition: margin-left .5s;
+    margin-left: 20rem;
+}
+
+#toucharea {
+    width: 100%;
+    height: 100%;
+    /*position: fixed;
+    display: inline-block;
+    z-index: -1;*/
 }
