@@ -1,22 +1,17 @@
 import * as React from "react";
-import { Session } from "../Model/Session";
+import { Session } from "./Session";
 
-export class Sessions extends React.Component<{},{}> {
-    sessions :Array<Session>;
+export interface SessionsProps { sessions: Array<Session>; }
 
-    constructor(sessions = new Array()) {
-        super();
-        this.sessions = sessions;
-        if (!sessions.length) this.sessions = [new Session()];
-    }
+export class Sessions extends React.Component<SessionsProps,{}> {
 
-    render() { 
-        var rows :any = [];
-        console.log(this.sessions);
-        this.sessions.forEach(function(session, index) {
-            rows.push(session.name);
+    render() {
+        var rows = this.props.sessions.map(function(session, i) {
+            return (
+                <Session key={i} name={session.props.name} solves={session.props.solves} />
+            );
         });
-        
+
         return (
             <div>sessions: {rows}</div>
         );
@@ -24,17 +19,17 @@ export class Sessions extends React.Component<{},{}> {
 
     new(name :string) {
         if (!this.exists(name))
-            this.sessions.push(new Session(name));
+            this.props.sessions.push(new Session({name:name , solves:[]}));
     }
 
     remove(index :number) {
-        if (index && index <= this.sessions.length)
-            this.sessions.splice(index, 1);
+        if (index && index <= this.props.sessions.length)
+            this.props.sessions.splice(index, 1);
     }
 
     exists(name :string) {
-        for (var session of this.sessions)
-            if (session.name == name) return true;
+        for (var session of this.props.sessions)
+            if (session.props.name == name) return true;
         return false;
     }
 }

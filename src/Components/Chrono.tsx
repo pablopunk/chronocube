@@ -1,7 +1,7 @@
 import * as React from "react";
 
-const enum Status {
-    Stopped,
+export const enum Status {
+    Stopped = 0,
     HoldingInspection,
     Inspecting,
     HoldingSolve,
@@ -12,26 +12,32 @@ enum KeyType {
     SPACE = 32
 }
 
-export class Chrono extends React.Component<{},{}>  {
-    status: Status;
-    regExp :RegExp;
-    inspection :Boolean = false;
-    spacePressed :Boolean = false;
-    classNames :string = 'container';
-    startTime :any;
-    endTime :any;
-    diff :any;
-    timerId :number;
-    dec :number;
-    sec :number;
-    min :number;
-    text :string;
+export interface ChronoProps {
+    regExp :RegExp,
+    classNames :string
+}
+
+export class Chrono extends React.Component<ChronoProps,{}>  {
+
+    text :string
+    spacePressed :Boolean
+    inspection :Boolean
+    status: Status
+    startTime :any
+    endTime :any
+    diff :any
+    timerId :number
+    dec :number
+    sec :number
+    min :number
 
     constructor() {
         super();
+        this.text = "00:00.00";
+        this.spacePressed = false;
+        this.inspection = false;
         this.status = Status.Stopped;
-        this.min = this.sec = this.dec = 0;
-        this.regExp = new RegExp('([0-9]+):([0-5]*[0-9]+)\.([0-9]+)');
+        this.startTime = this.endTime = this.diff = this.timerId = this.dec = this.sec = this.min = 0;
         this.bindEventsToBody();
     }
 
@@ -59,11 +65,11 @@ export class Chrono extends React.Component<{},{}>  {
 
             default:
             return (
-                <div style={divStyle} className={this.classNames}>No status found</div>
+                <div style={divStyle} className={this.props.classNames}>No status found</div>
             );
         }
         return (
-            <div style={divStyle} className={this.classNames}>{this.text}</div>
+            <div style={divStyle} className={this.props.classNames}>{this.text}</div>
         );
     }
 

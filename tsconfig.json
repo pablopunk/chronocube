@@ -11,8 +11,8 @@
         "./typings/index.d.ts",
         "./src/index.tsx",
         "./src/Model/Settings.ts",
-        "./src/Model/Solve.ts",
-        "./src/Model/Session.ts",
+        "./src/Components/Solve.tsx",
+        "./src/Components/Session.tsx",
         "./src/Components/Chrono.tsx",
         "./src/Components/Sessions.tsx"
     ],

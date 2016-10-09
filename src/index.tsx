@@ -3,11 +3,15 @@ import * as ReactDOM from "react-dom";
 
 import './css/index.css';
 
-import { Chrono } from "./Components/Chrono";
+import { Chrono }   from "./Components/Chrono";
+import { Status }   from "./Components/Chrono";
 import { Sessions } from "./Components/Sessions";
+import { Session }  from "./Components/Session";
+import { Solve }  from "./Components/Solve";
 
-var chrono = <Chrono/>;
-var sessions = <Sessions/>;
+var chrono = <Chrono regExp={new RegExp('([0-9]+):([0-5]*[0-9]+)\.([0-9]+)')} classNames="container"/>; 
+var defaultSession = new Session({name:"Default", solves:[]});
+var sessions = <Sessions sessions={[ defaultSession ]} />;
 
 init();
 
