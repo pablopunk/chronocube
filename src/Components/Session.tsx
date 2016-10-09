@@ -6,8 +6,17 @@ export interface SessionProps { name: string; solves: Array<Solve>; }
 export class Session extends React.Component<SessionProps,{}> {
 
     render() {
+        var rows = this.props.solves.map(function(solve, i) {
+            return (
+                <Solve key={i} dec={solve.props.dec} sec={solve.props.sec} min={solve.props.min} scramble={solve.props.scramble}/>
+            );
+        });
+
         return (
-            <div>{this.props.name}</div>
+            <div>
+                {this.props.name}
+                <div>{rows}</div>
+            </div>
         );
     }
 

@@ -8,14 +8,9 @@ export const enum Status {
     Solving,
 }
 
-enum KeyType {
-    SPACE = 32
-}
+enum KeyType { SPACE = 32 }
 
-export interface ChronoProps {
-    regExp :RegExp,
-    classNames :string
-}
+export interface ChronoProps { regExp :RegExp, classNames :string }
 
 export class Chrono extends React.Component<ChronoProps,{}>  {
 

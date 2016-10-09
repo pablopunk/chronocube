@@ -10,8 +10,7 @@ import { Session }  from "./Components/Session";
 import { Solve }  from "./Components/Solve";
 
 var chrono = <Chrono regExp={new RegExp('([0-9]+):([0-5]*[0-9]+)\.([0-9]+)')} classNames="container"/>; 
-var defaultSession = new Session({name:"Default", solves:[]});
-var sessions = <Sessions sessions={[ defaultSession ]} />;
+var sessions = <Sessions sessions={[ new Session({name:"Default", solves:[ new Solve({min:0,sec:0,dec:0,scramble:"no scrambe"}) ]}) ]} />;
 
 init();
 
@@ -23,6 +22,6 @@ function init() {
 
     ReactDOM.render(
         sessions,
-        document.getElementById('sessions')
+        document.getElementById('sidenav')
     );
 }
