@@ -30,7 +30,7 @@ export class ViewController {
 
     renderSessions() {
         ReactDOM.render(
-            <SessionsElement sessions={this.sessions.sessions} view={this}/>,
+            <SessionsElement sessions={this.sessions.sessions} view={this} currentSession={this.sessions.currentSession} />,
             document.getElementById('sessions')
         )
     }
@@ -38,11 +38,19 @@ export class ViewController {
     addSessionAction() {
         var name = prompt("Enter new session name", "");
         this.sessions.new(name);
+        this.sessions.currentSession = this.sessions.count()-1;
+        this.renderSessions();
     }
 
     addSolveAction(solve :Solve) {
         let index = this.sessions.currentSession;
         this.sessions.sessions[index].new(solve);
+        this.renderSessions();
+    }
+
+    setCurrentSession(index :number) {
+        if (this.sessions.count() <= index) return;
+        this.sessions.currentSession = index;
         this.renderSessions();
     }
 

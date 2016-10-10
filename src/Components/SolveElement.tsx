@@ -7,10 +7,10 @@ export class SolveElement extends React.Component<SolveProps,{}> {
     render() {
         let str :string = "";
         if (this.props.min > 0) str += this.props.min + ':';
-        str += this.props.sec+'.'+this.props.dec;
+        str += this.props.sec+'.'+(this.props.dec.toString().slice(0,2));
 
         return (
-            <div style={{textAlign:"right"}}>{str}</div>
+            <div className="solve" style={{textAlign:"right"}}>{str}</div>
         );
     }
 }

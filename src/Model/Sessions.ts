@@ -5,7 +5,7 @@ import {ViewController} from "../ViewController"
 export class Sessions {
     view :ViewController;
     sessions :Array<Session>;
-    currentSession = 0;
+    currentSession :number;
 
     constructor(view :ViewController, sessions = [ new Session('Default') ], currentSession = 0)
     {
@@ -26,13 +26,20 @@ export class Sessions {
     }
 
     index(name :string) {
+        var index = -1;
         this.sessions.forEach(function(session, i) {
-            if (session.name === name) return i;
+            if (session.name == name) { index = i; return; }
         });
+        if (index) return index;
         return -1;
     }
 
     exists(name :string) {
         return (this.index(name) > -1);
+    }
+
+    count() {
+        if (this.sessions == null) return 0;
+        return this.sessions.length;
     }
 }

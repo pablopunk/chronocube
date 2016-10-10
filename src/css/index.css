@@ -30,7 +30,19 @@ body {
     position: fixed;
     transition: 0.5s;
     overflow-x: hidden;
+}
+
+.sidenav h5, .sidenav .solve {
     padding: 1rem;
+}
+
+#add-session-button {
+    text-align: center;
+    cursor: pointer;
+}
+
+#add-session-button:hover {
+    background-color: green;
 }
 
 #main {

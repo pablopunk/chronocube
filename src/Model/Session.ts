@@ -4,11 +4,13 @@ import { Solve } from './Solve';
 export class Session {
     name :string;
     solves :Array<Solve>;
+    active :boolean;
 
-    constructor(name = 'Default')
+    constructor(name = 'Default', active = true, solves = new Array())
     {
         this.name = name;
-        this.solves = new Array();
+        this.active = active;
+        this.solves = solves;
     }
 
     new(newSolve :Solve)
