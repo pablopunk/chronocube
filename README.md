@@ -1,23 +1,21 @@
-# Chronocube
+# Chronocube [![Join the chat at https://gitter.im/pablopunk/chronocube](https://badges.gitter.im/pablopunk/chronocube.svg)](https://gitter.im/pablopunk/chronocube?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![License](http://img.shields.io/:license-mit-blue.svg)](https://raw.githubusercontent.com/pablopunk/chronocube/master/LICENSE)
+
+![icon](https://d17oy1vhnax1f7.cloudfront.net/items/2e1Q270y3j09423E1b0x/ch.png?v=72df95bd)
 
 *A simple and beautiful way to manage your Rubik's cube solves*
-
 ***
-
-[![Join the chat at https://gitter.im/pablopunk/chronocube](https://badges.gitter.im/pablopunk/chronocube.svg)](https://gitter.im/pablopunk/chronocube?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![License](http://img.shields.io/:license-mit-blue.svg)](https://raw.githubusercontent.com/pablopunk/chronocube/master/LICENSE)
 
 Request new features! [Open an issue](https://github.com/pablopunk/chronocube/issues) or [join the chat](https://gitter.im/pablopunk/chronocube?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge).
 
-Are you a developer or a designer? Fork it and [make a pull request](https://github.com/pablopunk/chronocube/pulls)! You can check the To Do list at the end of this file.
+Are you a developer or a designer? Fork it and [make a pull request](https://github.com/pablopunk/chronocube/pulls)!
 
-Or simply [show me some love](https://twitter.com/pablopunk) ;)
+Or simply [send me a message](https://twitter.com/pablopunk)
 
 ---
 ## Technologies
 
 - [React JS](https://facebook.github.io/react/) for the View 
-- [Typescript](https://www.typescriptlang.org/) language for the logic.
+- [Typescript](https://www.typescriptlang.org/) as the language.
 - [Webpack](https://webpack.github.io/) to get all modules together.
 - [Electron](http://electron.atom.io/) to build a **cross-platform** desktop app.
 
