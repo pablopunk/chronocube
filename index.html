@@ -39,11 +39,8 @@
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
 
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap-theme.min.css">
-
-        <!-- Font Awesome -->
-        <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">-->
+        <!-- Bootflat theme -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootflat/2.0.4/css/bootflat.min.css">
 
         <!-- Ionicons -->
         <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
@@ -76,14 +73,27 @@
             document.getElementById("main").style.marginLeft= "0";
             sidebarClosed = true;
         }
+
+        function isMobile()
+        {
+            if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) )
+                return true;
+            return false;
+        }
+
+        function checkMobile() {
+            if (isMobile()) {
+                closeNav();
+            }
+        }
         </script>
     </head>
-    <body>
-        <div id="sidenav" class="sidenav">
+    <body onload="checkMobile()">
+        <nav id="sidenav" class="sidenav">
             <div id="sessions"></div>
-        </div>
+        </nav>
         <div id="main">
-            <a href="#" class="btn" onclick="toggleNav()"><i class="ion-navicon"></i></a>
+            <button type="button" class="btn btn-link btn-lg" onclick="toggleNav()"><i class="ion-navicon"></i></button>
             <div id="toucharea">
                 <div id="timer"></div>
             </div>

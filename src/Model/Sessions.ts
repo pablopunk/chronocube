@@ -15,14 +15,18 @@ export class Sessions {
     }
 
     new(name :string) {
-        if (!this.exists(name))
+        if (name!=='' && !this.exists(name))
             this.sessions.push(new Session(name));
         this.view.renderSessions();
     }
 
     remove(index :number) {
-        if (index && index <= this.sessions.length)
+        if (index > -1 && index < this.sessions.length) {
             this.sessions.splice(index, 1);
+            if (this.sessions.length < 1) {
+                this.new('Default');
+            }
+        }
     }
 
     index(name :string) {
@@ -30,8 +34,7 @@ export class Sessions {
         this.sessions.forEach(function(session, i) {
             if (session.name == name) { index = i; return; }
         });
-        if (index) return index;
-        return -1;
+        return index;
     }
 
     exists(name :string) {

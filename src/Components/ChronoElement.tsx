@@ -48,17 +48,17 @@ export class ChronoElement extends React.Component<ChronoProps,{}>  {
     getStatusColor() {
         switch(this.props.status) {
             case Status.HoldingInspection:
-            return 'yellow';
+            return 'sunflower';
             case Status.HoldingSolve:
-            return 'lawngreen';
+            return '#48CFAD';
             case Status.Inspecting:
-            return 'orange';
+            return '#FC6E51';
             case Status.Solving:
-            return 'cyan';
+            return '#4FC1E9';
             case Status.Stopped:
-            return 'black';
+            return '#434A54';
             default:
-            return 'red';
+            return '#ED5565';
         }
     }
     

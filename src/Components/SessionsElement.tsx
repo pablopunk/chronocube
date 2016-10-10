@@ -20,7 +20,7 @@ export class SessionsElement extends React.Component<SessionsProps,{}> {
             <div>
                 <h3 style={{textAlign:"center"}}>Sessions</h3>
                 {rows}
-                <div id="add-session-button" onClick={e => this.props.view.addSessionAction()}>+</div>
+                <a href="#" id="add-session-button" className="btn btn-block btn-info" onClick={e => this.props.view.addSessionAction()}><i className="ion-plus"></i> Add session</a>
             </div>
         );
     }

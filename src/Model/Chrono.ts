@@ -68,7 +68,7 @@ export class Chrono  {
         if (this.status == Status.Inspecting && this.sec > 14 ) {
             clearTimeout(this.timerId);
         } else {
-            this.timerId = setTimeout(() => this.loop(), 100); // keep in loop
+            this.timerId = setTimeout(() => this.loop(), 10); // keep in loop
         }
         this.view.renderChrono();
     }

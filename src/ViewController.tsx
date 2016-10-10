@@ -13,11 +13,11 @@ enum KeyType { SPACE = 32 }
 export class ViewController {
 
     chrono :Chrono;
-    sessions :Sessions;
+    sessionsManager :Sessions;
 
     constructor() {
         this.chrono = new Chrono(this);
-        this.sessions = new Sessions(this);
+        this.sessionsManager = new Sessions(this);
         this.bindEventsToBody();
     }
 
@@ -30,27 +30,32 @@ export class ViewController {
 
     renderSessions() {
         ReactDOM.render(
-            <SessionsElement sessions={this.sessions.sessions} view={this} currentSession={this.sessions.currentSession} />,
+            <SessionsElement sessions={this.sessionsManager.sessions} view={this} currentSession={this.sessionsManager.currentSession} />,
             document.getElementById('sessions')
         )
     }
 
     addSessionAction() {
         var name = prompt("Enter new session name", "");
-        this.sessions.new(name);
-        this.sessions.currentSession = this.sessions.count()-1;
+        this.sessionsManager.new(name.trim());
+        this.sessionsManager.currentSession = this.sessionsManager.count()-1;
+        this.renderSessions();
+    }
+
+    deleteSessionAction(index :number) {
+        this.sessionsManager.remove(index); 
         this.renderSessions();
     }
 
     addSolveAction(solve :Solve) {
-        let index = this.sessions.currentSession;
-        this.sessions.sessions[index].new(solve);
+        let index = this.sessionsManager.currentSession;
+        this.sessionsManager.sessions[index].new(solve);
         this.renderSessions();
     }
 
     setCurrentSession(index :number) {
-        if (this.sessions.count() <= index) return;
-        this.sessions.currentSession = index;
+        if (this.sessionsManager.count() <= index || index < 0) return;
+        this.sessionsManager.currentSession = index;
         this.renderSessions();
     }
 

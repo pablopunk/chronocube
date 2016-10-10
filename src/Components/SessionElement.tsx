@@ -16,12 +16,15 @@ export class SessionElement extends React.Component<SessionProps,{}> {
             );
         });
 
-        var titleStyle = { textAlign:"right", backgroundColor:"inherit", cursor:"pointer", margin:0 }
-        if (this.props.active) titleStyle.backgroundColor = "#222";
+        var titleClass = "session-name ";
+        if (this.props.active) titleClass += "active ";
 
         return (
             <div>
-                <h5 style={titleStyle} onClick={e => this.props.view.setCurrentSession(this.props.index)}> {this.props.name} </h5>
+                <h5 className={titleClass} onClick={e => this.props.view.setCurrentSession(this.props.index)}>
+                    <i className="ion-trash-a delete-session" onClick={e => this.props.view.deleteSessionAction(this.props.index)}></i>
+                    {this.props.name}
+                </h5>
                 <div>{rows}</div>
             </div>
         );

@@ -25,8 +25,8 @@ body {
 .sidenav {
     height: 100%;
     width: 20rem;
-    background-color: #333;
-    color: white;
+    background-color: #F5F7FA;
+    color: #434A54;
     position: fixed;
     transition: 0.5s;
     overflow-x: hidden;
@@ -36,13 +36,37 @@ body {
     padding: 1rem;
 }
 
-#add-session-button {
-    text-align: center;
-    cursor: pointer;
+.sidenav .session-name { 
+    text-align:right;
+    cursor:pointer;
+    margin:0
 }
 
-#add-session-button:hover {
-    background-color: green;
+.sidenav .session-name:hover { 
+    background-color: #CCD1D9;
+}
+
+
+.delete-session {
+    display: none;
+    float: left;
+    color: #ED5565;
+}
+.sidenav .session-name:hover .delete-session {
+    display: inline;
+}
+
+.sidenav .active {
+    background-color: #AAB2BD;
+    color: white;
+}
+
+.btn {
+    border-radius: 0;
+}
+
+#main .btn i {
+    font-size: 150%;
 }
 
 #main {
