@@ -52,6 +52,7 @@ body {
     float: left;
     color: #ED5565;
 }
+
 .sidenav .session-name:hover .delete-session {
     display: inline;
 }
@@ -59,6 +60,10 @@ body {
 .sidenav .active {
     background-color: #AAB2BD;
     color: white;
+}
+
+.sidenav .solve {
+    text-align: right;
 }
 
 .btn {
@@ -80,4 +85,9 @@ body {
     /*position: fixed;
     display: inline-block;
     z-index: -1;*/
+}
+
+#solves .solve {
+    text-align: center;
+    font-family: Digital;
 }

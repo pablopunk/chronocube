@@ -11,6 +11,7 @@
         "./typings/index.d.ts",
         "./src/index.tsx",
         "./src/Components/SolveElement.tsx",
+        "./src/Components/SolvesElement.tsx",
         "./src/Components/SessionElement.tsx",
         "./src/Components/ChronoElement.tsx",
         "./src/Components/SessionsElement.tsx",

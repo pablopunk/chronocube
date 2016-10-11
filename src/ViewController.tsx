@@ -3,6 +3,7 @@ import * as ReactDOM from "react-dom";
 import {ChronoElement} from "./Components/ChronoElement";
 import {Status} from "./Model/Chrono";
 import {SessionsElement} from "./Components/SessionsElement";
+import {SolvesElement} from "./Components/SolvesElement";
 import {Session} from "./Model/Session";
 import {Sessions} from "./Model/Sessions";
 import {Solve} from "./Model/Solve";
@@ -32,6 +33,14 @@ export class ViewController {
         ReactDOM.render(
             <SessionsElement sessions={this.sessionsManager.sessions} view={this} currentSession={this.sessionsManager.currentSession} />,
             document.getElementById('sessions')
+        )
+        this.renderSolves();
+    }
+
+    renderSolves() {
+        ReactDOM.render(
+            <SolvesElement solves={this.sessionsManager.sessions[this.sessionsManager.currentSession].solves} />,
+            document.getElementById('solves')
         )
     }
 

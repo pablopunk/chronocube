@@ -18,7 +18,7 @@ export class ChronoElement extends React.Component<ChronoProps,{}>  {
             color: this.getStatusColor(),
             width: '100%',
             textAlign: 'center',
-            fontSize: '10em',
+            fontSize: '12em',
             fontFamily: 'Digital, Monospace'
         };
         var min = (this.props.min > 0) ? this.props.min.toString() + ':' : ''; // don't show 0 minutes

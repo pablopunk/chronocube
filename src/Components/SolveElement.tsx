@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export interface SolveProps { min :number, sec :number, dec :number, scramble :string; }
+export interface SolveProps { min :number, sec :number, dec :number, scramble :string, style? :__React.HTMLAttributes }
 
 export class SolveElement extends React.Component<SolveProps,{}> {
 
@@ -10,7 +10,7 @@ export class SolveElement extends React.Component<SolveProps,{}> {
         str += this.props.sec+'.'+(this.props.dec.toString().slice(0,2));
 
         return (
-            <div className="solve" style={{textAlign:"right"}}>{str}</div>
+            <div className="solve" style={this.props.style}>{str}</div>
         );
     }
 }
