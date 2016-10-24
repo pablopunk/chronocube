@@ -60,4 +60,11 @@ export class Session {
     {
         return this.average(this.count());
     }
+
+    best()
+    {
+        if (!this.count()) return new Solve(0,0,0)
+        let solves = this.solves.slice(0).sort(Solve.compare)
+        return solves[0]
+    }
 }

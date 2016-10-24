@@ -94,6 +94,8 @@ body {
 
 #stats table {
     width: 100%;
+    font-style: italic;
+    color: #5D9CEC;
 }
 
 #stats table td {
