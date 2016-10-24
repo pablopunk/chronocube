@@ -12,12 +12,13 @@ export class SessionElement extends React.Component<SessionProps,{}> {
     render() {
         var rows = this.props.solves.map(function(solve, i) {
             return (
-                <SolveElement key={i} dec={solve.dec} sec={solve.sec} min={solve.min} scramble={solve.scramble}/>
+                <SolveElement key={i} solve={solve} scramble={solve.scramble}/>
             );
         });
 
         var titleClass = "session-name ";
         if (this.props.active) titleClass += "active ";
+        else rows = []; // hide non-active sessions
 
         return (
             <div>

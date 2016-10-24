@@ -1,12 +1,11 @@
 import * as React from "react";
+import {Solve} from "../Model/Solve"
 import {Status} from "../Model/Chrono";
 
 export interface ChronoProps {
     inspection :Boolean,
     status: Status,
-    dec :number,
-    sec :number,
-    min :number
+    solve: Solve
 }
 
 export class ChronoElement extends React.Component<ChronoProps,{}>  {
@@ -21,18 +20,17 @@ export class ChronoElement extends React.Component<ChronoProps,{}>  {
             fontSize: '12em',
             fontFamily: 'Digital, Monospace'
         };
-        var min = (this.props.min > 0) ? this.props.min.toString() + ':' : ''; // don't show 0 minutes
-        var dec = this.props.dec.toString().slice(0,2); // truncate decimals
+        
         switch(this.props.status) {
             case Status.HoldingInspection:
             case Status.HoldingSolve:
             case Status.Inspecting:
             case Status.Solving:
-            this.text = min+this.props.sec;
+            this.text = this.props.solve.getTimeShort(true)
             break;
 
             case Status.Stopped:
-            this.text = min+this.props.sec+'.'+dec;
+            this.text = this.props.solve.getTimeShort()
             break;
 
             default:
@@ -41,7 +39,7 @@ export class ChronoElement extends React.Component<ChronoProps,{}>  {
             );
         }
         return (
-            <div style={divStyle}>{this.text}</div>
+            <div style={divStyle}>{this.text == '-' ? "0.00" : this.text}</div>
         );
     }
 

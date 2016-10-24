@@ -3,7 +3,7 @@ import * as ReactDOM from "react-dom";
 import {ChronoElement} from "./Components/ChronoElement";
 import {Status} from "./Model/Chrono";
 import {SessionsElement} from "./Components/SessionsElement";
-import {SolvesElement} from "./Components/SolvesElement";
+import {StatsElement} from "./Components/StatsElement";
 import {Session} from "./Model/Session";
 import {Sessions} from "./Model/Sessions";
 import {Solve} from "./Model/Solve";
@@ -24,7 +24,7 @@ export class ViewController {
 
     renderChrono() {
         ReactDOM.render(
-            <ChronoElement inspection={this.chrono.inspection} status={this.chrono.status} min={this.chrono.min} dec={this.chrono.dec} sec={this.chrono.sec}/>,
+            <ChronoElement inspection={this.chrono.inspection} status={this.chrono.status} solve={new Solve(this.chrono.min, this.chrono.sec, this.chrono.dec)}/>,
             document.getElementById('timer')
         )
     }
@@ -34,13 +34,13 @@ export class ViewController {
             <SessionsElement sessions={this.sessionsManager.sessions} view={this} currentSession={this.sessionsManager.currentSession} />,
             document.getElementById('sessions')
         )
-        this.renderSolves();
+        this.renderStats();
     }
 
-    renderSolves() {
+    renderStats() {
         ReactDOM.render(
-            <SolvesElement solves={this.sessionsManager.sessions[this.sessionsManager.currentSession].solves} />,
-            document.getElementById('solves')
+            <StatsElement session={this.sessionsManager.sessions[this.sessionsManager.currentSession]} view={this}/>,
+            document.getElementById('stats')
         )
     }
 

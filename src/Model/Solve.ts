@@ -8,7 +8,7 @@ export class Solve {
     constructor(min = 0, sec = 0, dec = 0, scramble = "") {
         this.min = min;
         this.sec = sec;
-        this.dec = dec;
+        this.dec = parseInt(dec.toString().slice(0,2));
         this.scramble = scramble;
     }
 
@@ -26,7 +26,57 @@ export class Solve {
 
     getTime()
     {
-        let str :string = this.min+':'+this.sec+'.'+this.dec;
-        return str;
+        return Solve.normalizeToString(this.min, this.sec, this.dec);
+    }
+
+    getTimeShort(hideDec = false)
+    {
+        if (!this.min && !this.sec && !this.dec) return '-'
+        let m = this.min > 0 ? this.min+":" : ""
+        let d = hideDec ? "" : "."+this.dec
+        return m+this.sec+d
+    }
+
+    // get time as a number to compare and calculate
+    getTimeRaw()
+    {
+        var time = this.dec;
+        time += (this.sec * 100);
+        time += (this.min * 100 * 60);
+
+        return time;
+    }
+
+    static compare(a: Solve, b: Solve)
+    {
+        return a.getTime().localeCompare(b.getTime())
+    }
+
+    static normalizeToNumbers(rawTime :number)
+    {
+        var rawString = rawTime.toString();
+        var l = rawString.length;
+        var dec = parseInt(rawString.slice(l-2, l)) // last two digits
+
+        if (rawTime < 100) {
+            return {"min":0, "sec":0, "dec":rawTime}
+        }
+
+        if (rawTime < 6000) {
+            var sec = parseInt((rawTime < 1000 ? "0" + rawString.charAt(0) : rawString.slice(0,2)))
+            return {"min":0, "sec":sec, "dec":rawTime}
+        }
+
+        var min = Math.floor(rawTime / 6000);
+        var sec = parseInt(((rawTime % 6000) / 100).toFixed(0));
+
+        return {"min":min, "sec":sec, "dec":dec}
+    }
+
+    static normalizeToString(min :number, sec :number, dec :number)
+    {
+        let m = min > 9 ? min : "0"+min;
+        let s = sec > 9 ? sec : "0"+sec;
+        return m+":"+s+"."+(dec.toString().slice(0,2))
     }
 }

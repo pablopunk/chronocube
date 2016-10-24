@@ -91,3 +91,16 @@ body {
     text-align: center;
     font-family: Digital;
 }
+
+#stats table {
+    width: 100%;
+}
+
+#stats table td {
+    width: 50%;
+    padding: .5em;
+}
+
+#stats table td:first-of-type {
+    text-align: right;
+}

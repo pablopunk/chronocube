@@ -1,13 +1,14 @@
 import * as React from "react";
+import {Solve} from "../Model/Solve";
 
-export interface SolveProps { min :number, sec :number, dec :number, scramble :string, style? :__React.HTMLAttributes }
+export interface SolveProps { solve :Solve, scramble :string, style? :__React.HTMLAttributes }
 
 export class SolveElement extends React.Component<SolveProps,{}> {
 
     render() {
         let str :string = "";
-        if (this.props.min > 0) str += this.props.min + ':';
-        str += this.props.sec+'.'+(this.props.dec.toString().slice(0,2));
+        if (this.props.solve.min > 0) str += this.props.solve.min + ':';
+        str += this.props.solve.sec+'.'+this.props.solve.dec;
 
         return (
             <div className="solve" style={this.props.style}>{str}</div>
