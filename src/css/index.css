@@ -28,7 +28,7 @@ body {
     background-color: #F5F7FA;
     color: #434A54;
     position: fixed;
-    transition: 0.5s;
+    transition: .2s;
     overflow-x: hidden;
 }
 
@@ -75,7 +75,7 @@ body {
 }
 
 #main {
-    transition: margin-left .5s;
+    transition: margin-left .2s;
     margin-left: 20rem;
 }
 
@@ -90,6 +90,15 @@ body {
 #solves .solve {
     text-align: center;
     font-family: Digital;
+}
+
+#scramble {
+    width: 100%;
+    padding: 2em;
+    text-align: center;
+    font-style: italic;
+    font-size: 1.2em;
+    color: rgba(101,109,120, .9);
 }
 
 #stats table {

@@ -15,10 +15,12 @@ export class StatsElement extends React.Component<StatsProps,{}> {
 
         return (
             <table>
-                <tr><td>ao5</td><td>{ao5.getTimeShort()}</td></tr>
-                <tr><td>ao12</td><td>{ao12.getTimeShort()}</td></tr>
-                <tr><td>aoAll</td><td>{aoAll.getTimeShort()}</td></tr>
-                <tr><td>PB single</td><td>{pb.getTimeShort()}</td></tr>
+                <tbody>
+                    <tr><td>ao5</td><td>{ao5.getTimeShort()}</td></tr>
+                    <tr><td>ao12</td><td>{ao12.getTimeShort()}</td></tr>
+                    <tr><td>aoAll</td><td>{aoAll.getTimeShort()}</td></tr>
+                    <tr><td>PB single</td><td>{pb.getTimeShort()}</td></tr>
+                </tbody>
             </table>
         );
     }

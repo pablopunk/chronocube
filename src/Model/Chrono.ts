@@ -55,7 +55,7 @@ export class Chrono  {
     stop()
     {
         clearTimeout(this.timerId);
-        this.view.addSolveAction(new Solve(this.min, this.sec, this.dec, ""));
+        this.view.addSolveAction(new Solve(this.min, this.sec, this.dec, this.view.getCurrentScramble()));
     }
 
     reset()

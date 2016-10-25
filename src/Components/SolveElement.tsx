@@ -11,7 +11,7 @@ export class SolveElement extends React.Component<SolveProps,{}> {
         str += this.props.solve.sec+'.'+this.props.solve.dec;
 
         return (
-            <div className="solve" style={this.props.style}>{str}</div>
+            <div className="solve" style={this.props.style} title={this.props.solve.scramble}>{str}</div>
         );
     }
 }

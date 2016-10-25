@@ -2,7 +2,7 @@
     "compilerOptions": {
         "outDir": "./dist/",
         "sourceMap": true,
-        "noImplicitAny": true,
+        "noImplicitAny": false,
         "module": "commonjs",
         "target": "es5",
         "jsx": "react"
@@ -16,11 +16,13 @@
         "./src/Components/SessionsElement.tsx",
         "./src/Components/SettingsElement.tsx",
         "./src/Components/StatsElement.tsx",
+        "./src/Components/ScrambleElement.tsx",
         "./src/Model/Settings.ts",
         "./src/Model/Session.ts",
         "./src/Model/Solve.ts",
         "./src/Model/Chrono.ts",
         "./src/Model/Sessions.ts",
+        "./src/Model/Cube.ts",
         "./src/ViewController.tsx"
     ],
     "exclude": [
