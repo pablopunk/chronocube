@@ -14,6 +14,8 @@
 }
 
 body {
+    font-family: "Avenir", "Arial";
+    font-weight: lighter;
     margin:0;
     padding:0;
     width: 100%;
@@ -21,6 +23,7 @@ body {
     user-select: none;         /* Prevents  */
     -webkit-user-select: none; /* selection */
 }
+
 
 .sidenav {
     height: 100%;
@@ -32,8 +35,39 @@ body {
     overflow-x: hidden;
 }
 
+.sidenav.open {
+    width: 0;
+    padding: 0;
+}
+
 .sidenav h5, .sidenav .solve {
     padding: 1rem;
+}
+
+.sidenav .title {
+    text-align: center;
+    font-size: 2rem;
+    padding-top: 1rem;
+}
+
+.sidenav .title i {
+    margin-right: 1rem;
+}
+
+.sidenav .setting {
+    text-align: right;
+    margin-right: 1rem;
+    height: 3rem;
+}
+
+.sidenav .setting i {
+    margin-left: 1rem;
+    font-size: 2rem;
+    vertical-align: middle;
+}
+
+.sidenav .setting .ion-android-checkbox {
+    color: #37BC9B;
 }
 
 .sidenav .session-name { 
@@ -45,7 +79,6 @@ body {
 .sidenav .session-name:hover { 
     background-color: #CCD1D9;
 }
-
 
 .delete-session {
     display: none;
@@ -70,13 +103,13 @@ body {
     border-radius: 0;
 }
 
-#main .btn i {
-    font-size: 150%;
-}
-
 #main {
     transition: margin-left .2s;
     margin-left: 20rem;
+}
+
+#main .btn i {
+    font-size: 150%;
 }
 
 #toucharea {

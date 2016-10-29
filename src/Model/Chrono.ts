@@ -1,4 +1,5 @@
-import {ViewController} from "../ViewController"
+import {ViewController}  from "../ViewController"
+import {SettingsManager} from "./Settings"
 import {Solve} from "../Model/Solve"
 
 export const enum Status {
@@ -11,12 +12,12 @@ export const enum Status {
 
 export class Chrono  {
 
+    settingsManager :SettingsManager
     view :ViewController;
     regExp = new RegExp('([0-9]+):([0-5]*[0-9]+)\.([0-9]+)');
     classNames :string
     text :string
     spacePressed :boolean
-    inspection :boolean
     status: Status
     startTime :any
     endTime :any
@@ -26,11 +27,11 @@ export class Chrono  {
     sec :number
     min :number
 
-    constructor(view = new ViewController()) {
+    constructor(view = new ViewController(), settingsManager = new SettingsManager()) {
         this.view = view;
         this.text = "00:00.00";
+        this.settingsManager = settingsManager
         this.spacePressed = false;
-        this.inspection = false;
         this.status = Status.Stopped;
         this.startTime = this.endTime = this.diff = this.timerId = this.dec = this.sec = this.min = 0;
     }
@@ -85,7 +86,7 @@ export class Chrono  {
             break;
             case Status.Stopped:
             this.min = this.sec = this.dec = 0;
-            this.status = (this.inspection ? Status.HoldingInspection : Status.HoldingSolve);
+            this.status = (this.settingsManager.settings.Inspection ? Status.HoldingInspection : Status.HoldingSolve);
             break;
             default: // do nothing when holding
             break;

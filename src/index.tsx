@@ -1,11 +1,12 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom";
+import * as React from "react"
+import * as ReactDOM from "react-dom"
 
-import './css/index.css';
+import './css/index.css'
 
-import { ViewController } from "./ViewController";
+import { ViewController } from "./ViewController"
 
-let view = new ViewController();
+let view = new ViewController()
  
-view.renderChrono();
-view.renderSessions();
+view.renderChrono()
+view.renderSessions()
+view.renderSettings()

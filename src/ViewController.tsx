@@ -5,6 +5,8 @@ import {Status} from "./Model/Chrono";
 import {SessionsElement} from "./Components/SessionsElement";
 import {StatsElement} from "./Components/StatsElement";
 import {ScrambleElement} from "./Components/ScrambleElement";
+import {SettingsElement} from "./Components/SettingsElement";
+import {SettingsManager} from "./Model/Settings";
 import {Session} from "./Model/Session";
 import {Sessions} from "./Model/Sessions";
 import {Solve} from "./Model/Solve";
@@ -17,20 +19,22 @@ export class ViewController {
 
     chrono :Chrono;
     sessionsManager :Sessions;
+    settingsManager :SettingsManager;
     cube :Cube;
 
     constructor()
     {
-        this.chrono = new Chrono(this);
+        this.settingsManager = new SettingsManager();
+        this.chrono          = new Chrono(this, this.settingsManager);
         this.sessionsManager = new Sessions(this);
-        this.cube = new Cube();
+        this.cube            = new Cube();
         this.bindEventsToBody();
     }
 
     renderChrono()
     {
         ReactDOM.render(
-            <ChronoElement inspection={this.chrono.inspection} status={this.chrono.status} solve={new Solve(this.chrono.min, this.chrono.sec, this.chrono.dec)}/>,
+            <ChronoElement settingsManager={this.settingsManager} status={this.chrono.status} solve={new Solve(this.chrono.min, this.chrono.sec, this.chrono.dec)}/>,
             document.getElementById('timer')
         )
     }
@@ -61,12 +65,25 @@ export class ViewController {
         )
     }
 
+    renderSettings()
+    {
+        ReactDOM.render(
+            <SettingsElement manager={this.settingsManager} view={this}/>,
+            document.getElementById('settings')
+        )
+    }
+
     addSessionAction()
     {
         var name = prompt("Enter new session name", "");
         this.sessionsManager.new(name.trim());
         this.sessionsManager.currentSession = this.sessionsManager.count()-1;
         this.renderSessions();
+    }
+
+    toggleSettingAction(setting) {
+        this.settingsManager.toggle(setting)
+        this.renderSettings()
     }
 
     deleteSessionAction(index :number)

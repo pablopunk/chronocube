@@ -15,7 +15,8 @@
     "cube",
     "timer",
     "puzzle",
-    "wca"
+    "wca",
+    "chronocube"
   ],
   "author": "Pablo Varela",
   "license": "MIT",

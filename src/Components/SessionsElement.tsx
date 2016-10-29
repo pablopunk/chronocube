@@ -18,9 +18,11 @@ export class SessionsElement extends React.Component<SessionsProps,{}> {
 
         return (
             <div>
-                <h3 style={{textAlign:"center"}}>Sessions</h3>
+                <div className="title"><i className="ion-android-list"></i>Sessions</div>
                 {rows}
-                <a href="#" id="add-session-button" className="btn btn-block btn-info" onClick={e => this.props.view.addSessionAction()}><i className="ion-plus"></i> Add session</a>
+                <a href="#" id="add-session-button" className="btn btn-block btn-info" onClick={e => this.props.view.addSessionAction()}>
+                    <i className="ion-plus"></i> Add session
+                </a>
             </div>
         );
     }

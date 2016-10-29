@@ -1,28 +1,13 @@
 
-export class Settings {
-    inspection :boolean;
-    hideTime :boolean;
-    theme :string;
+export class SettingsManager {
 
-    constructor(inspection = false, hideTime = false, theme = 'bright') { /* Defaults */
-        this.inspection = inspection;
-        this.hideTime = hideTime;
-        this.theme = theme;
+    settings = {
+        "Inspection"   : false,
+        "Hide Timer"   : false,
+        "Change theme" : false
     }
 
-    toggleInspection() {
-        this.inspection = !this.inspection;
-    }
-    
-    toggleHideTime() {
-        this.hideTime = !this.hideTime;
-    }
-
-    toggleTheme() {
-        if (this.theme == 'bright') {
-            this.theme = 'dark';
-        } else {
-            this.theme = 'bright';
-        }
+    toggle(setting) {
+        this.settings[setting] = !this.settings[setting] 
     }
 }

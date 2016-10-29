@@ -1,9 +1,10 @@
 import * as React from "react";
 import {Solve} from "../Model/Solve"
 import {Status} from "../Model/Chrono";
+import {SettingsManager} from "../Model/Settings"
 
 export interface ChronoProps {
-    inspection :Boolean,
+    settingsManager :SettingsManager,
     status: Status,
     solve: Solve
 }
@@ -20,6 +21,12 @@ export class ChronoElement extends React.Component<ChronoProps,{}>  {
             fontSize: '12em',
             fontFamily: 'Digital, Monospace'
         };
+
+        if (this.props.status == Status.Solving && this.props.settingsManager.settings["Hide Timer"]) {
+            return (
+                <div style={divStyle}><i className="ion-ios-stopwatch"></i></div>
+            );
+        }
         
         switch(this.props.status) {
             case Status.HoldingInspection:
@@ -46,7 +53,7 @@ export class ChronoElement extends React.Component<ChronoProps,{}>  {
     getStatusColor() {
         switch(this.props.status) {
             case Status.HoldingInspection:
-            return 'sunflower';
+            return '#F6BB42';
             case Status.HoldingSolve:
             return '#48CFAD';
             case Status.Inspecting:

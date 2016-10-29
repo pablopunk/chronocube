@@ -45,33 +45,17 @@
         <!-- Ionicons -->
         <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
+        <!-- Jquery -->
+        <script src="./lib/jquery.min.js"></script>
         <script type="text/javascript">
-        var sidebarWidth = "";
-        var sidebarPadding = "";
-        var sidebarClosed = false;
 
         function toggleNav() {
-            if (sidebarClosed) {
-                openNav();
+            $('#sidenav').toggleClass('open')
+            if (document.getElementById("main").style.marginLeft == "0px") {
+                document.getElementById("main").style.marginLeft = "20rem" 
             } else {
-                closeNav();
+                document.getElementById("main").style.marginLeft = "0px"
             }
-        }
-
-        function openNav() {
-            document.getElementById("sidenav").style.width = sidebarWidth;
-            document.getElementById("sidenav").style.padding = sidebarPadding;
-            document.getElementById("main").style.marginLeft = sidebarWidth;
-            sidebarClosed = false;
-        }
-
-        function closeNav() {
-            sidebarWidth = document.getElementById("sidenav").style.width;
-            sidebarPadding = document.getElementById("sidenav").style.padding;
-            document.getElementById("sidenav").style.width = "0";
-            document.getElementById("sidenav").style.padding = "0";
-            document.getElementById("main").style.marginLeft= "0";
-            sidebarClosed = true;
         }
 
         function isMobile()
@@ -83,13 +67,14 @@
 
         function checkMobile() {
             if (isMobile()) {
-                closeNav();
+                toggleNav();
             }
         }
         </script>
     </head>
     <body onload="checkMobile()">
         <nav id="sidenav" class="sidenav">
+            <div id="settings"></div>
             <div id="sessions"></div>
         </nav>
         <div id="main">
