@@ -1,17 +1,47 @@
 
 import { Session } from './Session';
 import {ViewController} from "../ViewController"
+import {Storable} from './Storage'
 
-export class Sessions {
+export class SessionsManager extends Storable {
     view :ViewController;
     sessions :Array<Session>;
-    currentSession :number;
+    current :number;
 
-    constructor(view :ViewController, sessions = [ new Session('Default') ], currentSession = 0)
+    constructor(view :ViewController, sessions = [ new Session('Default') ], current = 0)
     {
+        super()
         this.sessions = sessions;
         this.view = view;
-        this.currentSession = currentSession;
+        this.current = current;
+    }
+
+    getProps()
+    {
+        var sessions = this.sessions.map(function(session, index) {
+            return session.getProps()
+        })
+        return {
+            'sessions' : sessions,
+            'current'  : this.current
+        }
+    }
+
+    setProps(props :Object) // this method must be override for complex props
+    {
+        var self = this
+        Object.keys(props).forEach(function(key, index) {
+            if (key == 'sessions') {
+                var sessions :Session[] = props[key]
+                sessions.forEach(function(sessionProps, i) {
+                    var session = new Session()
+                    session.setProps(sessionProps)
+                    self.sessions.push(session)
+                })
+            } else {
+                self[key] = props[key]
+            }
+        })
     }
 
     new(name :string) {

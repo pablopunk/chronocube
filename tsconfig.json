@@ -23,6 +23,7 @@
         "./src/Model/Chrono.ts",
         "./src/Model/Sessions.ts",
         "./src/Model/Cube.ts",
+        "./src/Model/Storage.ts",
         "./src/ViewController.tsx"
     ],
     "exclude": [

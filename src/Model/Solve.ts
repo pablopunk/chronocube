@@ -1,15 +1,27 @@
+import {Storable} from './Storage'
 
-export class Solve {
+export class Solve extends Storable {
     min :number;
     sec :number;
     dec :number;
     scramble :string;
 
     constructor(min = 0, sec = 0, dec = 0, scramble = "") {
+        super()
         this.min = min;
         this.sec = sec;
         this.dec = parseInt(dec.toString().slice(0,2));
         this.scramble = scramble;
+    }
+
+    getProps()
+    {
+        return {
+            'min' : this.min,
+            'sec' : this.sec,
+            'dec' : this.dec,
+            'scramble' : this.scramble
+        }
     }
 
     setTime(time :string)

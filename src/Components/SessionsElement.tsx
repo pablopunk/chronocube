@@ -3,16 +3,16 @@ import { SessionElement } from "./SessionElement";
 import { Session } from "../Model/Session";
 import {ViewController} from "../ViewController"
 
-export interface SessionsProps { sessions: Array<Session>, view :ViewController, currentSession :number}
+export interface SessionsProps { sessions: Array<Session>, view :ViewController, current :number}
 
 export class SessionsElement extends React.Component<SessionsProps,{}> {
 
     render() {
-        var currentSession = this.props.currentSession;
+        var current = this.props.current;
         var view = this.props.view;
         var rows = this.props.sessions.map(function(session, i) {
             return (
-                <SessionElement key={i} index={i} name={session.name} solves={session.solves} active={(i == currentSession)} view={view}/>
+                <SessionElement key={i} index={i} name={session.name} solves={session.solves} active={(i == current)} view={view}/>
             );
         });
 

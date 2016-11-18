@@ -8,29 +8,34 @@ import {ScrambleElement} from "./Components/ScrambleElement";
 import {SettingsElement} from "./Components/SettingsElement";
 import {SettingsManager} from "./Model/Settings";
 import {Session} from "./Model/Session";
-import {Sessions} from "./Model/Sessions";
+import {SessionsManager} from "./Model/Sessions";
 import {Solve} from "./Model/Solve";
 import {Chrono} from "./Model/Chrono";
 import {Cube} from "./Model/Cube";
+import {Storage} from "./Model/Storage";
 
 enum KeyType { SPACE = 32 }
 
 export class ViewController {
 
-    chrono :Chrono;
-    sessionsManager :Sessions;
-    settingsManager :SettingsManager;
-    cube :Cube;
+    chrono :Chrono
+    sessionsManager :SessionsManager
+    settingsManager :SettingsManager
+    cube :Cube
+    storage :Storage
 
     constructor()
     {
-        this.settingsManager = new SettingsManager();
-        this.chrono          = new Chrono(this, this.settingsManager);
-        this.sessionsManager = new Sessions(this);
-        this.cube            = new Cube();
-        this.bindEventsToBody();
+        this.settingsManager = new SettingsManager()
+        this.chrono          = new Chrono(this, this.settingsManager)
+        this.sessionsManager = new SessionsManager(this)
+        this.cube            = new Cube()
+        this.storage         = new Storage(this.sessionsManager, this.settingsManager)
+        this.bindEventsToBody()
+        this.loadFromStorage()
     }
 
+    /****** Render functions *******/
     renderChrono()
     {
         ReactDOM.render(
@@ -42,11 +47,12 @@ export class ViewController {
     renderSessions()
     {
         ReactDOM.render(
-            <SessionsElement sessions={this.sessionsManager.sessions} view={this} currentSession={this.sessionsManager.currentSession} />,
+            <SessionsElement sessions={this.sessionsManager.sessions} view={this} current={this.sessionsManager.current} />,
             document.getElementById('sessions')
         )
         this.renderStats();
         this.renderScramble();
+        this.saveToStorage()
     }
 
     renderScramble()
@@ -60,7 +66,7 @@ export class ViewController {
     renderStats()
     {
         ReactDOM.render(
-            <StatsElement session={this.sessionsManager.sessions[this.sessionsManager.currentSession]} view={this}/>,
+            <StatsElement session={this.sessionsManager.sessions[this.sessionsManager.current]} view={this}/>,
             document.getElementById('stats')
         )
     }
@@ -71,13 +77,16 @@ export class ViewController {
             <SettingsElement manager={this.settingsManager} view={this}/>,
             document.getElementById('settings')
         )
+        this.saveToStorage()
     }
+
+    /****** Action functions *******/
 
     addSessionAction()
     {
         var name = prompt("Enter new session name", "");
         this.sessionsManager.new(name.trim());
-        this.sessionsManager.currentSession = this.sessionsManager.count()-1;
+        this.sessionsManager.current = this.sessionsManager.count()-1;
         this.renderSessions();
     }
 
@@ -94,7 +103,7 @@ export class ViewController {
 
     addSolveAction(solve :Solve)
     {
-        let index = this.sessionsManager.currentSession;
+        let index = this.sessionsManager.current;
         this.sessionsManager.sessions[index].new(solve);
         this.renderSessions();
     }
@@ -102,7 +111,7 @@ export class ViewController {
     setCurrentSession(index :number)
     {
         if (this.sessionsManager.count() <= index || index < 0) return;
-        this.sessionsManager.currentSession = index;
+        this.sessionsManager.current = index;
         this.renderSessions();
     }
 
@@ -110,6 +119,8 @@ export class ViewController {
     {
         return document.getElementById('scramble').innerText;
     }
+
+    /****** Config functions *******/
 
     bindEventsToBody()
     {
@@ -131,5 +142,22 @@ export class ViewController {
         if (key == KeyType.SPACE)
             if (!this.chrono.spacePressed) // If I'm not holding space already
                 this.chrono.spaceStart();
+    }
+
+    saveToStorage()
+    {
+        this.storage.save()
+    }
+
+    loadFromStorage()
+    {
+        var storage = this.storage.load()
+        if (storage.sessions != null) {
+            this.sessionsManager.sessions = [] // prevent adding multiple 'Default' sessions
+            this.sessionsManager.setProps(storage.sessions)
+        }
+        if (storage.settings != null) {
+            this.settingsManager.setProps(storage.settings)
+        }
     }
 }

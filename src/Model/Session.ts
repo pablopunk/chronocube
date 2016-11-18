@@ -1,16 +1,46 @@
-
+import {Storable} from './Storage'
 import { Solve } from './Solve';
 
-export class Session {
+export class Session extends Storable {
     name :string;
     solves :Array<Solve>;
     active :boolean;
 
     constructor(name = 'Default', active = true, solves = new Array())
     {
+        super()
         this.name = name;
         this.active = active;
         this.solves = solves;
+    }
+
+    getProps()
+    {
+        var solves = this.solves.map(function(solve, index) {
+            return solve.getProps()
+        })
+        return {
+            'name'   : this.name,
+            'solves' : this.solves,
+            'active' : this.active
+        }
+    }
+
+    setProps(props :Object) // this method must be override for complex props
+    {
+        var self = this
+        Object.keys(props).forEach(function(key, index) {
+            if (key == 'solves') {
+                var solves :Solve[] = props[key]
+                solves.forEach(function(solveProps, i) {
+                    var solve = new Solve()
+                    solve.setProps(solveProps)
+                    self.solves.push(solve)
+                })
+            } else {
+                self[key] = props[key]
+            }
+        })
     }
 
     new(newSolve :Solve)
