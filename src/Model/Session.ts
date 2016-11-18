@@ -62,12 +62,15 @@ export class Session extends Storable {
         else return this.solves.length;
     }
 
-    // Returns the average of the session in the last N solves
-    average(n :number) : Solve
+    // Returns the average of the session in the last 'ao' solves
+    average(ao :number) : Solve
     {
-        if (this.count() < n || this.count()<3) return new Solve(0,0,0);
+        var len = this.count()
+        if (len < ao || len < 3) return new Solve(0,0,0);
         var average = 0;
-        let solves = this.solves.slice(0).sort(Solve.compare);
+        var solves = this.solves.slice(len-ao, len).sort(Solve.compare)
+        
+        console.log(solves)
 
         // remove the best and the worst solves
         solves.shift(); solves.pop();
@@ -80,7 +83,7 @@ export class Session extends Storable {
             dec = parseInt(solve.getTime().slice(6,8))
             average += ( (min*6000) + (sec*100) + dec )
         });
-        average /= (n-2);
+        average /= (ao-2);
         let normalizedAverage = Solve.normalizeToNumbers(average);
         
         return new Solve(normalizedAverage.min, normalizedAverage.sec, normalizedAverage.dec)
