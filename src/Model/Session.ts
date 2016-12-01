@@ -69,8 +69,6 @@ export class Session extends Storable {
         if (len < ao || len < 3) return new Solve(0,0,0);
         var average = 0;
         var solves = this.solves.slice(len-ao, len).sort(Solve.compare)
-        
-        console.log(solves)
 
         // remove the best and the worst solves
         solves.shift(); solves.pop();
