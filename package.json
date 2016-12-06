@@ -2,8 +2,9 @@
   "name": "chronocube",
   "version": "1.0.0",
   "description": "A simple and beautiful way to manage your Rubik's cube solves",
-  "main": "./dist/bundle.js",
+  "main": "./app.js",
   "scripts": {
+    "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
