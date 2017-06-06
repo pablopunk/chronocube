@@ -44,14 +44,11 @@ Use the *MAKEFILE* to build the executable for all platforms:
 
 ## Contribution
 
-*NOTE: Right now I'm working on a [refactored](https://github.com/pablopunk/chronocube/commits/react) version of Chronocube, so all the code in the 'master' branch is being written from scratch in [typescript](https://github.com/Microsoft/TypeScript) and [React](https://facebook.github.io/react/). Keep this in mind if you're going to contribute to this project, as it would pointless to add new features to the live version without having the new refactor in mind.*
-
 Request new features! [Open an issue](https://github.com/pablopunk/chronocube/issues) or [join the chat](https://gitter.im/pablopunk/chronocube?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge).
 
 Are you a developer or a designer? Fork it and [make a pull request](https://github.com/pablopunk/chronocube/pulls)!
 
 Or simply [show me some love](https://twitter.com/pablopunk) ;)
-
 
 ## License
 Check `LICENSE` (MIT License)
