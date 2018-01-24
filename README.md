@@ -1,11 +1,6 @@
-# Chronocube
+# Chronocube [![Join the chat at https://gitter.im/pablopunk/chronocube](https://badges.gitter.im/pablopunk/chronocube.svg)](https://gitter.im/pablopunk/chronocube?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![License](http://img.shields.io/:license-mit-blue.svg)](https://raw.githubusercontent.com/pablopunk/chronocube/master/LICENSE)
 
-*Simple app to time your Rubik's Cube solves.*
-
-***
-
-[![Join the chat at https://gitter.im/pablopunk/chronocube](https://badges.gitter.im/pablopunk/chronocube.svg)](https://gitter.im/pablopunk/chronocube?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![License](http://img.shields.io/:license-mit-blue.svg)](https://raw.githubusercontent.com/pablopunk/chronocube/master/LICENSE)
----
+>Simple app to time your Rubik's Cube solves
 
 This app is cross-platform as it's created with *HTML+CSS+JS* and it's packaged on *[Electron](https://github.com/atom/electron)*, a tool to create apps from webapps, so you can use it as a native app on your desktop.
 
