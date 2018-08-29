@@ -1,20 +1,11 @@
 
 {
-  "osx" : {
-    "title": "Chronocube",
-    "background": "img/background.jpg",
-    "icon": "../resources/darwin/app.icns",
-    "icon-size": 80,
-    "contents": [
-      { "x": 438, "y": 250, "type": "link", "path": "/Applications" },
-      { "x": 192, "y": 250, "type": "file" }
-    ]
+  "mac" : {
+    "artifactName": "Chronocube",
+    "icon": "../resources/darwin/app.icns"
   },
   "win" : {
-    "title" : "Chronocube",
-    "version": "0.5.1",
-    "publisher": "Pablo Varela",
-    "icon" : "../resources/win/app.ico",
-    "verbosity": 1
+    "artifactName" : "Chronocube",
+    "icon" : "../resources/win/app.ico"
   }
 }

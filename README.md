@@ -16,7 +16,8 @@ This app is cross-platform as it's created with *HTML+CSS+JS* and it's packaged 
 Make sure you have the dependencies installed (instructions are found in each page, but this is how you do it on OS X):
 
 - [nodejs](https://nodejs.org/en/)
-- [electron-builder](https://github.com/maxogden/electron-packager) and [electron-packager](https://github.com/maxogden/electron-packager)
+- [electron-builder](https://github.com/maxogden/electron-packager)
+- [electron-packager](https://github.com/maxogden/electron-packager)
 
     ```shell
   npm install electron-packager -g
