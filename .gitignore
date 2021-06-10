@@ -2,3 +2,4 @@ dist/
 build/
 src/node_modules
 npm-debug.log
+.vercel
